@@ -100,4 +100,25 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
             p.setState(aciertos[i]);
         }
     }
+
+    //version corregida de rellenaPistas para lo que nos pedia el enunciado
+    void rellenaPistas2(int aciertosAbsolutos, int aciertosParciales){
+        for(int i = 0; i < tamCodigo; ++i){
+
+            Pista p = (Pista)pistas.getElemAtIndex(i);
+
+            if(aciertosAbsolutos > 0){
+                p.setState(1);
+                aciertosAbsolutos--;
+            }
+            else if(aciertosParciales > 0){
+                p.setState(2);
+                aciertosParciales--;
+            }
+            else{
+                p.setState(0);
+            }
+
+        }
+    }
 }
