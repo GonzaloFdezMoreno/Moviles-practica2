@@ -1,9 +1,8 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CAudio;
-import com.example.commonengine.CGraphics2D;
-import com.example.commonengine.CSound;
-import com.example.commonengine.TouchEvent;
+
+import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.TouchEvent;
 
 import java.util.ArrayList;
 
@@ -51,7 +50,7 @@ public class Button extends GameObject {
     public void update(double t){
     }
     @Override
-    public void render(CGraphics2D graph){
+    public void render(AndrGraphics2D graph){
         graph.setColor(0xFF00FF);
         graph.fillCircle((int)getPosX(),(int)getPosY(),(int)getWidth(),(int)getHeight());
         graph.setColor(0x000000);

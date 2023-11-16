@@ -1,11 +1,11 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CAudio;
-import com.example.commonengine.CGraphics2D;
-import com.example.commonengine.CLogic;
 
-import com.example.commonengine.EngineClass;
-import com.example.commonengine.TouchEvent;
+
+import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.CLogic;
+import com.example.androidengine.EngineClass;
+import com.example.androidengine.TouchEvent;
 
 import java.util.ArrayList;
 
@@ -38,14 +38,14 @@ public class Logic implements CLogic {
     }
 
     @Override
-    public void render(CGraphics2D graph) {
+    public void render(AndrGraphics2D graph) {
         currScene.render(graph);
 
 
     }
 
     @Override
-    public void handleEvents(ArrayList<TouchEvent> input, CAudio audio) {
+    public void handleEvents(ArrayList<TouchEvent> input /*,AndroidAudio audio*/) {
        currScene.handleInput(input,audio);
     }
 

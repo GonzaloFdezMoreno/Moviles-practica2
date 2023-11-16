@@ -1,8 +1,7 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CAudio;
-import com.example.commonengine.CGraphics2D;
-import com.example.commonengine.TouchEvent;
+import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.TouchEvent;
 
 import java.util.ArrayList;
 
@@ -40,13 +39,13 @@ public abstract class GameObject {
         return height;
     }
 
-    public void render(CGraphics2D graph){
+    public void render(AndrGraphics2D graph){
     }
 
     public void update(double delta) {
     }
 
-    public boolean handleInput(ArrayList<TouchEvent> event, CAudio audio) {
+    public boolean handleInput(ArrayList<TouchEvent> event /*,CAudio audio*/) {
 
         return true;
     }

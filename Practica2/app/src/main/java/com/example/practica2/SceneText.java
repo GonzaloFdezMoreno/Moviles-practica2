@@ -1,7 +1,6 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CFont;
-import com.example.commonengine.CGraphics2D;
+import com.example.androidengine.AndrGraphics2D;
 
 public class SceneText extends GameObject{
 
@@ -15,7 +14,7 @@ public class SceneText extends GameObject{
     }
 
     @Override
-    public void render(CGraphics2D graph) {
+    public void render(AndrGraphics2D graph) {
 
         graph.setFont(graph.createFont("stocky.ttf", 20, false, false));
 

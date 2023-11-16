@@ -1,11 +1,7 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CAudio;
-import com.example.commonengine.CGraphics2D;
-import com.example.commonengine.CLogic;
-import com.example.commonengine.CSound;
-import com.example.commonengine.Cengine;
-import com.example.commonengine.TouchEvent;
+
+import com.example.androidengine.CLogic;
 
 import java.util.ArrayList;
 
@@ -13,7 +9,7 @@ public class LevelButton extends Button {
     private String lvl;
     int difficulty;
 
-    private CSound sound;
+    //private AndroidSound sound;
     private Logic log;
 
         LevelButton(int posX_, int posY_, int width_, int height_, String txt, CLogic logic){

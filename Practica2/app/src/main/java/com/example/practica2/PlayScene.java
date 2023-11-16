@@ -1,4 +1,4 @@
-package com.example.logic;
+package com.example.practica2;
 
 
 public class PlayScene extends Scene {

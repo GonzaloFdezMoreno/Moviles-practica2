@@ -1,16 +1,15 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CAudio;
-import com.example.commonengine.CGraphics2D;
-import com.example.commonengine.CSound;
-import com.example.commonengine.Cengine;
-import com.example.commonengine.TouchEvent;
+import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.AndroidSound;
+import com.example.androidengine.TouchEvent;
+
 
 import java.util.ArrayList;
 
 public class StartButton extends Button {
     Logic log;
-    private CSound sound;
+    private AndroidSound sound;
     String text;
 
 
@@ -22,7 +21,7 @@ public class StartButton extends Button {
     }
 
     @Override
-    public boolean handleInput(ArrayList<TouchEvent> event, CAudio audio) {
+    public boolean handleInput(ArrayList<TouchEvent> event/*, CAudio audio*/) {
 
         if(sound == null){
             sound=audio.newSound("bloop.wav");
@@ -58,7 +57,7 @@ public class StartButton extends Button {
 
     }
     @Override
-    public void render(CGraphics2D graph){
+    public void render(AndrGraphics2D graph){
 
 
 

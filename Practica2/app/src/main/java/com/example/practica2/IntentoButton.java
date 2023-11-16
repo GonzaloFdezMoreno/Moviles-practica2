@@ -1,8 +1,9 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CAudio;
-import com.example.commonengine.CGraphics2D;
-import com.example.commonengine.TouchEvent;
+
+
+import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.TouchEvent;
 
 import java.util.ArrayList;
 
@@ -21,12 +22,12 @@ public class IntentoButton extends Button{ //contenidos en cada intento, con col
     }
 
     @Override
-    public boolean handleInput(ArrayList<TouchEvent> event, CAudio audio) {
+    public boolean handleInput(ArrayList<TouchEvent> event /*, CAudio audio*/) {
         return super.handleInput(event,audio);
     }
 
     @Override
-    public void render(CGraphics2D graph) {
+    public void render(AndrGraphics2D graph) {
         if(!colorSet){
             graph.setColor(0xFFc7cbd1);
             graph.fillCircle((int)getPosX(),(int)getPosY(),(int)getWidth(),(int)getHeight());

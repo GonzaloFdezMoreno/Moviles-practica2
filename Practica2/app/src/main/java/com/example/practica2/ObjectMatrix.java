@@ -1,8 +1,8 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CAudio;
-import com.example.commonengine.CGraphics2D;
-import com.example.commonengine.TouchEvent;
+
+import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.TouchEvent;
 
 import java.util.ArrayList;
 
@@ -39,7 +39,7 @@ public class ObjectMatrix extends GameObject { //utilizamos esta clase para pode
         }
     }
     @Override
-    public void render(CGraphics2D graph) {
+    public void render(AndrGraphics2D graph) {
         for(int i = 0; i < matrixObjects.size(); ++i){
             matrixObjects.get(i).render(graph);
         }

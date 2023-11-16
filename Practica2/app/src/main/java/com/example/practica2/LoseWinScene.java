@@ -1,4 +1,4 @@
-package com.example.logic;
+package com.example.practica2;
 
 public class LoseWinScene extends Scene{
     protected LoseWinScene(Logic logic, int[] codigoSecreto, int nivel,String txt,int intent, boolean dalton) {
@@ -21,7 +21,7 @@ public class LoseWinScene extends Scene{
         }
 
         addGameObject(new SecretCode(codigoSecreto, 150, 200, 1, 1, dalton));
-        addGameObject(new RepetirNivelButton(logic, "Volver a jugar", nivel, 75, 250, 300, 70));
+        //addGameObject(new RepetirNivelButton(logic, "Volver a jugar", nivel, 75, 250, 300, 70));
         addGameObject(new StartButton(75, 350, 300, 70,"Elegir dificultad",logic ));
 
     }

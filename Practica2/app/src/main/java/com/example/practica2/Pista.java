@@ -1,6 +1,7 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CGraphics2D;
+
+import com.example.androidengine.AndrGraphics2D;
 
 public class Pista extends GameObject{
 
@@ -13,7 +14,7 @@ public class Pista extends GameObject{
     }
 
     @Override
-    public void render(CGraphics2D graph) {
+    public void render(AndrGraphics2D graph) {
         switch (state){
             case 0:
                 graph.setColor(0xFFc7cbd1);

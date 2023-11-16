@@ -1,9 +1,7 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CAudio;
-import com.example.commonengine.CGraphics2D;
-import com.example.commonengine.CSound;
-import com.example.commonengine.TouchEvent;
+import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.TouchEvent;
 
 import java.util.ArrayList;
 
@@ -52,7 +50,7 @@ public class DaltonismoButton extends Button{
     }
 
     @Override
-    public void render(CGraphics2D graph) {
+    public void render(AndrGraphics2D graph) {
 
         if(!activated){
             graph.drawImage(graph.createImage("eyehide.png"),getPosX(),(int)getPosY(),(int)getWidth(),(int)getHeight());

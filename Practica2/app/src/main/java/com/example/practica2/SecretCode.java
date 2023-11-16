@@ -1,6 +1,7 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CGraphics2D;
+
+import com.example.androidengine.AndrGraphics2D;
 
 public class SecretCode extends GameObject{
 
@@ -14,7 +15,7 @@ public class SecretCode extends GameObject{
     }
 
     @Override
-    public void render(CGraphics2D graph) {
+    public void render(AndrGraphics2D graph) {
         for(int i = 0; i < code.length; ++i){
             graph.setColor(code[i]);
             graph.fillCircle(getPosX() + 35 * i, getPosY(), 25,25);

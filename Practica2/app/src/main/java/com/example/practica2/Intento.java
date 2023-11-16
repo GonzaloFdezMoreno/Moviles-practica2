@@ -1,8 +1,8 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CAudio;
-import com.example.commonengine.CGraphics2D;
-import com.example.commonengine.TouchEvent;
+
+import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.TouchEvent;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -61,7 +61,7 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
         pistas.update(t);
     }
     @Override
-    public void render(CGraphics2D graph){
+    public void render(AndrGraphics2D graph){
 
         graph.drawText(String.valueOf(numIntento),getPosX() + 15, getPosY() + 30);
 

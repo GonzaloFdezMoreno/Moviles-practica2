@@ -1,7 +1,6 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CGraphics2D;
-import com.example.commonengine.Cengine;
+
 
 public class MainMenu extends Scene {
 

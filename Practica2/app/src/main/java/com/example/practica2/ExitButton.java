@@ -1,9 +1,8 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CAudio;
-import com.example.commonengine.CGraphics2D;
-import com.example.commonengine.CSound;
-import com.example.commonengine.TouchEvent;
+
+import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.TouchEvent;
 
 import java.util.ArrayList;
 
@@ -57,7 +56,7 @@ public class ExitButton extends Button{
         //setPosX(newPos);
     }
     @Override
-    public void render(CGraphics2D graph){
+    public void render(AndrGraphics2D graph){
 
         graph.drawImage(graph.createImage("exit.png"),getPosX(),(int)getPosY(),(int)getWidth(),(int)getHeight());
 

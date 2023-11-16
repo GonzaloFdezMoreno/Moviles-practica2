@@ -1,10 +1,8 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CAudio;
-import com.example.commonengine.CGraphics2D;
 
-import com.example.commonengine.Cengine;
-import com.example.commonengine.TouchEvent;
+import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.TouchEvent;
 
 import java.util.ArrayList;
 
@@ -26,7 +24,7 @@ public abstract class Scene {
     }
 
 
-    public void render(CGraphics2D graph) {
+    public void render(AndrGraphics2D graph) {
         //Renderizamos todos los objetos de la escena
         for (GameObject object : objects) {
             object.render(graph);

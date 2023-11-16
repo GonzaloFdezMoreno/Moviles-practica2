@@ -1,8 +1,4 @@
-package com.example.logic;
-
-import com.example.commonengine.CAudio;
-import com.example.commonengine.CGraphics2D;
-import com.example.commonengine.TouchEvent;
+package com.example.practica2;
 
 import java.util.ArrayList;
 import java.util.HashMap;

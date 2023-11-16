@@ -1,6 +1,7 @@
-package com.example.logic;
+package com.example.practica2;
 
-import com.example.commonengine.CGraphics2D;
+
+import com.example.androidengine.AndrGraphics2D;
 
 public class ColorSetterButton extends Button{
     int currentColor = 0xFFFF00FF; //color por defecto, si falla algo se vera asi
@@ -19,7 +20,7 @@ public class ColorSetterButton extends Button{
     }
 
     @Override
-    public void render(CGraphics2D graph) {
+    public void render(AndrGraphics2D graph) {
         graph.setColor(currentColor);
         graph.fillCircle((int)getPosX(),(int)getPosY(),(int)getWidth(),(int)getHeight());
         graph.setColor(0xFF000000);
