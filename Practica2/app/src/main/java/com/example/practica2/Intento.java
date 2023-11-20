@@ -1,6 +1,6 @@
 package com.example.practica2;
 
-
+import com.example.androidengine.AndroidAudio;
 import com.example.androidengine.AndrGraphics2D;
 import com.example.androidengine.TouchEvent;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Intento extends GameObject { //contiene el "rectangulo" de info. Incluye numero, colores insertados, pistas y
-                                            // lineas separadoras
+    // lineas separadoras
 
     private int numIntento = -1;
     int diametroIntentoCodigo = 30;
@@ -61,7 +61,7 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
         pistas.update(t);
     }
     @Override
-    public void render(AndrGraphics2D graph){
+    public void render(CGraphics2D graph){
 
         graph.drawText(String.valueOf(numIntento),getPosX() + 15, getPosY() + 30);
 
@@ -98,6 +98,27 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
         for(int i = 0; i < tamCodigo; ++i){
             Pista p = (Pista)pistas.getElemAtIndex(i);
             p.setState(aciertos[i]);
+        }
+    }
+
+    //version corregida de rellenaPistas para lo que nos pedia el enunciado
+    void rellenaPistas2(int aciertosAbsolutos, int aciertosParciales){
+        for(int i = 0; i < tamCodigo; ++i){
+
+            Pista p = (Pista)pistas.getElemAtIndex(i);
+
+            if(aciertosAbsolutos > 0){
+                p.setState(1);
+                aciertosAbsolutos--;
+            }
+            else if(aciertosParciales > 0){
+                p.setState(2);
+                aciertosParciales--;
+            }
+            else{
+                p.setState(0);
+            }
+
         }
     }
 }
