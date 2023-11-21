@@ -95,7 +95,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
             }
 
 
-            //this.log.handleEvents(eventlist/*,audio*/);
+            this.log.handleEvents(eventlist/*,audio*/);
 
                 /*
                 // Posibilidad: cedemos algo de tiempo. Es una medida conflictiva...
