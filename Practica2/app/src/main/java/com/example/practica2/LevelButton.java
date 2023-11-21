@@ -1,7 +1,9 @@
 package com.example.practica2;
 
 
+import com.example.androidengine.AndrGraphics2D;
 import com.example.androidengine.CLogic;
+import com.example.androidengine.TouchEvent;
 
 import java.util.ArrayList;
 
@@ -22,11 +24,11 @@ public class LevelButton extends Button {
         }
 
         @Override
-        public boolean handleInput(ArrayList<TouchEvent> event, CAudio audio) {
+        public boolean handleInput(ArrayList<TouchEvent> event/*, CAudio audio*/) {
 
-            if(sound == null){
+            /*if(sound == null){
                 sound=audio.newSound("bloop.wav");
-            }
+            }*/
 
             for(TouchEvent events : event) {
                 //comprobamos que esta dentro de los limites del boton
@@ -42,7 +44,7 @@ public class LevelButton extends Button {
                     if (events.type == TouchEvent.TouchEventType.TOUCH_DOWN) {
 
                         System.out.println("ButtonPressed");
-                        audio.playSound(sound);
+                        //audio.playSound(sound);
                         onTouchDown();
                     }
                 }
@@ -58,7 +60,7 @@ public class LevelButton extends Button {
 
         }
         @Override
-        public void render(CGraphics2D graph){
+        public void render(AndrGraphics2D graph){
 
             //Segun la dificultad tendrá un color distinto
             if(lvl=="FACIL"){

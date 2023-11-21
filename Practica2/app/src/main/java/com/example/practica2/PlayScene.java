@@ -1,6 +1,11 @@
 package com.example.practica2;
 
 
+import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.TouchEvent;
+
+import java.util.ArrayList;
+
 public class PlayScene extends Scene {
 
     public PlayScene(Logic logic,int i){
@@ -16,4 +21,18 @@ public class PlayScene extends Scene {
 
     }
 
+    @Override
+    public void update(double deltaTime) {
+        super.update(deltaTime);
+    }
+
+    @Override
+    public void render(AndrGraphics2D graph) {
+        super.render(graph);
+    }
+
+    @Override
+    public void handleInput(ArrayList<TouchEvent> event) {
+        super.handleInput(event);
+    }
 }

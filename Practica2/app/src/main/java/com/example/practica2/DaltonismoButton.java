@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class DaltonismoButton extends Button{
 
-    private CSound sound;
+    //private CSound sound;
 
     MastermindBoard mb;
     boolean activated;
@@ -19,11 +19,11 @@ public class DaltonismoButton extends Button{
         activated = false;
     }
 
-    public boolean handleInput(ArrayList<TouchEvent> event, CAudio audio) {
+    public boolean handleInput(ArrayList<TouchEvent> event/*, CAudio audio*/) {
 
-        if(sound == null){
+        /*if(sound == null){
             sound=audio.newSound("bloop.wav");
-        }
+        }*/
 
         for(TouchEvent events : event) {
             //comprobamos que esta dentro de los limites del boton
@@ -42,7 +42,7 @@ public class DaltonismoButton extends Button{
                     onTouchDown();
 
 
-                    audio.playSound(sound);
+                    //audio.playSound(sound);
                 }
             }
         }

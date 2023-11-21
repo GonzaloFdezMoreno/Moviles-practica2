@@ -49,9 +49,9 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
     }
 
     @Override
-    public boolean handleInput(ArrayList<TouchEvent> event, CAudio audio) {
-        botonesIntentoCodigo.handleInput(event,audio);
-        pistas.handleInput(event,audio);
+    public boolean handleInput(ArrayList<TouchEvent> event/*, CAudio audio*/) {
+        botonesIntentoCodigo.handleInput(event/*,audio*/);
+        pistas.handleInput(event/*,audio*/);
         return true;
     }
 
@@ -61,7 +61,7 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
         pistas.update(t);
     }
     @Override
-    public void render(CGraphics2D graph){
+    public void render(AndrGraphics2D graph){
 
         graph.drawText(String.valueOf(numIntento),getPosX() + 15, getPosY() + 30);
 

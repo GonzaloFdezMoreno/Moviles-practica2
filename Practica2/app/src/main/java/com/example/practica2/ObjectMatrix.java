@@ -24,10 +24,10 @@ public class ObjectMatrix extends GameObject { //utilizamos esta clase para pode
     }
 
     @Override
-    public boolean handleInput(ArrayList<TouchEvent> event, CAudio audio) {
+    public boolean handleInput(ArrayList<TouchEvent> event/*, CAudio audio*/) {
 
         for(int i = 0; i < matrixObjects.size(); ++i){
-            matrixObjects.get(i).handleInput(event,audio);
+            matrixObjects.get(i).handleInput(event/*,audio*/);
         }
         return true;
     }

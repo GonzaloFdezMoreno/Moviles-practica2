@@ -46,7 +46,7 @@ public class Logic implements CLogic {
 
     @Override
     public void handleEvents(ArrayList<TouchEvent> input /*,AndroidAudio audio*/) {
-       currScene.handleInput(input,audio);
+       currScene.handleInput(input/*,audio*/);
     }
 
 

@@ -42,11 +42,11 @@ public abstract class Scene {
     }
 
 
-    public void handleInput(ArrayList<TouchEvent> event, CAudio audio) {
+    public void handleInput(ArrayList<TouchEvent> event/*, CAudio audio*/) {
 
         //cada objeto tiene su propio handle input
         for (GameObject object : objects) {
-            object.handleInput(event,audio);
+            object.handleInput(event/*,audio*/);
 
         }
 

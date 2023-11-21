@@ -23,9 +23,9 @@ public class StartButton extends Button {
     @Override
     public boolean handleInput(ArrayList<TouchEvent> event/*, CAudio audio*/) {
 
-        if(sound == null){
+        /*if(sound == null){
             sound=audio.newSound("bloop.wav");
-        }
+        }*/
 
         for(TouchEvent events : event) {
             //comprobamos que esta dentro de los limites del boton
@@ -43,7 +43,7 @@ public class StartButton extends Button {
 
                     onTouchDown();
 
-                    audio.playSound(sound);
+                    //audio.playSound(sound);
                 }
             }
 

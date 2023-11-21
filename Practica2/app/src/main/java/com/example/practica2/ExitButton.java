@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ExitButton extends Button{
 
     Logic log;
-    private CSound sound;
+    //private CSound sound;
     ExitButton(int posX_, int posY_, int width_, int height_, Logic logic){
         super(posX_,posY_,width_, height_);
         log=logic;
@@ -17,11 +17,11 @@ public class ExitButton extends Button{
 
     }
 
-    public boolean handleInput(ArrayList<TouchEvent> event, CAudio audio) {
+    public boolean handleInput(ArrayList<TouchEvent> event/*, CAudio audio*/) {
 
-        if(sound == null){
+        /*if(sound == null){
             sound=audio.newSound("bloop.wav");
-        }
+        }*/
 
         for(TouchEvent events : event) {
             //comprobamos que esta dentro de los limites del boton
@@ -40,7 +40,7 @@ public class ExitButton extends Button{
                     onTouchDown();
                     //engine.GetLogic().SetScene(new LevelMenu(engine));
 
-                    audio.playSound(sound);
+                    //audio.playSound(sound);
                 }
             }
 

@@ -1,5 +1,8 @@
 package com.example.practica2;
 
+import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.TouchEvent;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,11 +70,11 @@ public class MastermindBoard extends GameObject {
     }
 
     @Override
-    public boolean handleInput(ArrayList<TouchEvent> event, CAudio audio) {
+    public boolean handleInput(ArrayList<TouchEvent> event/*, CAudio audio*/) {
 
-        intentos[numIntentoActual].handleInput(event, audio);
+        intentos[numIntentoActual].handleInput(event/*, audio*/);
 
-        selector.handleInput(event, audio);
+        selector.handleInput(event/*, audio*/);
 
         return true;
     }
@@ -84,7 +87,7 @@ public class MastermindBoard extends GameObject {
 
     }
     @Override
-    public void render(CGraphics2D graph) {
+    public void render(AndrGraphics2D graph) {
         graph.setFont(graph.createFont("AARVC___.TTF",25,false,false));
 
         if(currTableroCaracteristicas.maxIntentos-numIntentoActual>1) {
@@ -247,7 +250,7 @@ public class MastermindBoard extends GameObject {
     }
 
     //auxiliar, para poder visualizar el codigo secreto
-    void pintaCodigo(CGraphics2D graph){
+    void pintaCodigo(AndrGraphics2D graph){
         for(int i = 0; i < codigoSecreto.length; ++i){
             graph.setColor(codigoSecreto[i]);
             graph.fillCircle(getPosX() + 50 * i, getPosY()-25, 25, 25);
