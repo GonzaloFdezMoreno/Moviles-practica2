@@ -18,11 +18,11 @@ public class Pista extends GameObject{
         switch (state){
             case 0:
                 graph.setColor(0xFFc7cbd1);
-                graph.fillCircle(getPosX(),getPosY(),getWidth(),getHeight());
+                graph.fillCircle(getPosX(),getPosY(),getWidth());
                 break;
             case 1:
                 graph.setColor(0xFF000000);
-                graph.fillCircle(getPosX(),getPosY(),getWidth(),getHeight());
+                graph.fillCircle(getPosX(),getPosY(),getWidth());
                 break;
             case 2:
                 graph.drawCircle(getPosX(),getPosY(),getWidth(),getHeight());

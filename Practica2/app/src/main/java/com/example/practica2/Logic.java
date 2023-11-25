@@ -15,7 +15,7 @@ public class Logic implements CLogic {
 
 
     public Logic(EngineClass engine){
-        //epezamos siempre desde el Menú principal
+        //empezamos siempre desde el Menú principal
         this.currScene=new MainMenu(this);
 
         //this.currEngine=engine;

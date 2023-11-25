@@ -8,42 +8,37 @@ import java.util.ArrayList;
 
 public class MainMenu extends Scene {
 
-
+    Button playButton;
     public MainMenu(Logic logic){
         super(logic);
         log=logic;
 
-
-        //grph.drawRectangle(200,200,100,100);
-        //addGameObject(new StartButton(100,100,200,200,this.eng));
-        //addGameObject(new MastermindBoard(3,25, 75, 1, 1 ));
-
         addGameObject(new SceneText(150,100,0,0,"MASTERMIND"));
-        addGameObject(new StartButton(100,400,200,80,"JUGAR",this.log));
 
-
-
-
-        //addGameObject(new StartButton(250,400,200,70,this.eng));
-
-
-        //addGameObject(new StartButton(grph.getWidth()/3, (grph.getHeight()/5)*4,grph.getWidth()/3,grph.getHeight()/5,this.eng));
-
+        playButton = new Button(100,400,150,80,"JUGAR", "");
 
     }
 
     @Override
     public void render(AndrGraphics2D graph) {
         super.render(graph);
+        playButton.render(graph);
     }
 
     @Override
     public void update(double deltaTime) {
         super.update(deltaTime);
+        playButton.update(deltaTime);
     }
 
     @Override
     public void handleInput(ArrayList<TouchEvent> event) {
         super.handleInput(event);
+        if(playButton.handleInput(event))
+            playButtonEffect();
+    }
+
+    void playButtonEffect(){
+        log.SetScene(new LevelMenu(log));
     }
 }

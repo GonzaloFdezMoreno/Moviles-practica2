@@ -253,7 +253,7 @@ public class MastermindBoard extends GameObject {
     void pintaCodigo(AndrGraphics2D graph){
         for(int i = 0; i < codigoSecreto.length; ++i){
             graph.setColor(codigoSecreto[i]);
-            graph.fillCircle(getPosX() + 50 * i, getPosY()-25, 25, 25);
+            graph.fillCircle(getPosX() + 50 * i, getPosY()-25, 25);
             graph.setColor(0xFF000000);
 
         }

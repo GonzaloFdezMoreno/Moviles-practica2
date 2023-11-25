@@ -17,7 +17,7 @@ public class IntentoButton extends Button{ //contenidos en cada intento, con col
     int assignedNum = 0;
     MastermindBoard mb;
     IntentoButton(MastermindBoard mb_, int posX_, int posY_, int width_, int height_) {
-        super(posX_, posY_, width_, height_);
+        super(posX_, posY_, width_, height_, "", "");
         mb = mb_;
     }
 
@@ -30,7 +30,7 @@ public class IntentoButton extends Button{ //contenidos en cada intento, con col
     public void render(AndrGraphics2D graph) {
         if(!colorSet){
             graph.setColor(0xFFc7cbd1);
-            graph.fillCircle((int)getPosX(),(int)getPosY(),(int)getWidth(),(int)getHeight());
+            graph.fillCircle(getPosX(),getPosY(),getWidth());
 
             //circulo interno mas pequeño
             graph.setColor(0xFF92969C);
@@ -39,12 +39,11 @@ public class IntentoButton extends Button{ //contenidos en cada intento, con col
 
             graph.fillCircle((int)(getPosX() + getWidth()/2 - smallWidth/2),
                     (int)(getPosY() + getHeight()/2 - smallHeight/2),
-                    (int)(smallWidth),
-                    (int)(smallHeight));
+                    (int)(smallWidth));
         }
         else{
             graph.setColor(currentColor);
-            graph.fillCircle((int)getPosX(),(int)getPosY(),(int)getWidth(),(int)getHeight());
+            graph.fillCircle(getPosX(),getPosY(),getWidth());
             if(mb.isDaltonismo()){
                 graph.setColor(0xFF000000);
                 graph.drawText(String.valueOf(assignedNum), (int) getPosX() + getWidth()/2 -3, (int) getPosY() + getHeight()/2 + 3);

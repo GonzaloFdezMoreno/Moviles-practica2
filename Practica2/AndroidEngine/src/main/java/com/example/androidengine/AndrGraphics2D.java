@@ -138,7 +138,7 @@ public class AndrGraphics2D {
     }
 
 
-    public void fillCircle(int cx, int cy, int width, int height) {
+    public void fillCircle(int cx, int cy, int width) {
         this.canvas.drawCircle(cx+width/2,cy+width/2,width/2,paint);
     }
 

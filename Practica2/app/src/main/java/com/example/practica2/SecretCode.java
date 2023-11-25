@@ -18,7 +18,7 @@ public class SecretCode extends GameObject{
     public void render(AndrGraphics2D graph) {
         for(int i = 0; i < code.length; ++i){
             graph.setColor(code[i]);
-            graph.fillCircle(getPosX() + 35 * i, getPosY(), 25,25);
+            graph.fillCircle(getPosX() + 35 * i, getPosY(), 25);
             graph.setColor(0xFF000000);
             if(daltonico){
                 for(int j = 0; j < hexColores.length; j++){

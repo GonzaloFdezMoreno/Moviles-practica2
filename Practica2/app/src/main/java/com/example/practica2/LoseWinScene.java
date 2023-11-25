@@ -6,6 +6,8 @@ import com.example.androidengine.TouchEvent;
 import java.util.ArrayList;
 
 public class LoseWinScene extends Scene{
+
+    Button playAgainButton;
     protected LoseWinScene(Logic logic, int[] codigoSecreto, int nivel,String txt,int intent, boolean dalton) {
         super(logic);
 
@@ -26,24 +28,32 @@ public class LoseWinScene extends Scene{
         }
 
         addGameObject(new SecretCode(codigoSecreto, 150, 200, 1, 1, dalton));
-        //addGameObject(new RepetirNivelButton(logic, "Volver a jugar", nivel, 75, 250, 300, 70));
-        addGameObject(new StartButton(75, 350, 300, 70,"Elegir dificultad",logic ));
+
+        //addGameObject(new StartButton(75, 350, 300, 70,"Elegir dificultad",logic ));
+        playAgainButton = new Button(100,400,200,80,"Elegir difificultad", "");
 
     }
 
     @Override
     public void update(double deltaTime) {
         super.update(deltaTime);
+        playAgainButton.update(deltaTime);
     }
 
     @Override
     public void render(AndrGraphics2D graph) {
         super.render(graph);
+        playAgainButton.render(graph);
     }
 
     @Override
     public void handleInput(ArrayList<TouchEvent> event) {
         super.handleInput(event);
+        if(playAgainButton.handleInput(event))
+            playAgainButtonEffect();
     }
 
+    void playAgainButtonEffect(){
+        log.SetScene(new LevelMenu(log));
+    }
 }
