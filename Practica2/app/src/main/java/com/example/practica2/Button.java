@@ -10,10 +10,16 @@ public class Button extends GameObject {
 
     String text = "";
     String imgName = "";
-    Button(int posX_, int posY_, int width_, int height_, String text_, String imgName_){
+    int color = 0xFF00FFFF;
+    Button(int posX_, int posY_, int width_, int height_, String imgName_){
+        super(posX_, posY_, width_, height_);
+        imgName = imgName_;
+    }
+
+    Button(int posX_, int posY_, int width_, int height_, String text_, int color_){
         super(posX_, posY_, width_, height_);
         text = text_;
-        imgName = imgName_;
+        color = color_;
     }
 
     @Override
@@ -43,8 +49,8 @@ public class Button extends GameObject {
     @Override
     public void render(AndrGraphics2D graph){
         if(imgName == ""){
-            graph.setColor(0xFF00FF00);
-            graph.fillCircle(getPosX(),getPosY(),getWidth());
+            graph.setColor(color);
+            graph.fillRoundRectangle(getPosX(), getPosY(), getWidth(), getHeight(), 15, 10);
             graph.setColor(0xFFFFFFFF);
 
         }
@@ -52,8 +58,14 @@ public class Button extends GameObject {
             graph.drawImage(graph.createImage(imgName),getPosX(),getPosY(),getWidth(),getHeight());
         }
 
-        graph.setFont(graph.createFont("AARVC___.TTF",25,true,false));
-        graph.drawText(text,getPosX() + 60, getPosY() + 45);
+        if(text != ""){
+            graph.setColor(0xFF000000);
+            int size = 25;
+            graph.setFont(graph.createFont("AARVC___.TTF",size,true,false));
+            graph.drawText(text,getPosX() + getWidth()/2 - 30, getPosY() + getHeight()/2);
+            graph.setColor(0xFFFFFFFF);
+        }
+
     }
 
     void onClick(){

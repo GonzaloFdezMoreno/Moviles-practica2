@@ -15,7 +15,7 @@ public class MainMenu extends Scene {
 
         addGameObject(new SceneText(150,100,0,0,"MASTERMIND"));
 
-        playButton = new Button(100,400,150,80,"JUGAR", "");
+        playButton = new Button(100,400,150,50,"JUGAR", 0xFF1FE3E0);
 
     }
 

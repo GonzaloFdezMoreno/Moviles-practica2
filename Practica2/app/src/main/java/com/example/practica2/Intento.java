@@ -24,8 +24,6 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
 
         tamCodigo = tamCodigo_;
 
-
-
         //introducimos circulos que marcan nuestros intentos
         botonesIntentoCodigo = new ObjectMatrix(1, getPosX() + 40, getPosY() + 5, 225, 50);
         for(int i = 0; i < tamCodigo_; ++i){
@@ -49,9 +47,9 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
     }
 
     @Override
-    public boolean handleInput(ArrayList<TouchEvent> event/*, CAudio audio*/) {
-        botonesIntentoCodigo.handleInput(event/*,audio*/);
-        pistas.handleInput(event/*,audio*/);
+    public boolean handleInput(ArrayList<TouchEvent> event) {
+        botonesIntentoCodigo.handleInput(event);
+        pistas.handleInput(event);
         return true;
     }
 

@@ -8,7 +8,7 @@ public class ColorSetterButton extends Button{
     MastermindBoard boardRef;
     int assignedNum = 0;
     ColorSetterButton(MastermindBoard boardRef_, int color_, int posX_, int posY_, int width_, int height_) { //boton para insertar colores en el Intento actual
-        super(posX_, posY_, width_, height_, "", "");
+        super(posX_, posY_, width_, height_, "", 0xFFFFFFFF);
         currentColor = color_;
         boardRef = boardRef_;
 

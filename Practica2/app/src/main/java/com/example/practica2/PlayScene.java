@@ -15,24 +15,26 @@ public class PlayScene extends Scene {
         super(logic);
         log=logic;
         
-        exitButton = new Button(10,10,20,20, "", "exit.png");
+        exitButton = new Button(10,10,20,20, "exit.png");
         //creamos tablero de juego con un nivel de  dificultad i
         mb = new MastermindBoard(log, i,25, 75, 1, 1 );
         addGameObject(mb);
 
-        daltonismoButton = new Button(350, 5, 40, 40, "", "eyehide.png");
+        daltonismoButton = new Button(350, 5, 40, 40, "eyehide.png");
     }
 
     @Override
     public void update(double deltaTime) {
         super.update(deltaTime);
         exitButton.update(deltaTime);
+        daltonismoButton.update(deltaTime);
     }
 
     @Override
     public void render(AndrGraphics2D graph) {
         super.render(graph);
         exitButton.render(graph);
+        daltonismoButton.render(graph);
     }
 
     @Override
@@ -40,10 +42,12 @@ public class PlayScene extends Scene {
         super.handleInput(event);
         if(exitButton.handleInput(event))
             exitButtonEffect();
+        if(daltonismoButton.handleInput(event))
+            daltonismoButtonEffect();
     }
 
     void exitButtonEffect(){
-
+        log.SetScene(new LevelMenu(log));
     }
 
     void daltonismoButtonEffect(){

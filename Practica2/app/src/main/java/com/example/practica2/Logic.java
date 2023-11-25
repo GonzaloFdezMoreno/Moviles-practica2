@@ -13,7 +13,6 @@ public class Logic implements CLogic {
     Scene currScene;
     //EngineClass currEngine;
 
-
     public Logic(EngineClass engine){
         //empezamos siempre desde el Menú principal
         this.currScene=new MainMenu(this);

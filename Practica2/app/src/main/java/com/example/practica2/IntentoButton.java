@@ -17,7 +17,7 @@ public class IntentoButton extends Button{ //contenidos en cada intento, con col
     int assignedNum = 0;
     MastermindBoard mb;
     IntentoButton(MastermindBoard mb_, int posX_, int posY_, int width_, int height_) {
-        super(posX_, posY_, width_, height_, "", "");
+        super(posX_, posY_, width_, height_, "", 0XFFFFFFFF);
         mb = mb_;
     }
 

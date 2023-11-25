@@ -56,9 +56,7 @@ public class AndrGraphics2D {
 
     }
     public void scale(float x,float y){
-
         canvas.scale(x,y);
-
     }
 
 
@@ -207,9 +205,7 @@ public class AndrGraphics2D {
     public void setFont(AndroidFont fnt) {
         AndroidFont andft= (AndroidFont) fnt;
 
-
         font=andft.getFont();
-
     }
 
     //Transformar los eventos a la inversa de
@@ -224,6 +220,5 @@ public class AndrGraphics2D {
         return (int)(k/scaleFactor)-posy/2;
 
     }
-
 
 }

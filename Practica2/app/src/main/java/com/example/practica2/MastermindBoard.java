@@ -70,11 +70,11 @@ public class MastermindBoard extends GameObject {
     }
 
     @Override
-    public boolean handleInput(ArrayList<TouchEvent> event/*, CAudio audio*/) {
+    public boolean handleInput(ArrayList<TouchEvent> event) {
 
-        intentos[numIntentoActual].handleInput(event/*, audio*/);
+        intentos[numIntentoActual].handleInput(event);
 
-        selector.handleInput(event/*, audio*/);
+        selector.handleInput(event);
 
         return true;
     }
@@ -101,7 +101,7 @@ public class MastermindBoard extends GameObject {
         }
 
         selector.render(graph);
-        //pintaCodigo(graph); //muestra el codigo secreto
+        pintaCodigo(graph); //muestra el codigo secreto
     }
 
     //seteamos currTableroCaracteristicas
@@ -191,7 +191,7 @@ public class MastermindBoard extends GameObject {
     //finalizado un intento, rellenamos las pistas para indicar al jugador que tal lo ha hecho
     void compruebaPistas(){
         int numAciertos = 0;
-        int aciertos[] = new int[currTableroCaracteristicas.tamCodigo]; //0 es fallo total, 1 es acierto, 2 es esta pero en otra pos
+        //int aciertos[] = new int[currTableroCaracteristicas.tamCodigo]; //0 es fallo total, 1 es acierto, 2 es esta pero en otra pos
         Map<Integer, Integer> aux = new HashMap<>();
         aux.putAll(cuantoDeCadaColorEnCodigoSecreto); //copia de contenido
 
@@ -204,7 +204,7 @@ public class MastermindBoard extends GameObject {
             int colorComprobado = codigoSecreto[i];
             int colorColocado = intentos[numIntentoActual].getColorBotonAt(i);
             if(colorComprobado == colorColocado){
-                aciertos[i] = 1;
+                //aciertos[i] = 1;
                 aux.put(colorComprobado, aux.get(colorComprobado) - 1);
                 ++numAciertos;
             }
@@ -216,29 +216,27 @@ public class MastermindBoard extends GameObject {
             return;
         }
 
-
+        int numAciertosPosIncorrecta = 0;
         //pasada para los no en pos correcta y los que no estan
         for(int i = 0; i < currTableroCaracteristicas.tamCodigo; ++i){
 
             int colorComprobado = codigoSecreto[i];
             int colorColocado = intentos[numIntentoActual].getColorBotonAt(i);
-            //if(colorComprobado == colorColocado){
-            //    aciertos[i] = 1;
-            //    aux.put(colorComprobado, aux.get(colorComprobado) - 1);
-            //}
+
             if(colorComprobado != colorColocado) {
-                /*else*/
                 if (aux.containsKey(colorColocado) && aux.get(colorColocado) > 0) {
-                    aciertos[i] = 2;
+                    numAciertosPosIncorrecta++;
+                    //aciertos[i] = 2;
                     aux.put(colorColocado, aux.get(colorColocado) - 1);
-                } else {
-                    aciertos[i] = 0;
-                }
+                } //else {
+                    //aciertos[i] = 0;
+                //}
             }
         }
 
         //ponemos colores a las pistas
-        intentos[numIntentoActual].rellenaPistas(aciertos);
+        //intentos[numIntentoActual].rellenaPistas2(aciertos);
+        intentos[numIntentoActual].rellenaPistas2(numAciertos, numAciertosPosIncorrecta);
         cantColoresRellenados = 0;
 
         numIntentoActual++;
