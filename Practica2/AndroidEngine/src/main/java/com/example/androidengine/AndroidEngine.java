@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.view.SurfaceView;
 
+
 import java.util.ArrayList;
 
 public class AndroidEngine extends EngineClass implements Runnable{
@@ -13,6 +14,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
     private Thread renderThread;
 
     private boolean running;
+
 
     private AndroidAudio audio;
     private AndrInput ainpt;
@@ -67,7 +69,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
 
             // Informe de FPS
             double elapsedTime = (double) nanoElapsedTime / 1.0E9;
-            this.GetLogic().update(elapsedTime);
+
             if (currentTime - informePrevio > 1000000000l) {
                 long fps = frames * 1000000000l / (currentTime - informePrevio);
                 System.out.println("" + fps + " fps");
@@ -80,8 +82,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
 
             //this.canvas = this.holder.lockCanvas();
             this.andgr.preparaFrame();
-            this.log.render(andgr);
-            this.andgr.terminaFrame();
+
             //this.holder.unlockCanvasAndPost(canvas);
 
             ArrayList<TouchEvent> eventlist = this.ainpt.getTouchEvent();
@@ -94,8 +95,10 @@ public class AndroidEngine extends EngineClass implements Runnable{
 
             }
 
-
             this.log.handleEvents(eventlist/*,audio*/);
+            this.log.update(elapsedTime);
+            this.log.render(andgr);
+            this.andgr.terminaFrame();
 
                 /*
                 // Posibilidad: cedemos algo de tiempo. Es una medida conflictiva...

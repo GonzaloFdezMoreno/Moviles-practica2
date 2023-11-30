@@ -2,6 +2,8 @@ package com.example.practica2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdView;
+
 import android.os.Bundle;
 import android.view.SurfaceView;
 
