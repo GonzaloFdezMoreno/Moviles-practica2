@@ -16,6 +16,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
     private boolean running;
 
 
+    //AdView adview;
     private AndroidAudio audio;
     private AndrInput ainpt;
 
