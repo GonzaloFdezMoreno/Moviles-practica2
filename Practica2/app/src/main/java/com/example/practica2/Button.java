@@ -35,8 +35,9 @@ public class Button extends GameObject {
                 if (events.type == TouchEvent.TouchEventType.TOUCH_DOWN) {
                     System.out.println("ButtonPressed");
                     onTouchDown();
+                    pressed = true;
                 }
-                pressed = true;
+
             }
 
         }
