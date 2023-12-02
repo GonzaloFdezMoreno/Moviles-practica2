@@ -28,7 +28,7 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
         botonesIntentoCodigo = new ObjectMatrix(1, getPosX() + 40, getPosY() + 5, 225, 50);
         for(int i = 0; i < tamCodigo_; ++i){
             //las posiciones que se pasen por aqui dan igual, setObjectsPositionsInMatrix() las ajusta automaticamente
-            botonesIntentoCodigo.addObjectToMatrix(new IntentoButton(mb,-1, -1, diametroIntentoCodigo, diametroIntentoCodigo));
+            botonesIntentoCodigo.addObjectToMatrix(new IntentoButton(mb,-1, -1, diametroIntentoCodigo, diametroIntentoCodigo, mb.log.getEngine().getAudio()));
         }
         botonesIntentoCodigo.setObjectsPositionsInMatrix();
 

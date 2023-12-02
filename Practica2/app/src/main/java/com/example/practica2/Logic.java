@@ -3,6 +3,7 @@ package com.example.practica2;
 
 
 import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.AndroidEngine;
 import com.example.androidengine.CLogic;
 import com.example.androidengine.EngineClass;
 import com.example.androidengine.TouchEvent;
@@ -11,22 +12,28 @@ import java.util.ArrayList;
 
 public class Logic implements CLogic {
     Scene currScene;
-    //EngineClass currEngine;
+    EngineClass currEngine;
 
-    public Logic(EngineClass engine){
+    //AndroidEngine currEngine;
+
+    public Logic(EngineClass engine){ //AndroidEngine engine){
         //empezamos siempre desde el Menú principal
+
+        this.currEngine=engine;
+
         this.currScene=new MainMenu(this);
-
-        //this.currEngine=engine;
-
     }
 
     public Scene getScene() {
         return currScene;
     }
-    /*public EngineClass getEngine() {
+
+    public EngineClass getEngine() {
         return currEngine;
-    }*/
+    }
+    //public AndroidEngine getEngine() {
+        //return currEngine;
+    //}
 
     //Unicamente debemos renderizar, actualizar y manejar los inputs
     // de la escena que esté mostrandose.

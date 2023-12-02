@@ -2,24 +2,35 @@ package com.example.practica2;
 
 
 import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.AndroidAudio;
+import com.example.androidengine.AndroidSound;
 import com.example.androidengine.TouchEvent;
 
 import java.util.ArrayList;
 
 public class Button extends GameObject {
 
+    //ok para que el audio funcione hacer que la escena le pase el audio de engine al boton al crearlo y
+    //asi tiene acceso a audio el boton (que la escena coja el audio de logic y se lo da al boton)
+    private AndroidSound sound;
+    private AndroidAudio andAudio;
+
     String text = "";
     String imgName = "";
     int color = 0xFF00FFFF;
-    Button(int posX_, int posY_, int width_, int height_, String imgName_){
+    Button(int posX_, int posY_, int width_, int height_, String imgName_, AndroidAudio audio){
         super(posX_, posY_, width_, height_);
         imgName = imgName_;
+        andAudio = audio;
+        sound = andAudio.newSound("bloop.wav");
     }
 
-    Button(int posX_, int posY_, int width_, int height_, String text_, int color_){
+    Button(int posX_, int posY_, int width_, int height_, String text_, int color_, AndroidAudio audio){
         super(posX_, posY_, width_, height_);
         text = text_;
         color = color_;
+        andAudio = audio;
+        sound = andAudio.newSound("bloop.wav");
     }
 
     @Override
@@ -35,6 +46,7 @@ public class Button extends GameObject {
                 if (events.type == TouchEvent.TouchEventType.TOUCH_DOWN) {
                     System.out.println("ButtonPressed");
                     onTouchDown();
+                    andAudio.playSound(sound);
                     pressed = true;
                 }
 

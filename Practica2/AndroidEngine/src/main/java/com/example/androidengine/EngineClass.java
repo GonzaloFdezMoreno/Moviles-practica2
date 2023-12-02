@@ -4,6 +4,7 @@ public abstract class EngineClass {
 
 
     protected CLogic log;
+    public AndroidAudio audio;
 
     public int getWidth() {
         return 0;
@@ -20,5 +21,9 @@ public abstract class EngineClass {
 
     public void SetLogic(CLogic logic){
         this.log=logic;
+    }
+
+    public AndroidAudio getAudio() {
+        return this.audio;
     }
 }

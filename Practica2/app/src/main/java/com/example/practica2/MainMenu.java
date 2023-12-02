@@ -18,8 +18,8 @@ public class MainMenu extends Scene {
         addGameObject(new SceneText(150,100,0,0,"MASTERMIND"));
 
         //playButton = new Button(100,400,150,50,"JUGAR", 0xFF1FE3E0);
-        partidaRapida = new Button(100,300,150,50,"PARTIDA RAPIDA", 0xFF1FE3E0);
-        explorarMundos = new Button(100,400,150,50,"EXPLORAR MUNDOS", 0xFF1FE3E0);
+        partidaRapida = new Button(100,300,150,50,"PARTIDA RAPIDA", 0xFF1FE3E0, logic.currEngine.getAudio());
+        explorarMundos = new Button(100,400,150,50,"EXPLORAR MUNDOS", 0xFF1FE3E0, logic.currEngine.getAudio());
     }
 
     @Override

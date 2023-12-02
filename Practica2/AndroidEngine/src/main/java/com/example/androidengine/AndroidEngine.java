@@ -17,7 +17,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
 
 
     //AdView adview;
-    private AndroidAudio audio;
+    public AndroidAudio audio;
     private AndrInput ainpt;
 
     AndrGraphics2D andgr;
