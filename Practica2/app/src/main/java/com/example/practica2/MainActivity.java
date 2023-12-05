@@ -2,10 +2,14 @@ package com.example.practica2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.SurfaceView;
+import android.view.View;
 
 import com.example.androidengine.AndroidEngine;
 import com.example.androidengine.CLogic;
@@ -18,10 +22,16 @@ public class MainActivity extends AppCompatActivity {
     SurfaceView sfv;
     AndroidEngine andrEng;
 
+    AdView adView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
+
+        this.sfv = findViewById(R.id.surfaceView);
+        //setContentView(this.sfv);
+
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -30,12 +40,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //AdView adView=new AdView(this);
+        //adView.setAdSize(AdSize.BANNER);
+        //adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        //adView.setVisibility(View.VISIBLE);
+        adView=findViewById(R.id.adView);
 
-        this.sfv = new SurfaceView(this);
-        setContentView(this.sfv);
 
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
-        andrEng=new AndroidEngine(this.sfv,this);
+        andrEng=new AndroidEngine(this.sfv, this.adView,this);
 
         CLogic logic = new Logic(andrEng);
 

@@ -5,6 +5,8 @@ import android.content.res.AssetManager;
 import android.view.SurfaceView;
 
 
+import com.google.android.gms.ads.AdView;
+
 import java.util.ArrayList;
 
 public class AndroidEngine extends EngineClass implements Runnable{
@@ -16,13 +18,13 @@ public class AndroidEngine extends EngineClass implements Runnable{
     private boolean running;
 
 
-    //AdView adview;
+    AdView adview;
     public AndroidAudio audio;
     private AndrInput ainpt;
 
     AndrGraphics2D andgr;
 
-    public AndroidEngine(SurfaceView sfView,Context cntxt){
+    public AndroidEngine(SurfaceView sfView, AdView ads, Context cntxt){
         this.myView = sfView;
 
         AssetManager asman = cntxt.getAssets();
@@ -32,6 +34,8 @@ public class AndroidEngine extends EngineClass implements Runnable{
         this.ainpt = new AndrInput(sfView);
 
         this.audio = new AndroidAudio(asman);
+
+        this.adview=ads;
 
     }
 
