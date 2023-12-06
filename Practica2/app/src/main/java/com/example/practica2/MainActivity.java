@@ -17,6 +17,8 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
 
     SurfaceView sfv;
@@ -56,7 +58,17 @@ public class MainActivity extends AppCompatActivity {
 
         this.andrEng.SetLogic(logic);
 
+        File path = new File(getFilesDir().getName() + "\\assets\\levels");
+        try {
+            //System.out.print(path.getName());
+            System.out.print("\nFile Name : " + path.getName() + "\n");
+            path.list();
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
     }
+
+}
     @Override
     protected void onResume() {
         super.onResume();

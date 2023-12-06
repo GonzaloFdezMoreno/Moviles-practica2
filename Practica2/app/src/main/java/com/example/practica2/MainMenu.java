@@ -42,10 +42,13 @@ public class MainMenu extends Scene {
         if(partidaRapida.handleInput(event))
             playButtonEffect();
         if(explorarMundos.handleInput(event))
-            playButtonEffect();
+            explorarMundosEffect();
     }
 
     void playButtonEffect(){
         log.SetScene(new LevelMenu(log));
+    }
+    void explorarMundosEffect(){
+        log.SetScene(new ExploreWorldsScene(log));
     }
 }
