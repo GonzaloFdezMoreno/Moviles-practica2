@@ -4,13 +4,10 @@ import android.util.JsonReader;
 
 import com.example.androidengine.AndrGraphics2D;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.lang.Object;
-import java.util.List;
 
 public class WorldLevelSelector {
     int posX, posY;
@@ -49,7 +46,7 @@ public class WorldLevelSelector {
     }
 
     void testLoadJSON() throws IOException {
-        String filename = "level_test.json";
+        String filename = "levels/world1/level_1_10.json";
         //log.getEngine()
 
         InputStream is = log.getEngine().getaJsonlodr().getResource(filename);

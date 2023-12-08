@@ -29,8 +29,7 @@ public class AndrJSONLoader {
     }
 
     public InputStream getResource(String filename) throws IOException {
-        InputStream is = aMngr.open(filename);
-        return is;
+        return aMngr.open(filename);
     }
 
 }
