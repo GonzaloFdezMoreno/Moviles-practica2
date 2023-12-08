@@ -7,6 +7,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+
+class Level{
+    int codeSize, codeOpt, attempts;
+    boolean repeat;
+    Level(int codeSize_, int codeOpt_, boolean repeat_, int attempts_){
+        codeSize = codeSize_;
+        codeOpt = codeOpt_;
+        repeat = repeat_;
+        attempts = attempts_;
+    }
+}
 public class MastermindBoard extends GameObject {
 
     Logic log; //para poder cambiar entre escenas cuando ganas, pierdes...
@@ -69,6 +81,39 @@ public class MastermindBoard extends GameObject {
 
     }
 
+    MastermindBoard(Logic log_, Level l, int posX_, int posY_, int width_, int height_) {
+        super(posX_, posY_, width_, height_);
+
+        log = log_;
+
+        currTableroCaracteristicas.maxIntentos = l.attempts;
+        currTableroCaracteristicas.tamCodigo = l.codeSize;
+        currTableroCaracteristicas.repeticionColores = l.repeat;
+        currTableroCaracteristicas.numColoresCodigo = l.codeOpt;
+
+        //creamos la secuencia vacia de todos los intentos
+        intentos = new Intento[currTableroCaracteristicas.maxIntentos];
+        for (int i = 0; i < currTableroCaracteristicas.maxIntentos; ++i) {
+            intentos[i] = new Intento(this, i+1, currTableroCaracteristicas.tamCodigo, getPosX(), getPosY() + margenAltoIntento * i, anchoIntento, altoIntento);
+        }
+
+        //creamos el selector
+        selector = new ObjectMatrix(1,posX_ - 20, 540, anchoIntento, altoIntento);//new Selector(tamCodigo, posX_ + 150, getPosY() + 600, anchoIntento, altoIntento);
+        for (int i = 0; i < currTableroCaracteristicas.numColoresCodigo; ++i){
+
+            //podemos ver que no importa la pos en la que se colocan los objetos, pues con selector.setObjectsPositionsInMatrix(); los colocamos correctamente
+            selector.addObjectToMatrix(new ColorSetterButton(this, hexColores[i], -1, -1, 30, 30, log.currEngine.getAudio()));
+        }
+        selector.setObjectsPositionsInMatrix(); //necesario para situar los elementos dentro del ObjectMatrix, asi no lo hacemos en cada vuelta del bucle
+
+        //creamos codigo secreto
+        codigoSecreto = new int[currTableroCaracteristicas.tamCodigo];
+        cuantoDeCadaColorEnCodigoSecreto = new HashMap<>();
+        estableceNuevoCodigoSecreto();
+
+        daltonismo = false;
+
+    }
     @Override
     public boolean handleInput(ArrayList<TouchEvent> event) {
 

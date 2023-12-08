@@ -7,6 +7,8 @@ import android.view.SurfaceView;
 
 import com.google.android.gms.ads.AdView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class AndroidEngine extends EngineClass implements Runnable{
@@ -21,13 +23,13 @@ public class AndroidEngine extends EngineClass implements Runnable{
     AdView adview;
     public AndroidAudio audio;
     private AndrInput ainpt;
-
+    private AndrJSONLoader aJsonlodr;
     AndrGraphics2D andgr;
-
+    private AssetManager asman;
     public AndroidEngine(SurfaceView sfView, AdView ads, Context cntxt){
         this.myView = sfView;
 
-        AssetManager asman = cntxt.getAssets();
+        asman = cntxt.getAssets();
 
         this.andgr=new AndrGraphics2D(600,400,myView,cntxt);//,context);
 
@@ -36,6 +38,8 @@ public class AndroidEngine extends EngineClass implements Runnable{
         this.audio = new AndroidAudio(asman);
 
         this.adview=ads;
+
+        aJsonlodr = new AndrJSONLoader(cntxt);
 
     }
 
@@ -145,6 +149,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
         return this.audio;
     }
 
+    public AndrJSONLoader getaJsonlodr(){return aJsonlodr;}
 
 }
 

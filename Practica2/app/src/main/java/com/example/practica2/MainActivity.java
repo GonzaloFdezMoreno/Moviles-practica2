@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     SurfaceView sfv;
     AndroidEngine andrEng;
-
     AdView adView;
 
     @Override
@@ -58,15 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
         this.andrEng.SetLogic(logic);
 
-        File path = new File(getFilesDir().getName() + "\\assets\\levels");
-        try {
-            //System.out.print(path.getName());
-            System.out.print("\nFile Name : " + path.getName() + "\n");
-            path.list();
-        }
-        catch (Exception e) {
-            System.err.println(e.getMessage());
-    }
 
 }
     @Override

@@ -5,7 +5,7 @@ public abstract class EngineClass {
 
     protected CLogic log;
     public AndroidAudio audio;
-
+    AndrJSONLoader andrJSONLoader;
     public int getWidth() {
         return 0;
 
@@ -26,4 +26,6 @@ public abstract class EngineClass {
     public AndroidAudio getAudio() {
         return this.audio;
     }
+
+    public AndrJSONLoader getaJsonlodr(){ return andrJSONLoader;}
 }

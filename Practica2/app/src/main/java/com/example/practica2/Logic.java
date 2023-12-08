@@ -31,6 +31,7 @@ public class Logic implements CLogic {
     public EngineClass getEngine() {
         return currEngine;
     }
+
     //public AndroidEngine getEngine() {
         //return currEngine;
     //}
@@ -51,8 +52,8 @@ public class Logic implements CLogic {
     }
 
     @Override
-    public void handleEvents(ArrayList<TouchEvent> input /*,AndroidAudio audio*/) {
-       currScene.handleInput(input/*,audio*/);
+    public void handleEvents(ArrayList<TouchEvent> input) {
+       currScene.handleInput(input);
     }
 
 
