@@ -3,6 +3,7 @@ package com.example.practica2;
 import android.util.JsonReader;
 
 import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.TouchEvent;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +16,7 @@ public class WorldLevelSelector {
     int numLevels = 14;
     int widthMargin = 90, heightMargin = 90; //margenes entre botones de niveles
     ArrayList<Button> worldLevels;
-
+    Button b;
     Logic log;
     WorldLevelSelector(int posX_, int posY_, Logic log_){
         posX = posX_; posY = posY_;
@@ -32,25 +33,40 @@ public class WorldLevelSelector {
                     String.valueOf(i + 1), 0XDDD3D3D3,log.currEngine.getAudio()));
         }
 
-        try{
+        b = new Button(100,300,150,50,"PARTIDA RAPIDA", 0xFF1FE3E0, log.currEngine.getAudio());
+        /*try{
             testLoadJSON();
         }
         catch (IOException e){
             System.err.println(e.getMessage() + "\nNO SE PUDO ABRIR EL ARCHIVO");
-        }
+        }*/
     }
 
     public void render(AndrGraphics2D graph){
         for(Button b : worldLevels)
             b.render(graph);
+
+        b.render(graph);
+    }
+
+    public void handleInput(ArrayList<TouchEvent> event){
+        if(b.handleInput(event)){
+            try{
+                testLoadJSON();
+            }
+            catch (IOException e){
+                System.err.println(e.getMessage());
+            }
+        }
     }
 
     void testLoadJSON() throws IOException {
         String filename = "levels/world1/level_1_10.json";
-        //log.getEngine()
 
         InputStream is = log.getEngine().getaJsonlodr().getResource(filename);
-        readJsonStream(is);
+        Level L = readJsonStream(is);
+
+        log.SetScene(new PlayScene(log,L));
     }
     public Level readJsonStream(InputStream in) throws IOException { //creamos el JsonReader
         JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));

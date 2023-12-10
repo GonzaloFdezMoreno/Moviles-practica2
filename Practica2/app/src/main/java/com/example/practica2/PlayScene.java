@@ -23,11 +23,25 @@ public class PlayScene extends Scene {
         daltonismoButton = new Button(350, 5, 40, 40, "eyehide.png", log.currEngine.getAudio());
     }
 
+    public PlayScene(Logic logic,Level L){
+        super(logic);
+        log=logic;
+
+        exitButton = new Button(10,10,20,20, "exit.png", log.currEngine.getAudio());
+        //creamos tablero de juego con un nivel de  dificultad i
+        mb = new MastermindBoard(log, L,25, 75, 1, 1 );
+        addGameObject(mb);
+
+        daltonismoButton = new Button(350, 5, 40, 40, "eyehide.png", log.currEngine.getAudio());
+    }
+
     @Override
     public void update(double deltaTime) {
         super.update(deltaTime);
         exitButton.update(deltaTime);
         daltonismoButton.update(deltaTime);
+        System.out.print("\nTEST\n");
+
     }
 
     @Override

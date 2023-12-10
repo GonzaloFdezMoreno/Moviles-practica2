@@ -3,6 +3,7 @@ package com.example.practica2;
 import com.example.androidengine.AndrGraphics2D;
 import com.example.androidengine.TouchEvent;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ExploreWorldsScene extends Scene{
@@ -16,7 +17,6 @@ public class ExploreWorldsScene extends Scene{
 
         levelSelector = new WorldLevelSelector(70,30, logic);
         //levelSelector = new ArrayList<>();
-
     }
 
     @Override
@@ -33,5 +33,7 @@ public class ExploreWorldsScene extends Scene{
     @Override
     public void handleInput(ArrayList<TouchEvent> event) {
         super.handleInput(event);
+
+        levelSelector.handleInput(event);
     }
 }

@@ -86,6 +86,8 @@ public class MastermindBoard extends GameObject {
 
         log = log_;
 
+        currTableroCaracteristicas = new caractTablero();
+
         currTableroCaracteristicas.maxIntentos = l.attempts;
         currTableroCaracteristicas.tamCodigo = l.codeSize;
         currTableroCaracteristicas.repeticionColores = l.repeat;
