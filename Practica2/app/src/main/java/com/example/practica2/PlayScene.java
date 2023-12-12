@@ -40,7 +40,6 @@ public class PlayScene extends Scene {
         super.update(deltaTime);
         exitButton.update(deltaTime);
         daltonismoButton.update(deltaTime);
-        System.out.print("\nTEST\n");
 
     }
 

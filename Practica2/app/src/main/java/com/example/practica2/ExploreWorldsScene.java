@@ -15,7 +15,7 @@ public class ExploreWorldsScene extends Scene{
     protected ExploreWorldsScene(Logic logic) {
         super(logic);
 
-        levelSelector = new WorldLevelSelector(70,30, logic);
+        levelSelector = new WorldLevelSelector(30,30, logic);
         //levelSelector = new ArrayList<>();
     }
 

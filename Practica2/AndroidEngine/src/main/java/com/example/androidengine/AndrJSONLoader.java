@@ -3,6 +3,7 @@ package com.example.androidengine;
 import android.content.Context;
 import android.content.res.AssetManager;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -17,6 +18,10 @@ public class AndrJSONLoader {
 
     public InputStream getResource(String filename) throws IOException {
         return aMngr.open(filename);
+    }
+
+    public String[] getAssetsDirectory(String dirname) throws IOException { //para coger un directorio de la carpeta Assets
+        return aMngr.list(dirname);
     }
 
 }
