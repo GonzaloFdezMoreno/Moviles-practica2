@@ -29,11 +29,12 @@ public class ExploreWorldsScene extends Scene{
     @Override
     public void render(AndrGraphics2D graph) {
         super.render(graph);
-        graph.drawImage(graph.createImage("world4_bg.jpeg"),0,0,500,800);
+        graph.drawImage(graph.createImage(worldBackgroundImages[currentWorld]),0,0,500,800);
 
         prevWorld.render(graph);
         nextWorld.render(graph);
         levelSelector.render(graph);
+
         /*for(WorldLevelSelector wls : levelSelector)
             wls.render(graph);*/
 
@@ -43,6 +44,15 @@ public class ExploreWorldsScene extends Scene{
     public void handleInput(ArrayList<TouchEvent> event) {
         super.handleInput(event);
 
+        if(prevWorld.handleInput(event)){
+            if(currentWorld > 0)
+                currentWorld--;
+        }
+
+        if(nextWorld.handleInput(event)){
+            if(currentWorld < 3)
+                currentWorld++;
+        }
         levelSelector.handleInput(event);
     }
 }
