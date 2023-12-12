@@ -164,12 +164,15 @@ public class AndrGraphics2D {
         else{
             scaleFactor=sfView.getWidth()/wid;
         }
-        scale(scaleFactor,scaleFactor);
 
         posx=(int)(sfView.getWidth()/2-wid*scaleFactor/2);
         posy=(int)(sfView.getHeight()/2-hei*scaleFactor/2);
 
         translate(posx,posy/2);
+
+
+        scale(scaleFactor,scaleFactor);
+
 
     }
 
