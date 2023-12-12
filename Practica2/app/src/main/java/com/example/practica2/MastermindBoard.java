@@ -88,6 +88,10 @@ public class MastermindBoard extends GameObject {
 
         currTableroCaracteristicas = new caractTablero();
 
+        if(!l.repeat && l.codeSize > l.codeOpt){
+            l.repeat = true;
+            System.err.println("Al cargar tablero: codeSize > codeOpt y repeat = false.\nEl tablero es imposible de crear.\nCambiando repeat a true");
+        }
         currTableroCaracteristicas.maxIntentos = l.attempts;
         currTableroCaracteristicas.tamCodigo = l.codeSize;
         currTableroCaracteristicas.repeticionColores = l.repeat;
