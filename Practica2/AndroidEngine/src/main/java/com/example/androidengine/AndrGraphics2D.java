@@ -220,7 +220,7 @@ public class AndrGraphics2D {
     }
     public int refactorY(int k){
         //hacer la inversa de la traslacion y la escala
-        return (int)(k/scaleFactor)-posy/2;
+        return (int)(k/scaleFactor);
 
     }
 
