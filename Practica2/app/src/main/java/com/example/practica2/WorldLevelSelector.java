@@ -16,7 +16,6 @@ public class WorldLevelSelector {
     int numLevelsBeaten = 0;
     int numLevels = 0;
     int widthMargin = 120, heightMargin = 120; //margenes entre botones de niveles
-    ArrayList<Button> worldLevels;
     String[] worldLevelFileNames;
     String[] worldNames;
     ArrayList<ArrayList<Button>> allWorldLevels; //aqui cargamos todos los botones cuando creamos la clase
@@ -31,6 +30,7 @@ public class WorldLevelSelector {
         allWorldLevels = new ArrayList<>();
         for(int i = 0; i < worldNames.length; ++i)
             allWorldLevels.add(new ArrayList<>());
+
         int l = 0;
         for(ArrayList<Button> a : allWorldLevels){
             getLevels(worldNames[l]);

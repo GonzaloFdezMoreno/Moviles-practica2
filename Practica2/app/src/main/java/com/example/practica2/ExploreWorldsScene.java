@@ -18,7 +18,7 @@ public class ExploreWorldsScene extends Scene{
     protected ExploreWorldsScene(Logic logic) {
         super(logic);
 
-        levelSelector = new WorldLevelSelector(30,30, worldFolderNames, logic);
+        levelSelector = new WorldLevelSelector(30,-40, worldFolderNames, logic);
 
 
         prevWorld = new Button(10,10,30,40, "PrevArrows.png", log.currEngine.getAudio());
@@ -34,14 +34,6 @@ public class ExploreWorldsScene extends Scene{
         prevWorld.render(graph);
         nextWorld.render(graph);
         levelSelector.render(graph);
-
-        /*for(WorldLevelSelector wls : levelSelector)
-            wls.render(graph);*/
-
-    }
-
-    void loadLevelButtons(String worldName){
-
     }
 
     @Override
@@ -51,7 +43,6 @@ public class ExploreWorldsScene extends Scene{
         if(prevWorld.handleInput(event)){
             if(currentWorld > 0){
                 currentWorld--;
-                //loadLevelButtons(worldFolderNames[currentWorld]);
                 levelSelector.setCurrWorld(currentWorld);
             }
         }
