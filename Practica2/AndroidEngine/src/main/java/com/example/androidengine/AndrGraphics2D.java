@@ -167,8 +167,9 @@ public class AndrGraphics2D {
 
         posx=(int)(sfView.getWidth()/2-wid*scaleFactor/2);
         posy=(int)(sfView.getHeight()/2-hei*scaleFactor/2);
-
-        translate(posx,posy/2);
+        int npd = sfView.getWidth();
+        int skdfjh = sfView.getHeight();
+        translate(posx,posy);
 
 
         scale(scaleFactor,scaleFactor);
@@ -215,12 +216,12 @@ public class AndrGraphics2D {
     //lo escalado para coincidir con las dimensiones logicas
     public int refactorX(int k){
         //hacer la inversa de la traslacion y la escala
-        return (int)(k/scaleFactor)-posx;
+        return (int)(k/scaleFactor)-(int)(posx/scaleFactor);
 
     }
     public int refactorY(int k){
         //hacer la inversa de la traslacion y la escala
-        return (int)(k/scaleFactor);
+        return (int)(k/scaleFactor)-(int)(posy/scaleFactor);
 
     }
 
