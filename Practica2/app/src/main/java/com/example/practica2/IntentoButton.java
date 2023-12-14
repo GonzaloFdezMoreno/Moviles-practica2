@@ -4,6 +4,7 @@ package com.example.practica2;
 
 import com.example.androidengine.AndrGraphics2D;
 import com.example.androidengine.AndroidAudio;
+import com.example.androidengine.AndroidSound;
 import com.example.androidengine.TouchEvent;
 
 import java.util.ArrayList;
@@ -17,8 +18,8 @@ public class IntentoButton extends Button{ //contenidos en cada intento, con col
                                         // valor mas pequeño su tamaño
     int assignedNum = 0;
     MastermindBoard mb;
-    IntentoButton(MastermindBoard mb_, int posX_, int posY_, int width_, int height_, AndroidAudio audio) {
-        super(posX_, posY_, width_, height_, "", 0XFFFFFFFF, audio);
+    IntentoButton(MastermindBoard mb_, int posX_, int posY_, int width_, int height_, AndroidAudio audio, AndroidSound sound) {
+        super(posX_, posY_, width_, height_, "", 0XFFFFFFFF, audio, sound);
         mb = mb_;
     }
 

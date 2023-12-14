@@ -42,7 +42,7 @@ public class WorldLevelSelector {
                 }
 
                 a.add(new Button(posX + k * widthMargin, posY + j * heightMargin, 110, 110,
-                        String.valueOf(i + 1), 0XDDD3D3D3,log.currEngine.getAudio()));
+                        String.valueOf(i + 1), 0XDDD3D3D3,log.currEngine.getAudio(), log.currEngine.getSound()));
             }
             ++l;
         }

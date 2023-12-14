@@ -15,24 +15,24 @@ public class PlayScene extends Scene {
         super(logic);
         log=logic;
         
-        exitButton = new Button(10,10,20,20, "exit.png", log.currEngine.getAudio());
+        exitButton = new Button(10,10,20,20, "exit.png", log.currEngine.getAudio(), log.currEngine.getSound());
         //creamos tablero de juego con un nivel de  dificultad i
         mb = new MastermindBoard(log, i,25, 75, 1, 1 );
         addGameObject(mb);
 
-        daltonismoButton = new Button(350, 5, 40, 40, "eyehide.png", log.currEngine.getAudio());
+        daltonismoButton = new Button(350, 5, 40, 40, "eyehide.png", log.currEngine.getAudio(), log.currEngine.getSound());
     }
 
     public PlayScene(Logic logic,Level L){
         super(logic);
         log=logic;
 
-        exitButton = new Button(10,10,20,20, "exit.png", log.currEngine.getAudio());
+        exitButton = new Button(10,10,20,20, "exit.png", log.currEngine.getAudio(), log.currEngine.getSound());
         //creamos tablero de juego con un nivel de  dificultad i
         mb = new MastermindBoard(log, L,25, 75, 1, 1 );
         addGameObject(mb);
 
-        daltonismoButton = new Button(350, 5, 40, 40, "eyehide.png", log.currEngine.getAudio());
+        daltonismoButton = new Button(350, 5, 40, 40, "eyehide.png", log.currEngine.getAudio(), log.currEngine.getSound());
     }
 
     @Override

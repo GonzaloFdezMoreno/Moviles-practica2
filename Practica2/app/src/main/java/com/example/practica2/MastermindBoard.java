@@ -68,7 +68,7 @@ public class MastermindBoard extends GameObject {
         for (int i = 0; i < currTableroCaracteristicas.numColoresCodigo; ++i){
 
             //podemos ver que no importa la pos en la que se colocan los objetos, pues con selector.setObjectsPositionsInMatrix(); los colocamos correctamente
-            selector.addObjectToMatrix(new ColorSetterButton(this, hexColores[i], -1, -1, 30, 30, log.currEngine.getAudio()));
+            selector.addObjectToMatrix(new ColorSetterButton(this, hexColores[i], -1, -1, 30, 30, log.currEngine.getAudio(), log.currEngine.getSound()));
         }
         selector.setObjectsPositionsInMatrix(); //necesario para situar los elementos dentro del ObjectMatrix, asi no lo hacemos en cada vuelta del bucle
 
@@ -108,7 +108,7 @@ public class MastermindBoard extends GameObject {
         for (int i = 0; i < currTableroCaracteristicas.numColoresCodigo; ++i){
 
             //podemos ver que no importa la pos en la que se colocan los objetos, pues con selector.setObjectsPositionsInMatrix(); los colocamos correctamente
-            selector.addObjectToMatrix(new ColorSetterButton(this, hexColores[i], -1, -1, 30, 30, log.currEngine.getAudio()));
+            selector.addObjectToMatrix(new ColorSetterButton(this, hexColores[i], -1, -1, 30, 30, log.currEngine.getAudio(), log.currEngine.getSound()));
         }
         selector.setObjectsPositionsInMatrix(); //necesario para situar los elementos dentro del ObjectMatrix, asi no lo hacemos en cada vuelta del bucle
 

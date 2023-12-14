@@ -24,6 +24,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
 
     AndroidAdsManager adsMngr;
     public AndroidAudio audio;
+    public AndroidSound sound;
     private AndrInput ainpt;
     private AndrJSONLoader aJsonlodr;
     AndrGraphics2D andgr;
@@ -45,6 +46,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
 
         aJsonlodr = new AndrJSONLoader(cntxt);
 
+        this.sound = audio.newSound("bloop.wav");
     }
 
     @Override
@@ -151,6 +153,10 @@ public class AndroidEngine extends EngineClass implements Runnable{
 
     public AndroidAudio getAudio() {
         return this.audio;
+    }
+
+    public AndroidSound getSound() {
+        return this.sound;
     }
 
     public AndrJSONLoader getaJsonlodr(){return aJsonlodr;}
