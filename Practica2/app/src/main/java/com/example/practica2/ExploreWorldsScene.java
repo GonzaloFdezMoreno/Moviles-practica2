@@ -29,7 +29,7 @@ public class ExploreWorldsScene extends Scene{
     @Override
     public void render(AndrGraphics2D graph) {
         super.render(graph);
-        graph.drawImage(graph.createImage(worldBackgroundImages[currentWorld]),0,0,500,800);
+        graph.drawImage(graph.createImage(worldBackgroundImages[currentWorld]),0,0,400,600);
 
         prevWorld.render(graph);
         nextWorld.render(graph);

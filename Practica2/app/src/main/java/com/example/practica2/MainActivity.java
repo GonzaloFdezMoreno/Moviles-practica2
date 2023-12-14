@@ -31,10 +31,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.sfv = findViewById(R.id.surfaceView);
+        this.adView=findViewById(R.id.adView);
         //setContentView(this.sfv);
 
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+        /*MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
                 // cargamos los anuncios
@@ -45,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
         //adView.setAdSize(AdSize.BANNER);
         //adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
         //adView.setVisibility(View.VISIBLE);
-        adView=findViewById(R.id.adView);
+
 
 
         AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
+        adView.loadAd(adRequest);*/
 
         andrEng=new AndroidEngine(this.sfv, this.adView,this);
 

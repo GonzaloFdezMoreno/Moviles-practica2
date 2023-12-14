@@ -27,6 +27,7 @@ public class MainMenu extends Scene {
         super.render(graph);
         partidaRapida.render(graph);
         explorarMundos.render(graph);
+
     }
 
     @Override

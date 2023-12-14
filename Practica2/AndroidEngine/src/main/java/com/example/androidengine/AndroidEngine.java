@@ -21,6 +21,8 @@ public class AndroidEngine extends EngineClass implements Runnable{
 
 
     AdView adview;
+
+    AndroidAdsManager adsMngr;
     public AndroidAudio audio;
     private AndrInput ainpt;
     private AndrJSONLoader aJsonlodr;
@@ -38,6 +40,8 @@ public class AndroidEngine extends EngineClass implements Runnable{
         this.audio = new AndroidAudio(asman);
 
         this.adview=ads;
+
+        adsMngr=new AndroidAdsManager(this.adview,cntxt);
 
         aJsonlodr = new AndrJSONLoader(cntxt);
 
