@@ -18,28 +18,39 @@ public class WorldLevelSelector {
     int widthMargin = 120, heightMargin = 120; //margenes entre botones de niveles
     ArrayList<Button> worldLevels;
     String[] worldLevelFileNames;
+    String[] worldNames;
+    ArrayList<ArrayList<Button>> allWorldLevels; //aqui cargamos todos los botones cuando creamos la clase
     Logic log;
-    WorldLevelSelector(int posX_, int posY_, Logic log_){
+    int currWorld = 0;
+    WorldLevelSelector(int posX_, int posY_, String[] worldNames_, Logic log_){
         posX = posX_; posY = posY_;
+        worldNames = worldNames_;
+
         log = log_;
 
-        worldLevels = new ArrayList<>();
+        allWorldLevels = new ArrayList<>();
+        for(int i = 0; i < worldNames.length; ++i)
+            allWorldLevels.add(new ArrayList<>());
+        int l = 0;
+        for(ArrayList<Button> a : allWorldLevels){
+            getLevels(worldNames[l]);
 
-        getLevels();
+            for (int i = 0, j = 0, k = 0; i < numLevels; ++i, ++k){
+                if(i%3==0){
+                    k = 0;
+                    ++j;
+                }
 
-        for (int i = 0, j = 0, k = 0; i < numLevels; ++i, ++k){
-            if(i%3==0){
-                k = 0;
-                ++j;
+                a.add(new Button(posX + k * widthMargin, posY + j * heightMargin, 110, 110,
+                        String.valueOf(i + 1), 0XDDD3D3D3,log.currEngine.getAudio()));
             }
-            worldLevels.add(new Button(posX + k * widthMargin, posY + j * heightMargin, 110, 110,
-                    String.valueOf(i + 1), 0XDDD3D3D3,log.currEngine.getAudio()));
+            ++l;
         }
     }
 
-    void getLevels(){ //cogemos los archivos en la carpeta correspondiente al mundo y asignamos cuantos hay
+    void getLevels(String worldName){ //cogemos los archivos en la carpeta correspondiente al mundo y asignamos cuantos hay
         try{
-            worldLevelFileNames = log.getEngine().getaJsonlodr().getAssetsDirectory("levels/world1");
+            worldLevelFileNames = log.getEngine().getaJsonlodr().getAssetsDirectory("levels/" + worldName);
             numLevels = worldLevelFileNames.length;
             int i = 1;
             for(String s : worldLevelFileNames){
@@ -55,16 +66,16 @@ public class WorldLevelSelector {
     }
 
     public void render(AndrGraphics2D graph){
-        for(Button b : worldLevels)
+        for(Button b : allWorldLevels.get(currWorld))
             b.render(graph);
     }
 
     public void handleInput(ArrayList<TouchEvent> event){
         int i = 0;
-        for(Button b : worldLevels){
+        for(Button b : allWorldLevels.get(currWorld)){
             if(b.handleInput(event)){
                 try{
-                    testLoadJSON(i);
+                    loadLevelJSON(i);
                 }
                 catch (IOException e){
                     System.err.println(e.getMessage());
@@ -74,14 +85,27 @@ public class WorldLevelSelector {
         }
     }
 
-    void testLoadJSON(int n) throws IOException {
+    void setCurrWorld(int i){
+        currWorld = i;
+    }
+
+    void loadLevelJSON(int n) throws IOException {
         String filename = "levels/world1/" + worldLevelFileNames[n];
 
         InputStream is = log.getEngine().getaJsonlodr().getResource(filename);
+        try {
+            Level L = readJsonStream(is);
 
-        Level L = readJsonStream(is);
+            if(L.codeOpt <= -1 || L.codeSize <= -1 || L.attempts <= -1){
+                throw new IllegalArgumentException("Level file didnt have correct formatting");
+            }
+            log.SetScene(new PlayScene(log,L));
 
-        log.SetScene(new PlayScene(log,L));
+        }
+        catch(IllegalArgumentException e){
+            System.err.println(e);
+
+        }
     }
     public Level readJsonStream(InputStream in) throws IOException { //creamos el JsonReader
         JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
@@ -91,7 +115,6 @@ public class WorldLevelSelector {
             reader.close();
         }
     }
-
     public Level readLevel(JsonReader reader) throws IOException {
         //los tipos que estan en el json
         int codeSize = -1;

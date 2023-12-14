@@ -14,16 +14,16 @@ public class ExploreWorldsScene extends Scene{
     WorldLevelSelector levelSelector;
 
     String[] worldBackgroundImages = {"world1_background.jpg", "world2_bg.jpeg", "world3_bg.jpg", "world4_bg.jpeg"};
+    String[] worldFolderNames = {"world1", "world2","world3","world4"};
     protected ExploreWorldsScene(Logic logic) {
         super(logic);
 
-        levelSelector = new WorldLevelSelector(30,30, logic);
+        levelSelector = new WorldLevelSelector(30,30, worldFolderNames, logic);
 
 
-        prevWorld = new Button(10,10,30,40, "prev", 0XFFD3D3D3, log.currEngine.getAudio());
-        nextWorld = new Button(350,10,30,40, "next", 0XFFD3D3D3, log.currEngine.getAudio());
+        prevWorld = new Button(10,10,30,40, "PrevArrows.png", log.currEngine.getAudio());
+        nextWorld = new Button(350,10,30,40, "NextArrows.png", log.currEngine.getAudio());
 
-        //levelSelector = new ArrayList<>();
     }
 
     @Override
@@ -40,18 +40,28 @@ public class ExploreWorldsScene extends Scene{
 
     }
 
+    void loadLevelButtons(String worldName){
+
+    }
+
     @Override
     public void handleInput(ArrayList<TouchEvent> event) {
         super.handleInput(event);
 
         if(prevWorld.handleInput(event)){
-            if(currentWorld > 0)
+            if(currentWorld > 0){
                 currentWorld--;
+                //loadLevelButtons(worldFolderNames[currentWorld]);
+                levelSelector.setCurrWorld(currentWorld);
+            }
         }
 
         if(nextWorld.handleInput(event)){
-            if(currentWorld < 3)
+            if(currentWorld < 3){
                 currentWorld++;
+                //loadLevelButtons(worldFolderNames[currentWorld]);
+                levelSelector.setCurrWorld(currentWorld);
+            }
         }
         levelSelector.handleInput(event);
     }
