@@ -1,5 +1,7 @@
 package com.example.practica2;
 
+import android.media.Image;
+
 import com.example.androidengine.AndrGraphics2D;
 import com.example.androidengine.TouchEvent;
 
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 public class ExploreWorldsScene extends Scene{
     Button nextWorld;
     Button prevWorld;
-    //ArrayList<WorldLevelSelector> levelSelector;
+    Button goBack;
     int currentWorld = 0;
     WorldLevelSelector levelSelector;
 
@@ -21,9 +23,9 @@ public class ExploreWorldsScene extends Scene{
         levelSelector = new WorldLevelSelector(30,-40, worldFolderNames, logic);
 
 
-        prevWorld = new Button(10,10,30,40, "PrevArrows.png", log.currEngine.getAudio());
-        nextWorld = new Button(350,10,30,40, "NextArrows.png", log.currEngine.getAudio());
-
+        prevWorld = new Button(110,10,30,40, "PrevArrows.png", log.currEngine.getAudio());
+        nextWorld = new Button(250,10,30,40, "NextArrows.png", log.currEngine.getAudio());
+        goBack = new Button(20,20,20,20, "goback.png", log.currEngine.getAudio());
     }
 
     @Override
@@ -31,8 +33,14 @@ public class ExploreWorldsScene extends Scene{
         super.render(graph);
         graph.drawImage(graph.createImage(worldBackgroundImages[currentWorld]),0,0,400,600);
 
+        graph.setColor(0xFFFFFFFF);
+        graph.fillRectangle(0,0,400, 50);
+        graph.setColor(0xFF000000);
+
         prevWorld.render(graph);
         nextWorld.render(graph);
+        goBack.render(graph);
+
         levelSelector.render(graph);
     }
 
@@ -50,9 +58,12 @@ public class ExploreWorldsScene extends Scene{
         if(nextWorld.handleInput(event)){
             if(currentWorld < 3){
                 currentWorld++;
-                //loadLevelButtons(worldFolderNames[currentWorld]);
                 levelSelector.setCurrWorld(currentWorld);
             }
+        }
+
+        if(goBack.handleInput(event)){
+            log.SetScene(new MainMenu(log));
         }
         levelSelector.handleInput(event);
     }

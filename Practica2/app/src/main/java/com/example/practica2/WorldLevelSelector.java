@@ -88,7 +88,6 @@ public class WorldLevelSelector {
     void setCurrWorld(int i){
         currWorld = i;
     }
-
     void loadLevelJSON(int n) throws IOException {
         String filename = "levels/world1/" + worldLevelFileNames[n];
 
