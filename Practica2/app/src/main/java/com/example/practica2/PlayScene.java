@@ -45,7 +45,16 @@ public class PlayScene extends Scene {
 
     @Override
     public void render(AndrGraphics2D graph) {
+        if(log.currBG < 4) {
+            graph.drawImage(graph.createImage(backgroundImages[log.currBG]), 0, 0, 400, 600);
+
+            graph.setColor(0xFFFFFFFF);
+            graph.fillRectangle(0,0,400, 50);
+            graph.setColor(0xFF000000);
+        }
+
         super.render(graph);
+
         exitButton.render(graph);
         daltonismoButton.render(graph);
     }

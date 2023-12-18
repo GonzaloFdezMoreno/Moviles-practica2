@@ -14,10 +14,14 @@ public class Logic implements CLogic {
     Scene currScene;
     EngineClass currEngine;
 
+    int currBG; //este int es el fondo actual que tenemos en la aplicacion
+
     //AndroidEngine currEngine;
 
     public Logic(EngineClass engine){ //AndroidEngine engine){
         //empezamos siempre desde el Menú principal
+
+        this.currBG=4; //por defecto empezamos con el fondo blanco
 
         this.currEngine=engine;
 

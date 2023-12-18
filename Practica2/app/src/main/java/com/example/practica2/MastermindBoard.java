@@ -22,6 +22,7 @@ class Level{
 public class MastermindBoard extends GameObject {
 
     Logic log; //para poder cambiar entre escenas cuando ganas, pierdes...
+
     int nivelDificultad;
     Random random = new Random(); //para poder generara valores aleatorios
 
