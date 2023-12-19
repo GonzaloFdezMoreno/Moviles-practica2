@@ -15,6 +15,7 @@ public class Logic implements CLogic {
     EngineClass currEngine;
 
     int currBG; //este int es el fondo actual que tenemos en la aplicacion
+    int currSkin; //este int es la skin actual que tenemos en la aplicacion
 
     //AndroidEngine currEngine;
 
@@ -22,6 +23,7 @@ public class Logic implements CLogic {
         //empezamos siempre desde el Menú principal
 
         this.currBG=4; //por defecto empezamos con el fondo blanco
+        this.currSkin=4; //por defecto empezamos con la skin basica
 
         this.currEngine=engine;
 

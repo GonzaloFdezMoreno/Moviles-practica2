@@ -19,12 +19,18 @@ public class ColorSetterButton extends Button{
                 assignedNum = i + 1;
             }
         }
+
     }
 
     @Override
     public void render(AndrGraphics2D graph) {
-        graph.setColor(currentColor);
-        graph.fillCircle(getPosX(),getPosY(),getWidth());
+        if(boardRef.log.currSkin < 4){
+            graph.drawImage(graph.createImage("sprites/"+ boardRef.skinFolderNames[boardRef.log.currSkin] + "/" +boardRef.skinsColores[assignedNum-1]), getPosX(), getPosY(), getWidth(), getHeight());
+        }
+        else {
+            graph.setColor(currentColor);
+            graph.fillCircle(getPosX(), getPosY(), getWidth());
+        }
         graph.setColor(0xFF000000);
         if(boardRef.isDaltonismo()){
             graph.drawText(String.valueOf(assignedNum),  getPosX() + getWidth()/2 -3,  getPosY() + getHeight()/2 + 3);

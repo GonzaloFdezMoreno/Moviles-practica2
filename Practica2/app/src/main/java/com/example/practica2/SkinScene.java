@@ -13,6 +13,11 @@ public class SkinScene extends Scene{
     Button turkeyBG;
     Button santaBG;
     Button defaultBG;
+    Button coinSkin;
+    Button emojiSkin;
+    Button foodSkin;
+    Button xmasSkin;
+    Button defaultSkin;
 
     //String[] backgroundImages = {"world1_background.jpg", "world2_bg.jpeg", "world3_bg.jpg", "world4_bg.jpeg"};
 
@@ -26,6 +31,11 @@ public class SkinScene extends Scene{
         turkeyBG = new Button(170,100,60,100, "world3_bg.jpg", log.currEngine.getAudio(), log.currEngine.getSound());
         santaBG = new Button(250,100,60,100, "world4_bg.jpeg", log.currEngine.getAudio(), log.currEngine.getSound());
         defaultBG = new Button(330,100,60,100, "default_bg.jpg", log.currEngine.getAudio(), log.currEngine.getSound());
+        coinSkin = new Button(20,300,60,60, "sprites/coins/amarillo.png", log.currEngine.getAudio(), log.currEngine.getSound());
+        emojiSkin = new Button(100,300,60,60, "sprites/emojis/amarillo.png", log.currEngine.getAudio(), log.currEngine.getSound());
+        foodSkin = new Button(180,300,60,60, "sprites/food/amarillo.png", log.currEngine.getAudio(), log.currEngine.getSound());
+        xmasSkin = new Button(40,400,60,60, "sprites/xmas/rojo.png", log.currEngine.getAudio(), log.currEngine.getSound());
+        defaultSkin = new Button(140,400,60,60, "defaultSkin.png", log.currEngine.getAudio(), log.currEngine.getSound());
     }
 
     public void render(AndrGraphics2D graph){
@@ -45,6 +55,11 @@ public class SkinScene extends Scene{
         turkeyBG.render(graph);
         santaBG.render(graph);
         defaultBG.render(graph);
+        coinSkin.render(graph);
+        emojiSkin.render(graph);
+        foodSkin.render(graph);
+        xmasSkin.render(graph);
+        defaultSkin.render(graph);
     }
 
     @Override
@@ -68,6 +83,21 @@ public class SkinScene extends Scene{
         }
         if(defaultBG.handleInput(event)){
             log.currBG=4;
+        }
+        if(coinSkin.handleInput(event)){
+            log.currSkin=0;
+        }
+        if(emojiSkin.handleInput(event)){
+            log.currSkin=1;
+        }
+        if(foodSkin.handleInput(event)){
+            log.currSkin=2;
+        }
+        if(xmasSkin.handleInput(event)){
+            log.currSkin=3;
+        }
+        if(defaultSkin.handleInput(event)){
+            log.currSkin=4;
         }
     }
 }

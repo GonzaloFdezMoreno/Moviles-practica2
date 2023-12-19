@@ -29,6 +29,10 @@ public class MastermindBoard extends GameObject {
     // introducimos aqui los colores que queremos que esten en el juego. DEBE HABER 9. Si no seleccion de dificultad fallara
     int hexColores[] = {0xffff0000,0Xffff9033,0xfffffc33,0xff00ff00,0xff33fffb,0xff334dff,0xfff433ff,0xffff33a5,0xff991111};
                         //ROJO   NARANJA  AMARILLO VERDE    CIAN     AZUL     MAGENTA  ROSA     ROJOSCURO
+    // estos son los nombres de las imagenes de las skins que substituiran nuestros colores cuando activemos una skin
+    String skinsColores[] = {"rojo.png", "naranja.png", "amarillo.png", "verde.png", "cian.png", "azul.png", "magenta.png", "rosa.png", "oscurorojo.png"};
+    // estos son los nombres de las carpetas donde estan las imagenes de cada tipo de skin
+    String skinFolderNames[] = {"coins", "emojis", "food", "xmas"};
 
     //cuando creamos un tablero, asignaremos estas caracteristicas en el metodo estableceCaracteristicasTablero(int dificultad)
     static private class caractTablero{

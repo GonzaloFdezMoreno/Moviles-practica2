@@ -44,8 +44,13 @@ public class IntentoButton extends Button{ //contenidos en cada intento, con col
                     (int)(smallWidth));
         }
         else{
-            graph.setColor(currentColor);
-            graph.fillCircle(getPosX(),getPosY(),getWidth());
+            if(mb.log.currSkin < 4){
+                graph.drawImage(graph.createImage("sprites/"+ mb.skinFolderNames[mb.log.currSkin] + "/" +mb.skinsColores[assignedNum-1]), getPosX(), getPosY(), getWidth(), getHeight());
+            }
+            else {
+                graph.setColor(currentColor);
+                graph.fillCircle(getPosX(), getPosY(), getWidth());
+            }
             if(mb.isDaltonismo()){
                 graph.setColor(0xFF000000);
                 graph.drawText(String.valueOf(assignedNum), (int) getPosX() + getWidth()/2 -3, (int) getPosY() + getHeight()/2 + 3);
