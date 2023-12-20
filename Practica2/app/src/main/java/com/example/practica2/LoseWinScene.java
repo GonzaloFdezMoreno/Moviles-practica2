@@ -28,7 +28,7 @@ public class LoseWinScene extends Scene{
                     "Codigo:"));
         }
 
-        addGameObject(new SecretCode(codigoSecreto, 150, 200, 1, 1, dalton));
+        addGameObject(new SecretCode(codigoSecreto, 150, 200, 1, 1, dalton, logic));
 
         //addGameObject(new StartButton(75, 350, 300, 70,"Elegir dificultad",logic ));
         playAgainButton = new Button(100,400,200,80,"Volver a jugar", 0xFF1FE3E0, logic.currEngine.getAudio(), log.currEngine.getSound());
