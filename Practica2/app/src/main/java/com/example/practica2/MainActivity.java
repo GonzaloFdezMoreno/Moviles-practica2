@@ -16,7 +16,7 @@ import com.example.androidengine.CLogic;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-
+import android.content.SharedPreferences;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +24,9 @@ public class MainActivity extends AppCompatActivity {
     SurfaceView sfv;
     AndroidEngine andrEng;
     AdView adView;
-
+    CLogic logic;
+    private String sharedPrefFile = "com.example.android.mastermindPrefs";
+    private SharedPreferences mPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
         andrEng=new AndroidEngine(this.sfv, this.adView,this);
 
-        CLogic logic = new Logic(andrEng);
+        logic = new Logic(andrEng);
 
         this.andrEng.SetLogic(logic);
 
-
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
 }
     @Override
     protected void onResume() {
@@ -70,5 +72,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         andrEng.pause();
+
+        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+
+        Logic logic_ = (Logic)logic;
+        logic_.saveStuffTest();
+
+       /* preferencesEditor.putInt("count", mCount);
+        preferencesEditor.putBoolean("playing", True);
+        preferencesEditor.apply(); //también podemos usar .commit()*/
     }
 }

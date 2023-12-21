@@ -1,8 +1,11 @@
 package com.example.practica2;
 
+import android.os.Environment;
+
 import com.example.androidengine.AndrGraphics2D;
 import com.example.androidengine.TouchEvent;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +23,7 @@ class Level{
     }
 }
 public class MastermindBoard extends GameObject {
-
+    Button save;
     Logic log; //para poder cambiar entre escenas cuando ganas, pierdes...
 
     int nivelDificultad;
@@ -53,6 +56,8 @@ public class MastermindBoard extends GameObject {
     boolean daltonismo; //modo daltonismo, muestra numeros encima de los colores para identificarlos facilmente
     MastermindBoard(Logic log_, int nivDificultad_, int posX_, int posY_, int width_, int height_) {
         super(posX_, posY_, width_, height_);
+
+        save = new Button(100,10,50,50,"SAVE TEST", 0xFF1FE3E0, log_.currEngine.getAudio(), log_.currEngine.getSound());
 
         log = log_;
 
@@ -131,6 +136,8 @@ public class MastermindBoard extends GameObject {
         intentos[numIntentoActual].handleInput(event);
 
         selector.handleInput(event);
+        /*if(save.handleInput(event))
+            saveGameToJSON();*/
 
         return true;
     }
@@ -145,6 +152,8 @@ public class MastermindBoard extends GameObject {
     @Override
     public void render(AndrGraphics2D graph) {
         graph.setFont(graph.createFont("AARVC___.TTF",25,false,false));
+
+        save.render(graph);
 
         if(currTableroCaracteristicas.maxIntentos-numIntentoActual>1) {
             graph.drawText("Te quedan " + (currTableroCaracteristicas.maxIntentos - numIntentoActual) + " intentos", 100, 30);
@@ -330,4 +339,41 @@ public class MastermindBoard extends GameObject {
     public boolean isDaltonismo() {
         return daltonismo;
     }
+
+    void saveGameState(){
+        System.out.print("Vamos a suspender");
+        /*//numero intentos max
+        //numero intento actual
+        //codigo secreto
+        //tam codigo
+        //contenido intentos resueltos y pistas
+        //numero del nivel
+        String environment = Environment.getExternalStorageState();
+        System.out.print(environment + "\n");
+
+        *//*if(environment != "mounted")
+            System.err.println("No se pudo acceder a la memoria");*//*
+
+        File storageDir = Environment.getExternalStorageDirectory();
+        System.out.print(storageDir.listFiles() + "\n");
+
+        File externalCacheFile = new File(
+                context.getExternalCacheDir(), filename);
+        *//*File[] externalStorageVolumes =
+                ContextCompat.getExternalFilesDirs(getApplicationContext(),
+                        null);
+        File primaryExternalStorage = externalStorageVolumes[0];*//*
+    }
+
+    private String sharedPrefFile = "com.example.android.hellosharedprefs";
+    mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+    // MODE_WORLD_WRITEABLE and MODE_WORLD_READABLE están deprecados desde API 17
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+        preferencesEditor.putInt("count", mCount);
+        preferencesEditor.putBoolean("playing", True);
+        preferencesEditor.apply(); //también podemos usar .commit()
+    */}
 }
