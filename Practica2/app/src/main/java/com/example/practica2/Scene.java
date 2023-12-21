@@ -13,6 +13,10 @@ public abstract class Scene {
     //estas son las imagenes de fondo que podemos poner cuando cambiamos la skin de fondo en el menu de skins
     String[] backgroundImages = {"world1_background.jpg", "world2_bg.jpeg", "world3_bg.jpg", "world4_bg.jpeg"};
 
+    String sceneName = "no_scene_name"; //usamos esto para que desde logic en la funcion de guardar
+                                        // escena podamos saber en cual estamos. Para ello solamente
+                                        //PlayScene va a tener un nombre distinto, que asignamos en su constructora
+
     private final ArrayList<GameObject> objects = new ArrayList<>();
 
 
@@ -58,6 +62,5 @@ public abstract class Scene {
     public void addGameObject(GameObject gobj){
         objects.add(gobj);
     }
-
 
 }

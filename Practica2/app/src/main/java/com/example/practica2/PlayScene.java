@@ -14,7 +14,9 @@ public class PlayScene extends Scene {
     public PlayScene(Logic logic,int i){
         super(logic);
         log=logic;
-        
+
+        sceneName = "play_scene";
+
         exitButton = new Button(10,10,20,20, "exit.png", log.currEngine.getAudio(), log.currEngine.getSound());
         //creamos tablero de juego con un nivel de  dificultad i
         mb = new MastermindBoard(log, i,25, 75, 1, 1 );
@@ -26,6 +28,8 @@ public class PlayScene extends Scene {
     public PlayScene(Logic logic,Level L){
         super(logic);
         log=logic;
+
+        sceneName = "play_scene";
 
         exitButton = new Button(10,10,20,20, "exit.png", log.currEngine.getAudio(), log.currEngine.getSound());
         //creamos tablero de juego con un nivel de  dificultad i

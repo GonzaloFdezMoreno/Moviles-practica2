@@ -34,7 +34,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
 
         asman = cntxt.getAssets();
 
-        this.andgr=new AndrGraphics2D(600,400,myView,cntxt);//,context);
+        this.andgr=new AndrGraphics2D(600,400,myView,cntxt);
 
         this.ainpt = new AndrInput(sfView);
 
@@ -87,7 +87,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
 
             if (currentTime - informePrevio > 1000000000l) {
                 long fps = frames * 1000000000l / (currentTime - informePrevio);
-                System.out.println("" + fps + " fps");
+                //System.out.println("" + fps + " fps");
                 frames = 0;
                 informePrevio = currentTime;
             }
