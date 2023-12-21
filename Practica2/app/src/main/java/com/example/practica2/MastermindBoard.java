@@ -315,9 +315,19 @@ public class MastermindBoard extends GameObject {
     //auxiliar, para poder visualizar el codigo secreto
     void pintaCodigo(AndrGraphics2D graph){
         for(int i = 0; i < codigoSecreto.length; ++i){
-            graph.setColor(codigoSecreto[i]);
-            graph.fillCircle(getPosX() + 50 * i, getPosY()-25, 25);
-            graph.setColor(0xFF000000);
+            if(log.currSkin < 4){
+                for(int j = 0; j < hexColores.length; j++){
+                    if(codigoSecreto[i] == hexColores[j]){
+                        graph.drawImage(graph.createImage("sprites/"+skinFolderNames[log.currSkin]+"/"+skinsColores[j]),
+                                getPosX() + 50 * i, getPosY() - 25, 25, 25);
+                    }
+                }
+            }
+            else {
+                graph.setColor(codigoSecreto[i]);
+                graph.fillCircle(getPosX() + 50 * i, getPosY() - 25, 25);
+                graph.setColor(0xFF000000);
+            }
 
         }
     }
