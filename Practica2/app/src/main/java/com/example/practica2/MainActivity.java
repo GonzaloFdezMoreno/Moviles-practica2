@@ -1,11 +1,18 @@
 package com.example.practica2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
+import com.example.androidengine.Notification;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.SurfaceView;
@@ -18,6 +25,8 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import android.content.SharedPreferences;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -92,5 +101,46 @@ public class MainActivity extends AppCompatActivity {
 
         preferencesEditor.apply();
 
+        NotificationManagerCompat mngr = NotificationManagerCompat.from(getApplicationContext());
+
+
+        if (ContextCompat. checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) ==
+                PackageManager. PERMISSION_GRANTED) {
+            // Si tenemos permisos, podemos usar la API solicitada.
+        }
+        else {
+            // Pedimos permisos al usuario. Lo correcto es explicar al usuario antes el porqué son
+            //necesarios
+            requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS},
+                    1);
+        }
+
+
+        ArrayList<Notification> notifications= andrEng.getAndroidNotifications().getNotification();
+
+        //Para cargar cada notificacion
+        for(Notification notification: notifications){
+        Data input = new Data.Builder()
+                .putString(NotificationViewer.INPUT_CHANNEL_ID, andrEng.getAndroidNotifications().GetChannelID())
+                .putString(NotificationViewer.INPUT_TITLE, notification.GetTitle())
+                .putString(NotificationViewer.INPUT_DESCRIPTION, notification.GetDescription())
+                .putBoolean(NotificationViewer.INPUT_AUTOCANCEL, true)
+                .build();
+
+        OneTimeWorkRequest notificationWork = new OneTimeWorkRequest.Builder(NotificationViewer.class)
+                .setInitialDelay(10, TimeUnit.SECONDS)
+                .setInputData(input)
+                .build();
+
+        WorkManager.getInstance(this).enqueue(notificationWork);
+
+        System.out.println("aparece");
+        mngr.notify(1, NotificationViewer.GetBuilder().build());
+        }
+        notifications.clear();
+
+
     }
+
+
 }

@@ -46,6 +46,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
 
         aJsonlodr = new AndrJSONLoader(cntxt);
 
+        andrNot=new AndroidNotifications(cntxt);
         this.sound = audio.newSound("bloop.wav");
     }
 
@@ -147,6 +148,8 @@ public class AndroidEngine extends EngineClass implements Runnable{
                 }
             }
         }
+
+        getAndroidNotifications().addNotification(new Notification("Ayuda","me muero",10));
     }
 
 

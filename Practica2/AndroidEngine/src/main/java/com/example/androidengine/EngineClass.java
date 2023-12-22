@@ -7,6 +7,8 @@ public abstract class EngineClass {
     public AndroidAudio audio;
     public AndroidSound sound;
     AndrJSONLoader andrJSONLoader;
+
+    AndroidNotifications andrNot;
     public int getWidth() {
         return 0;
 
@@ -33,4 +35,6 @@ public abstract class EngineClass {
     }
 
     public AndrJSONLoader getaJsonlodr(){ return andrJSONLoader;}
+
+    public AndroidNotifications getAndroidNotifications(){return andrNot;}
 }
