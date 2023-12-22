@@ -1,6 +1,8 @@
 package com.example.practica2;
 
 
+import android.content.SharedPreferences;
+
 import com.example.androidengine.AndrGraphics2D;
 import com.example.androidengine.TouchEvent;
 
@@ -15,8 +17,6 @@ public class PlayScene extends Scene {
         super(logic);
         log=logic;
 
-        sceneName = "play_scene";
-
         exitButton = new Button(10,10,20,20, "exit.png", log.currEngine.getAudio(), log.currEngine.getSound());
         //creamos tablero de juego con un nivel de  dificultad i
         mb = new MastermindBoard(log, i,25, 75, 1, 1 );
@@ -28,8 +28,6 @@ public class PlayScene extends Scene {
     public PlayScene(Logic logic,Level L){
         super(logic);
         log=logic;
-
-        sceneName = "play_scene";
 
         exitButton = new Button(10,10,20,20, "exit.png", log.currEngine.getAudio(), log.currEngine.getSound());
         //creamos tablero de juego con un nivel de  dificultad i
@@ -84,5 +82,15 @@ public class PlayScene extends Scene {
             daltonismoButton.setImgName("eyeshow.png");
 
         mb.setDaltonismo(daltonismoMode);
+    }
+
+    @Override
+    public void onLoad(SharedPreferences preferences) {
+        mb.loadGameState(preferences);
+    }
+
+    @Override
+    public void onSave(SharedPreferences.Editor preferencesEditor) {
+        mb.saveGameState(preferencesEditor);
     }
 }

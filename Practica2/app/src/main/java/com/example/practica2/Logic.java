@@ -2,6 +2,8 @@ package com.example.practica2;
 
 
 
+import android.content.SharedPreferences;
+
 import com.example.androidengine.AndrGraphics2D;
 import com.example.androidengine.AndroidEngine;
 import com.example.androidengine.CLogic;
@@ -68,24 +70,14 @@ public class Logic implements CLogic {
     }
 
 
-    void saveStuffTest(){
+    void saveGameState(SharedPreferences.Editor preferencesEditor){
         System.out.print("Saving stuff...\n");
-
-        if(getScene().sceneName == "play_scene") { //podria haber peligro de una escena inadecuada teniendo este nombre asignado en su constructora
-
-            //nos aseguramos que la escena concreta sea de tipo Playscene, si no se puede convertir escribimos
-            //mensaje de error
-            try {
-                PlayScene ps = (PlayScene) getScene();
-                ps.mb.saveGameState();
-                System.out.print("GameSaved\n");
-
-            }
-            catch(Exception e){
-                System.out.print(e+"\n");
-            }
-        }
+        currScene.onSave(preferencesEditor);
     };
+
+    void loadGameState(SharedPreferences preferences) {
+        currScene.onLoad(preferences);
+    }
 
 
 

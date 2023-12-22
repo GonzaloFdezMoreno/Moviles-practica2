@@ -1,5 +1,6 @@
 package com.example.practica2;
 
+import android.content.SharedPreferences;
 import android.os.Environment;
 
 import com.example.androidengine.AndrGraphics2D;
@@ -8,8 +9,10 @@ import com.example.androidengine.TouchEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 
 class Level{
@@ -22,8 +25,17 @@ class Level{
         attempts = attempts_;
     }
 }
+
+class SaveBoardInformation{ //la info que queremos que se guarde de una partida en progreso cuando se cierre el juego
+    int maxIntentos;
+    int numIntentoActual;
+    int codigoSecreto[];
+    int tamCodigo;
+    int numNivel;
+    int[][] intentos; //cada intento con los colores que metimos
+
+}
 public class MastermindBoard extends GameObject {
-    Button save;
     Logic log; //para poder cambiar entre escenas cuando ganas, pierdes...
 
     int nivelDificultad;
@@ -56,8 +68,6 @@ public class MastermindBoard extends GameObject {
     boolean daltonismo; //modo daltonismo, muestra numeros encima de los colores para identificarlos facilmente
     MastermindBoard(Logic log_, int nivDificultad_, int posX_, int posY_, int width_, int height_) {
         super(posX_, posY_, width_, height_);
-
-        save = new Button(100,10,50,50,"SAVE TEST", 0xFF1FE3E0, log_.currEngine.getAudio(), log_.currEngine.getSound());
 
         log = log_;
 
@@ -141,7 +151,6 @@ public class MastermindBoard extends GameObject {
 
         return true;
     }
-
     @Override
     public void update(double t){
         for (Intento intento : intentos) {
@@ -152,8 +161,6 @@ public class MastermindBoard extends GameObject {
     @Override
     public void render(AndrGraphics2D graph) {
         graph.setFont(graph.createFont("AARVC___.TTF",25,false,false));
-
-        save.render(graph);
 
         if(currTableroCaracteristicas.maxIntentos-numIntentoActual>1) {
             graph.drawText("Te quedan " + (currTableroCaracteristicas.maxIntentos - numIntentoActual) + " intentos", 100, 30);
@@ -340,40 +347,45 @@ public class MastermindBoard extends GameObject {
         return daltonismo;
     }
 
-    void saveGameState(){
-        System.out.print("Vamos a suspender");
-        /*//numero intentos max
-        //numero intento actual
-        //codigo secreto
-        //tam codigo
-        //contenido intentos resueltos y pistas
-        //numero del nivel
-        String environment = Environment.getExternalStorageState();
-        System.out.print(environment + "\n");
+    void loadGameState(SharedPreferences preferences){
+        SaveBoardInformation sbitest = new SaveBoardInformation();
+        sbitest.maxIntentos = preferences.getInt("maxIntentos", sbitest.maxIntentos);
+        sbitest.numIntentoActual = preferences.getInt("numIntentoActual", sbitest.numIntentoActual);
 
-        *//*if(environment != "mounted")
-            System.err.println("No se pudo acceder a la memoria");*//*
+        System.out.print("Resultados del loadGameState:\n" + sbitest.maxIntentos + "\n" + sbitest.numIntentoActual + "\n");
 
-        File storageDir = Environment.getExternalStorageDirectory();
-        System.out.print(storageDir.listFiles() + "\n");
-
-        File externalCacheFile = new File(
-                context.getExternalCacheDir(), filename);
-        *//*File[] externalStorageVolumes =
-                ContextCompat.getExternalFilesDirs(getApplicationContext(),
-                        null);
-        File primaryExternalStorage = externalStorageVolumes[0];*//*
+        /*mCount = mPreferences.getInt("count", 1);
+            mShowCount.setText(String.format("%s", mCount));
+            mCurrentColor = mPreferences.getInt("color", mCurrentColor);
+            mShowCount.setBackgroundColor(mCurrentColor);
+            mNewText = mPreferences.getString("text", "");*/
     }
+    SaveBoardInformation saveGameState(SharedPreferences.Editor preferencesEditor){
+        System.out.print("Vamos a suspender\n");
+        //lo guardamos a un saveBoardInformation para tener flexibilidad de mover el codigo de preferencesEditor.putInt,
+        //en lugar de introducirlo directamente. Si no se ha quitado este comentario es que se me ha olvidado que lo que haya
+        //aqui ya nos vale para la entrega final, y no hay que tenerlo separado ya.
+        //-Sebas
+        SaveBoardInformation sbi = new SaveBoardInformation();
+        sbi.maxIntentos = currTableroCaracteristicas.maxIntentos;
+        sbi.numIntentoActual = numIntentoActual;
+        sbi.codigoSecreto = codigoSecreto;
+        sbi.tamCodigo = currTableroCaracteristicas.tamCodigo;
+        sbi.numNivel = -1;
+        //sbi.intentos = ; //cada intento con los colores que metimos
 
-    private String sharedPrefFile = "com.example.android.hellosharedprefs";
-    mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
-    // MODE_WORLD_WRITEABLE and MODE_WORLD_READABLE están deprecados desde API 17
-    @Override
-    protected void onPause() {
-        super.onPause();
-        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-        preferencesEditor.putInt("count", mCount);
-        preferencesEditor.putBoolean("playing", True);
-        preferencesEditor.apply(); //también podemos usar .commit()
-    */}
+
+        preferencesEditor.putInt("maxIntentos", sbi.maxIntentos);
+        preferencesEditor.putInt("numIntentoActual", sbi.numIntentoActual);
+
+        Set<String> codigosSecretoSet = new HashSet<String>();
+        for (int i : codigoSecreto){
+            codigosSecretoSet.add(String.valueOf(i));
+        }
+        preferencesEditor.putStringSet("codigoSecreto", codigosSecretoSet);
+
+        preferencesEditor.putInt("tamCodigo", sbi.tamCodigo);
+        preferencesEditor.putInt("numNivel", sbi.numNivel);
+        return sbi;
+    }
 }

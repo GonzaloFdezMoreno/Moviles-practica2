@@ -25,10 +25,12 @@ public class MainActivity extends AppCompatActivity {
     AndroidEngine andrEng;
     AdView adView;
     CLogic logic;
+    Bundle savedInstanceState;
     private String sharedPrefFile = "com.example.android.mastermindPrefs";
     private SharedPreferences mPreferences;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState_) {
+        savedInstanceState = savedInstanceState_;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -66,6 +68,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         andrEng.resume();
+
+        System.out.print("WE BACK BBY!!\n");
+        if (savedInstanceState == null) {
+            //load stuff
+            Logic logic_ = (Logic)logic;
+            logic_.loadGameState(mPreferences);
+
+        } else {
+            System.out.print("Nothing loaded, savedInstanceState in MainActivity was null\n");
+        }
     }
 
     @Override
@@ -76,10 +88,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor preferencesEditor = mPreferences.edit();
 
         Logic logic_ = (Logic)logic;
-        logic_.saveStuffTest();
+        logic_.saveGameState(preferencesEditor);
 
-       /* preferencesEditor.putInt("count", mCount);
-        preferencesEditor.putBoolean("playing", True);
-        preferencesEditor.apply(); //también podemos usar .commit()*/
+        preferencesEditor.apply();
+
     }
 }
