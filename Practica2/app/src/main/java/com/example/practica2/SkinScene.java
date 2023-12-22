@@ -60,6 +60,54 @@ public class SkinScene extends Scene{
         foodSkin.render(graph);
         xmasSkin.render(graph);
         defaultSkin.render(graph);
+
+        switch(log.currBG){
+            case 0:
+                graph.setColor(0x55000000);
+                graph.fillRectangle(pokerBG.getPosX(), pokerBG.getPosY(), pokerBG.getWidth(), pokerBG.getHeight());
+                break;
+            case 1:
+                graph.setColor(0x55000000);
+                graph.fillRectangle(emojiBG.getPosX(), emojiBG.getPosY(), emojiBG.getWidth(), emojiBG.getHeight());
+                break;
+            case 2:
+                graph.setColor(0x55000000);
+                graph.fillRectangle(turkeyBG.getPosX(), turkeyBG.getPosY(), turkeyBG.getWidth(), turkeyBG.getHeight());
+                break;
+            case 3:
+                graph.setColor(0x55000000);
+                graph.fillRectangle(santaBG.getPosX(), santaBG.getPosY(), santaBG.getWidth(), santaBG.getHeight());
+                break;
+            case 4:
+                graph.setColor(0x55000000);
+                graph.fillRectangle(defaultBG.getPosX(), defaultBG.getPosY(), defaultBG.getWidth(), defaultBG.getHeight());
+                break;
+        }
+        graph.setColor(0xFF000000);
+
+        switch(log.currSkin){
+            case 0:
+                graph.setColor(0x55000000);
+                graph.fillCircle(coinSkin.getPosX(), coinSkin.getPosY(), coinSkin.getWidth());
+                break;
+            case 1:
+                graph.setColor(0x55000000);
+                graph.fillCircle(emojiSkin.getPosX(), emojiSkin.getPosY(), emojiSkin.getWidth());
+                break;
+            case 2:
+                graph.setColor(0x55000000);
+                graph.fillCircle(foodSkin.getPosX(), foodSkin.getPosY(), foodSkin.getWidth());
+                break;
+            case 3:
+                graph.setColor(0x55000000);
+                graph.fillCircle(xmasSkin.getPosX(), xmasSkin.getPosY(), xmasSkin.getWidth());
+                break;
+            case 4:
+                graph.setColor(0x55000000);
+                graph.fillCircle(defaultSkin.getPosX(), defaultSkin.getPosY(), defaultSkin.getWidth());
+                break;
+        }
+        graph.setColor(0xFF000000);
     }
 
     @Override
