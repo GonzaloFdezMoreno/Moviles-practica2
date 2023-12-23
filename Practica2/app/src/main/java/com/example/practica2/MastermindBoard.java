@@ -352,20 +352,28 @@ public class MastermindBoard extends GameObject {
         sbitest.maxIntentos = preferences.getInt("maxIntentos", sbitest.maxIntentos);
         sbitest.numIntentoActual = preferences.getInt("numIntentoActual", sbitest.numIntentoActual);
 
+        /*Set<String> codigosSecretoSet = new HashSet <String>();
+        codigosSecretoSet = preferences.getStringSet("codigoSecreto", codigosSecretoSet);*/
         System.out.print("Resultados del loadGameState:\n" + sbitest.maxIntentos + "\n" + sbitest.numIntentoActual + "\n");
 
-        /*mCount = mPreferences.getInt("count", 1);
-            mShowCount.setText(String.format("%s", mCount));
-            mCurrentColor = mPreferences.getInt("color", mCurrentColor);
-            mShowCount.setBackgroundColor(mCurrentColor);
-            mNewText = mPreferences.getString("text", "");*/
+        sbitest.tamCodigo = preferences.getInt("tamCodigo", sbitest.tamCodigo);
+        sbitest.numNivel = preferences.getInt("numNivel", sbitest.numNivel);
+
+
+        for(int i = 0; i < numIntentoActual; ++i){
+            String s = new String();
+            s = preferences.getString("valoresYaPuestos_" + String.valueOf(i), s);
+            String[] valoresIntento = s.split(",");
+            for(String str : valoresIntento){
+                System.out.print(str + " ");
+            }
+            System.out.print("\n");
+        }
+
+
     }
     SaveBoardInformation saveGameState(SharedPreferences.Editor preferencesEditor){
-        System.out.print("Vamos a suspender\n");
-        //lo guardamos a un saveBoardInformation para tener flexibilidad de mover el codigo de preferencesEditor.putInt,
-        //en lugar de introducirlo directamente. Si no se ha quitado este comentario es que se me ha olvidado que lo que haya
-        //aqui ya nos vale para la entrega final, y no hay que tenerlo separado ya.
-        //-Sebas
+
         SaveBoardInformation sbi = new SaveBoardInformation();
         sbi.maxIntentos = currTableroCaracteristicas.maxIntentos;
         sbi.numIntentoActual = numIntentoActual;
@@ -378,14 +386,28 @@ public class MastermindBoard extends GameObject {
         preferencesEditor.putInt("maxIntentos", sbi.maxIntentos);
         preferencesEditor.putInt("numIntentoActual", sbi.numIntentoActual);
 
-        Set<String> codigosSecretoSet = new HashSet<String>();
+        /*Set<String> codigosSecretoSet = new HashSet<String>();
         for (int i : codigoSecreto){
             codigosSecretoSet.add(String.valueOf(i));
         }
         preferencesEditor.putStringSet("codigoSecreto", codigosSecretoSet);
-
+*/
         preferencesEditor.putInt("tamCodigo", sbi.tamCodigo);
         preferencesEditor.putInt("numNivel", sbi.numNivel);
+
+        for(int i = 0; i < numIntentoActual; ++i){
+            StringBuilder sb = new StringBuilder();
+
+            for (int j = 0; j < currTableroCaracteristicas.tamCodigo; j++) {
+                sb.append(intentos[i].getColorBotonAt(j)).append(",");
+            }
+
+            preferencesEditor.putString("valoresYaPuestos_" + String.valueOf(i), sb.toString());
+
+        }
+
+
+
         return sbi;
     }
 }

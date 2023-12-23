@@ -39,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences mPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState_) {
-        savedInstanceState = savedInstanceState_;
         super.onCreate(savedInstanceState);
+
+        savedInstanceState = savedInstanceState_;
+
         setContentView(R.layout.activity_main);
 
         this.sfv = findViewById(R.id.surfaceView);
