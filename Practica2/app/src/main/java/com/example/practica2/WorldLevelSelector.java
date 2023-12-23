@@ -16,7 +16,7 @@ public class WorldLevelSelector {
     int numLevelsBeaten = 0;
     int numLevels = 0;
     int widthMargin = 120, heightMargin = 120; //margenes entre botones de niveles
-    String[] worldLevelFileNames;
+    ArrayList<String[]> worldLevelFileNames;
     String[] worldNames;
     ArrayList<ArrayList<Button>> allWorldLevels; //aqui cargamos todos los botones cuando creamos la clase
     Logic log;
@@ -30,6 +30,8 @@ public class WorldLevelSelector {
         allWorldLevels = new ArrayList<>();
         for(int i = 0; i < worldNames.length; ++i)
             allWorldLevels.add(new ArrayList<>());
+
+        worldLevelFileNames = new ArrayList<>();
 
         int l = 0;
         for(ArrayList<Button> a : allWorldLevels){
@@ -46,12 +48,15 @@ public class WorldLevelSelector {
             }
             ++l;
         }
+
     }
 
     void getLevels(String worldName){ //cogemos los archivos en la carpeta correspondiente al mundo y asignamos cuantos hay
         try{
-            worldLevelFileNames = log.getEngine().getaJsonlodr().getAssetsDirectory("levels/" + worldName);
-            numLevels = worldLevelFileNames.length;
+            String[] lvls = log.getEngine().getaJsonlodr().getAssetsDirectory("levels/" + worldName);
+            worldLevelFileNames.add(lvls);
+
+            numLevels = lvls.length;
             int i = 1;
         }
         catch(IOException e){
@@ -84,7 +89,7 @@ public class WorldLevelSelector {
         currWorld = i;
     }
     void loadLevelJSON(int n) throws IOException {
-        String filename = "levels/world1/" + worldLevelFileNames[n];
+        String filename = "levels/" + worldNames[currWorld] + "/" + worldLevelFileNames.get(currWorld)[n];
 
         InputStream is = log.getEngine().getaJsonlodr().getResource(filename);
         try {
