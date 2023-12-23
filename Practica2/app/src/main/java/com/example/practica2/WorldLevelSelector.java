@@ -56,7 +56,7 @@ public class WorldLevelSelector {
             String[] lvls = log.getEngine().getaJsonlodr().getAssetsDirectory("levels/" + worldName);
             worldLevelFileNames.add(lvls);
 
-            numLevels = worldLevelFileNames.get(currWorld).length;
+            numLevels = lvls.length;
             int i = 1;
         }
         catch(IOException e){
