@@ -5,6 +5,8 @@ import android.content.res.AssetManager;
 import android.view.SurfaceView;
 
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.ads.AdView;
 
 import java.io.IOException;
@@ -29,7 +31,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
     private AndrJSONLoader aJsonlodr;
     AndrGraphics2D andgr;
     private AssetManager asman;
-    public AndroidEngine(SurfaceView sfView, AdView ads, Context cntxt){
+    public AndroidEngine(SurfaceView sfView, AdView ads, Context cntxt, AppCompatActivity activity){
         this.myView = sfView;
 
         asman = cntxt.getAssets();
@@ -42,7 +44,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
 
         this.adview=ads;
 
-        adsMngr=new AndroidAdsManager(this.adview,cntxt);
+        adsMngr=new AndroidAdsManager(this.adview,cntxt,activity);
 
         aJsonlodr = new AndrJSONLoader(cntxt);
 
@@ -163,6 +165,11 @@ public class AndroidEngine extends EngineClass implements Runnable{
     }
 
     public AndrJSONLoader getaJsonlodr(){return aJsonlodr;}
+
+    @Override
+    public void loadRewardAd(){adsMngr.loadRewardAd();}
+    @Override
+    public void showRewardAd(){adsMngr.showRewardAd();}
 
 }
 

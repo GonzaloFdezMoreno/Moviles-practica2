@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);*/
 
-        andrEng=new AndroidEngine(this.sfv, this.adView,this);
+        andrEng=new AndroidEngine(this.sfv, this.adView,this,this);
 
         logic = new Logic(andrEng);
 

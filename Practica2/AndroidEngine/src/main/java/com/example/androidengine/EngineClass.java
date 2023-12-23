@@ -37,4 +37,7 @@ public abstract class EngineClass {
     public AndrJSONLoader getaJsonlodr(){ return andrJSONLoader;}
 
     public AndroidNotifications getAndroidNotifications(){return andrNot;}
+
+    public void showRewardAd(){};
+    public void loadRewardAd(){};
 }
