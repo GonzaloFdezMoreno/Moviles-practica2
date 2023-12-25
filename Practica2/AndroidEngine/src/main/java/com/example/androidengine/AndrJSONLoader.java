@@ -5,6 +5,7 @@ import android.content.res.AssetManager;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 public class AndrJSONLoader {
     private AssetManager aMngr;
@@ -23,4 +24,7 @@ public class AndrJSONLoader {
         return aMngr.list(dirname);
     }
 
+    public Context getCtxt() {
+        return ctxt;
+    }
 }
