@@ -17,12 +17,23 @@ public class Button extends GameObject {
 
     String text = "";
     String imgName = "";
-    int color = 0xFF00FFFF;
+    int color = 0xFFFFFFFF;
+    boolean background = false;
     Button(int posX_, int posY_, int width_, int height_, String imgName_, AndroidAudio audio, AndroidSound sound){
         super(posX_, posY_, width_, height_);
         imgName = imgName_;
         andAudio = audio;
         esound = sound;
+    }
+
+    //he creado esta version con el booleano background porque no tengo tiempo de cambiar cada uno de las constructoras de botones para que incluyan un booleano inicializado a false
+    Button(int posX_, int posY_, int width_, int height_, String imgName_, boolean background_, AndroidAudio audio, AndroidSound sound){
+        super(posX_, posY_, width_, height_);
+        imgName = imgName_;
+        andAudio = audio;
+        esound = sound;
+
+        background = background_;
     }
 
     Button(int posX_, int posY_, int width_, int height_, String text_, int color_, AndroidAudio audio, AndroidSound sound){
@@ -61,13 +72,14 @@ public class Button extends GameObject {
     }
     @Override
     public void render(AndrGraphics2D graph){
-        if(imgName == ""){
+        if(imgName == "" || background){
             graph.setColor(color);
             graph.fillRoundRectangle(getPosX(), getPosY(), getWidth(), getHeight(), 15, 10);
             graph.setColor(0xFFFFFFFF);
 
         }
-        else{
+
+        if(imgName != ""){
             graph.drawImage(graph.createImage(imgName),getPosX(),getPosY(),getWidth(),getHeight());
         }
 
@@ -97,4 +109,9 @@ public class Button extends GameObject {
         imgName = name_;
     }
 
+    //nuestro boton pasa de tener una imagen a renderizar texto
+    void changeButtonTypeToNoImg(String newText){
+        imgName = "";
+        text = newText;
+    }
 }

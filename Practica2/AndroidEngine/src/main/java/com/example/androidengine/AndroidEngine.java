@@ -31,6 +31,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
     private AndrJSONLoader aJsonlodr;
     AndrGraphics2D andgr;
     private AssetManager asman;
+    Context ctxt;
     public AndroidEngine(SurfaceView sfView, AdView ads, Context cntxt, AppCompatActivity activity){
         this.myView = sfView;
 
@@ -43,6 +44,8 @@ public class AndroidEngine extends EngineClass implements Runnable{
         this.audio = new AndroidAudio(asman);
 
         this.adview=ads;
+
+        ctxt = cntxt;
 
         adsMngr=new AndroidAdsManager(this.adview,cntxt,activity);
 
@@ -171,6 +174,8 @@ public class AndroidEngine extends EngineClass implements Runnable{
     @Override
     public void showRewardAd(){adsMngr.showRewardAd();}
 
+    public Context getContext(){ return ctxt;}
+    public SurfaceView getSurfaceView(){return myView;}
 }
 
 

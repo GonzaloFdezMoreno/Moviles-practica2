@@ -14,6 +14,8 @@ import java.util.ArrayList;
 public class WorldLevelSelector {
     int posX, posY;
     int numLevelsBeaten = 0;
+    /*boolean[] worldsBeaten;*/
+    ArrayList<boolean[]> levelsAvailablePerWorld; //que niveles estan disponibles para jugar
     int numLevels = 0;
     int widthMargin = 120, heightMargin = 120; //margenes entre botones de niveles
     ArrayList<String[]> worldLevelFileNames;
@@ -21,18 +23,22 @@ public class WorldLevelSelector {
     ArrayList<ArrayList<Button>> allWorldLevels; //aqui cargamos todos los botones cuando creamos la clase
     Logic log;
     int currWorld = 0;
+    Button aux;
     WorldLevelSelector(int posX_, int posY_, String[] worldNames_, Logic log_){
         posX = posX_; posY = posY_;
         worldNames = worldNames_;
 
         log = log_;
 
+        /*worldsBeaten = new boolean[worldNames.length];*/
+        levelsAvailablePerWorld = new ArrayList<>();
+
         allWorldLevels = new ArrayList<>();
         for(int i = 0; i < worldNames.length; ++i)
             allWorldLevels.add(new ArrayList<>());
 
         worldLevelFileNames = new ArrayList<>();
-
+        aux = new Button(posX + widthMargin, posY - 20, 110, 110, "lock.png", true, log.currEngine.getAudio(), log.currEngine.getSound());
         int l = 0;
         for(ArrayList<Button> a : allWorldLevels){
             getLevels(worldNames[l]);
@@ -43,11 +49,15 @@ public class WorldLevelSelector {
                     ++j;
                 }
 
-                a.add(new Button(posX + k * widthMargin, posY + j * heightMargin, 110, 110,
-                        String.valueOf(i + 1), 0XDDD3D3D3,log.currEngine.getAudio(), log.currEngine.getSound()));
+                a.add(new Button(posX + k * widthMargin, posY + j * heightMargin, 110, 110, "lock.png", true, log.currEngine.getAudio(), log.currEngine.getSound()));
+
             }
             ++l;
         }
+
+        //ponemos el primer nivel a jugable
+        if(allWorldLevels.get(currWorld).size() > 0)
+            allWorldLevels.get(currWorld).get(0).changeButtonTypeToNoImg("1");
 
     }
 
@@ -57,7 +67,10 @@ public class WorldLevelSelector {
             worldLevelFileNames.add(lvls);
 
             numLevels = lvls.length;
-            int i = 1;
+
+            boolean levels[] = new boolean[numLevels];
+            levelsAvailablePerWorld.add(levels);
+
         }
         catch(IOException e){
             System.err.println(e.getMessage());
@@ -65,15 +78,38 @@ public class WorldLevelSelector {
 
     }
 
+    //cuando completemos un nivel llamamos aqui
+    void levelComplete(){
+        allWorldLevels.get(currWorld).get(numLevelsBeaten).color = 0XDDD3D3D3;
+
+        if(numLevelsBeaten+1<levelsAvailablePerWorld.get(currWorld).length){
+            levelsAvailablePerWorld.get(currWorld)[numLevelsBeaten]=true;
+            allWorldLevels.get(currWorld).get(numLevelsBeaten).changeButtonTypeToNoImg(String.valueOf(numLevelsBeaten + 1));
+        }
+        else{
+            levelsAvailablePerWorld.get(currWorld+1)[0] = true;
+            //allWorldLevels.get(currWorld+1).get(numLevelsBeaten-).changeButtonTypeToNoImg(String.valueOf(numLevelsBeaten + 1));
+        }
+
+        numLevelsBeaten++;
+
+       /* if(numLevelsBeaten >= worldLevelFileNames.get(currWorld).length)
+            worldsBeaten[currWorld] = true;*/
+
+    }
     public void render(AndrGraphics2D graph){
         for(Button b : allWorldLevels.get(currWorld))
             b.render(graph);
-    }
 
+        aux.render(graph);
+    }
     public void handleInput(ArrayList<TouchEvent> event){
+        if(aux.handleInput(event))
+            levelComplete();
+
         int i = 0;
         for(Button b : allWorldLevels.get(currWorld)){
-            if(b.handleInput(event)){
+            if(levelsAvailablePerWorld.get(currWorld)[i] && b.handleInput(event)){
                 try{
                     loadLevelJSON(i);
                 }
@@ -88,6 +124,8 @@ public class WorldLevelSelector {
     void setCurrWorld(int i){
         currWorld = i;
     }
+
+    //aqui cargamos un nivel a partir de un archivo json
     void loadLevelJSON(int n) throws IOException {
         String filename = "levels/" + worldNames[currWorld] + "/" + worldLevelFileNames.get(currWorld)[n];
 

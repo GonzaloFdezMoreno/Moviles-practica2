@@ -14,6 +14,8 @@ import com.google.android.gms.ads.AdView;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.view.View;
@@ -24,6 +26,10 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import android.content.SharedPreferences;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -74,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         this.andrEng.SetLogic(logic);
 
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+
 }
     @Override
     protected void onResume() {
