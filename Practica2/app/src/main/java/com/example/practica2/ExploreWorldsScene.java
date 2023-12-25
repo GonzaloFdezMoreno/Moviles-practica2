@@ -24,7 +24,7 @@ public class ExploreWorldsScene extends Scene{
 
 
         prevWorld = new Button(110,10,30,40, "PrevArrows.png", log.currEngine.getAudio(), log.currEngine.getSound());
-        nextWorld = new Button(250,10,30,40, "NextArrows.png", log.currEngine.getAudio(), log.currEngine.getSound());
+        nextWorld = new Button(275,10,30,40, "NextArrows.png", log.currEngine.getAudio(), log.currEngine.getSound());
         goBack = new Button(20,20,20,20, "goback.png", log.currEngine.getAudio(), log.currEngine.getSound());
     }
 
