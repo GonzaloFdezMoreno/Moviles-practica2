@@ -19,7 +19,9 @@ public class World {
     String[] worldLevelFileNames;
     ArrayList<Button> buttonsLevels; //aqui cargamos todos los botones cuando creamos la clase
 
-    World(int posX_, int posY_, int widthMargin_, int heightMargin_, String worldName_, Logic log_){
+    boolean complete = false;
+    WorldLevelSelector wls;
+    World(int posX_, int posY_, int widthMargin_, int heightMargin_, String worldName_, WorldLevelSelector wls_, Logic log_){
         worldName = worldName_;
         log = log_;
 
@@ -36,6 +38,8 @@ public class World {
             buttonsLevels.add(new Button(posX_ + k * widthMargin_, posY_ + j * heightMargin_, 110, 110, "lock.png", true, log.currEngine.getAudio(), log.currEngine.getSound()));
 
         }
+
+        wls = wls_;
     }
 
     public void render(AndrGraphics2D graph){
@@ -72,25 +76,22 @@ public class World {
     }
     //cuando completemos un nivel llamamos aqui
     void levelComplete(){
-        buttonsLevels.get(numLevelsBeaten).color = 0xFFFFFFFF;
-
-        if(numLevelsBeaten > 0)
-            buttonsLevels.get(numLevelsBeaten-1).color = 0XDDD3D3D3;
-
         if(numLevelsBeaten < levelsAvailable.length){
+            buttonsLevels.get(numLevelsBeaten).color = 0xFFFFFFFF;
+
+            if(numLevelsBeaten > 0)
+                buttonsLevels.get(numLevelsBeaten-1).color = 0XDDD3D3D3;
+
             levelsAvailable[numLevelsBeaten] = true;
             buttonsLevels.get(numLevelsBeaten).changeButtonTypeToNoImg(String.valueOf(numLevelsBeaten + 1));
+
+            numLevelsBeaten++;
         }
-        else{
-            //levelsAvailablePerWorld.get(currWorld+1)[0] = true;
-            //allWorldLevels.get(currWorld+1).get(numLevelsBeaten-).changeButtonTypeToNoImg(String.valueOf(numLevelsBeaten + 1));
+        else if(numLevelsBeaten > 0 && !complete){
+            buttonsLevels.get(numLevelsBeaten-1).color = 0XDDD3D3D3;
+            wls.startNextWorld();
+            complete = true;
         }
-
-        numLevelsBeaten++;
-
-       /* if(numLevelsBeaten >= worldLevelFileNames.get(currWorld).length)
-            worldsBeaten[currWorld] = true;*/
-
     }
 
     void loadLevelJSON(int n) throws IOException {

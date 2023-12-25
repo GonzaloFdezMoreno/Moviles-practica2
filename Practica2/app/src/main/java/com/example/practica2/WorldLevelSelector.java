@@ -25,14 +25,11 @@ public class WorldLevelSelector {
         worlds = new ArrayList<>();
 
         for(int i = 0; i < worldNames_.length; ++i){
-            worlds.add(new World(posX_, posY_, widthMargin, heightMargin, worldNames_[i], log_));
+            worlds.add(new World(posX_, posY_, widthMargin, heightMargin, worldNames_[i], this, log_));
         }
 
 
-       /* //ponemos el primer nivel a jugable
-        if(allWorldLevels.get(currWorld).size() > 0)
-            allWorldLevels.get(currWorld).get(0).changeButtonTypeToNoImg("1");*/
-        //worlds.get(currWorld).buttonsLevels.get(0).changeButtonTypeToNoImg("1");
+        //ponemos el primer nivel a jugable
         worlds.get(currWorld).levelComplete();
     }
 
@@ -48,9 +45,12 @@ public class WorldLevelSelector {
         worlds.get(currWorld).handleInput(event);
 
     }
-
     void setCurrWorld(int i){
         currWorld = i;
+    }
+    void startNextWorld(){
+        if(currWorld < worlds.size()-1)
+            worlds.get(currWorld+1).levelComplete();
     }
 
 
