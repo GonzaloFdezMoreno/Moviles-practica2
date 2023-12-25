@@ -159,7 +159,7 @@ public class AndroidAdsManager {
                         String rewardType = rewardItem.getType();
                     }
                 });
-                rewardedAd=null;
+                rewardedAd=null; //de esta forma no se repite en bucle
             }
             else {
                 System.out.println("The rewarded ad wasn't ready yet.");
@@ -167,10 +167,7 @@ public class AndroidAdsManager {
             }
 
             if(!loaded)
-                loadRewardAd();
-
-
-
+                loadRewardAd(); //mientras no se haya cargado, que siga probandolo
 
         }
     }
