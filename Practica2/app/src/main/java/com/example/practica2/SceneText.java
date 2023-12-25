@@ -21,4 +21,8 @@ public class SceneText extends GameObject{
         graph.drawText(txt,getPosX(),getPosY());
 
     }
+
+    public void changeText(String text){
+        txt = text;
+    }
 }

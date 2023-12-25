@@ -3,6 +3,7 @@ package com.example.practica2;
 import com.example.androidengine.AndrGraphics2D;
 import com.example.androidengine.TouchEvent;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class LoseWinScene extends Scene{
@@ -20,6 +21,12 @@ public class LoseWinScene extends Scene{
                     "Has averiguado el codigo en  "));
             addGameObject(new SceneText(100, 175, 100, 50,
                     intent+" intento(s)"));
+            logic.money += 50;
+            try {
+                logic.saveGameSkins();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         else if (txt=="GAME OVER"){
             addGameObject(new SceneText(50, 125, 100, 50,
