@@ -28,9 +28,6 @@ public class SkinScene extends Scene{
     SceneText emojiSkinText;
     SceneText foodText;
     SceneText xmasText;
-
-    //String[] backgroundImages = {"world1_background.jpg", "world2_bg.jpeg", "world3_bg.jpg", "world4_bg.jpeg"};
-
     protected SkinScene(Logic logic){
         super(logic);
 

@@ -107,43 +107,6 @@ public class MastermindBoard extends GameObject {
         estableceNuevoCodigoSecreto();
 
         daltonismo = false;
-
-
-
-/*
-        Context c = ((AndroidEngine)log_.getEngine()).getContext();
-        // Create a ScrollView
-        ScrollView scrollView = new ScrollView(c);
-        scrollView.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT));
-
-        // Create a LinearLayout for the content
-        LinearLayout linearLayout = new LinearLayout(c);
-        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT));
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.setGravity(Gravity.CENTER);
-
-        // Example TextViews to demonstrate scrolling
-        for (int i = 0; i < 50; i++) {
-            TextView textView = new TextView(c);
-            textView.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
-            textView.setText("Your content goes here...");
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            linearLayout.addView(textView);
-        }
-
-        // Add the LinearLayout to the ScrollView
-        scrollView.addView(linearLayout);*/
-
-        // Set the ScrollView as the content view of the activity
-        //log.setContentView(scrollView);
-        /*((AppCompatActivity)c)
-        ((AndroidEngine) log_.getEngine()).getSurfaceView()*/
     }
 
     MastermindBoard(Logic log_, Level l, int posX_, int posY_, int width_, int height_) {
@@ -191,8 +154,6 @@ public class MastermindBoard extends GameObject {
         intentos[numIntentoActual].handleInput(event);
 
         selector.handleInput(event);
-        /*if(save.handleInput(event))
-            saveGameToJSON();*/
 
         return true;
     }
@@ -396,8 +357,6 @@ public class MastermindBoard extends GameObject {
         sbitest.maxIntentos = preferences.getInt("maxIntentos", sbitest.maxIntentos);
         sbitest.numIntentoActual = preferences.getInt("numIntentoActual", sbitest.numIntentoActual);
 
-        /*Set<String> codigosSecretoSet = new HashSet <String>();
-        codigosSecretoSet = preferences.getStringSet("codigoSecreto", codigosSecretoSet);*/
         System.out.print("Resultados del loadGameState:\n" + sbitest.maxIntentos + "\n" + sbitest.numIntentoActual + "\n");
 
         sbitest.tamCodigo = preferences.getInt("tamCodigo", sbitest.tamCodigo);
@@ -430,12 +389,7 @@ public class MastermindBoard extends GameObject {
         preferencesEditor.putInt("maxIntentos", sbi.maxIntentos);
         preferencesEditor.putInt("numIntentoActual", sbi.numIntentoActual);
 
-        /*Set<String> codigosSecretoSet = new HashSet<String>();
-        for (int i : codigoSecreto){
-            codigosSecretoSet.add(String.valueOf(i));
-        }
-        preferencesEditor.putStringSet("codigoSecreto", codigosSecretoSet);
-*/
+
         preferencesEditor.putInt("tamCodigo", sbi.tamCodigo);
         preferencesEditor.putInt("numNivel", sbi.numNivel);
 
@@ -449,8 +403,6 @@ public class MastermindBoard extends GameObject {
             preferencesEditor.putString("valoresYaPuestos_" + String.valueOf(i), sb.toString());
 
         }
-
-
 
         return sbi;
     }
