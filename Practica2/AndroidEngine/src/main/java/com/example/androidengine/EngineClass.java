@@ -40,4 +40,7 @@ public abstract class EngineClass {
 
     public void showRewardAd(){};
     public void loadRewardAd(){};
+
+    public void resetLoaded() {
+    }
 }

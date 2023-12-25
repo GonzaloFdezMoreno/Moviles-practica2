@@ -176,6 +176,9 @@ public class AndroidEngine extends EngineClass implements Runnable{
 
     public Context getContext(){ return ctxt;}
     public SurfaceView getSurfaceView(){return myView;}
+
+    @Override
+    public void resetLoaded(){ adsMngr.setNotLoaded();}
 }
 
 

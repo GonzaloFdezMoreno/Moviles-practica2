@@ -10,11 +10,16 @@ public class LoseWinScene extends Scene{
 
     Button playAgainButton;
     Button selectDifficultyButton;
+    Button adButton;
+
+    Logic log;
     protected LoseWinScene(Logic logic, int[] codigoSecreto, int nivel,String txt,int intent, boolean dalton) {
         super(logic);
 
         addGameObject(new SceneText(100, 80, 100, 50, txt));
         addGameObject(new SceneText(100, 80, 100, 50, txt));
+
+        log=logic;
 
         if (txt=="ENHORABUENA!!"){
             addGameObject(new SceneText(50, 125, 100, 50,
@@ -40,8 +45,9 @@ public class LoseWinScene extends Scene{
         //addGameObject(new StartButton(75, 350, 300, 70,"Elegir dificultad",logic ));
         playAgainButton = new Button(100,400,200,80,"Volver a jugar", 0xFF1FE3E0, logic.currEngine.getAudio(), log.currEngine.getSound());
         selectDifficultyButton = new Button(100,500,200,80,"Elegir difificultad", 0xFF1FE3E0, logic.currEngine.getAudio(), log.currEngine.getSound());
+        adButton = new Button(100,300,200,80,"Ver para recompensa", 0xFF1FE3E0, logic.currEngine.getAudio(), log.currEngine.getSound());
 
-        logic.currEngine.showRewardAd();
+
     }
 
     @Override
@@ -49,6 +55,7 @@ public class LoseWinScene extends Scene{
         super.update(deltaTime);
         playAgainButton.update(deltaTime);
         selectDifficultyButton.update(deltaTime);
+        adButton.update(deltaTime);
     }
 
     @Override
@@ -64,6 +71,7 @@ public class LoseWinScene extends Scene{
         super.render(graph);
         playAgainButton.render(graph);
         selectDifficultyButton.render(graph);
+        adButton.render(graph);
     }
 
     @Override
@@ -73,6 +81,8 @@ public class LoseWinScene extends Scene{
             playAgainButtonEffect();
         if(selectDifficultyButton.handleInput(event))
             selectDifficultyButtonEffect();
+        if(adButton.handleInput(event))
+            loadAdButtonEffect();
     }
 
     void playAgainButtonEffect(){
@@ -81,4 +91,7 @@ public class LoseWinScene extends Scene{
     void selectDifficultyButtonEffect(){
        log.SetScene(new MainMenu(log));
     }
+
+    void loadAdButtonEffect(){ log.currEngine.resetLoaded();  log.currEngine.showRewardAd();  }
+
 }

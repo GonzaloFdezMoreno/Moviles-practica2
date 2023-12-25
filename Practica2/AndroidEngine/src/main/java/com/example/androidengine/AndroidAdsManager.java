@@ -28,6 +28,8 @@ public class AndroidAdsManager {
     AppCompatActivity act;
     String adUnit="ca-app-pub-3940256099942544/5224354917";
 
+    boolean loaded=false;
+
     private RewardedAd rewardedAd;
     AndroidAdsManager(AdView ads, Context cntxt, AppCompatActivity activity){
 
@@ -48,6 +50,10 @@ public class AndroidAdsManager {
 
     }
 
+    public void setNotLoaded(){
+        loaded=false;
+    }
+
 
     public void loadRewardAd(){
         RewardedAd.load(act,adUnit, adRequest, new RewardedAdLoadCallback() {
@@ -56,6 +62,7 @@ public class AndroidAdsManager {
                 // Handle the error.
                 System.out.println("Not Loaded");
                 rewardedAd = null;
+                loaded=false;
             }
 
             @Override
@@ -67,7 +74,9 @@ public class AndroidAdsManager {
                         .setCustomData("SAMPLE_CUSTOM_DATA_STRING")
                         .build();
                 rewardedAd.setServerSideVerificationOptions(options);*/
+                loaded=true;
                 showRewardAd();
+
             }
         });
 
@@ -139,7 +148,7 @@ public class AndroidAdsManager {
         @Override
         public void run() {
 
-            if (rewardedAd != null) {
+            if (rewardedAd!=null) {
                 Activity activityContext = act;
                 rewardedAd.show(activityContext, new OnUserEarnedRewardListener() {
                     @Override
@@ -150,11 +159,16 @@ public class AndroidAdsManager {
                         String rewardType = rewardItem.getType();
                     }
                 });
+                rewardedAd=null;
             }
             else {
                 System.out.println("The rewarded ad wasn't ready yet.");
+
             }
-            loadRewardAd();
+
+            if(!loaded)
+                loadRewardAd();
+
 
 
 
