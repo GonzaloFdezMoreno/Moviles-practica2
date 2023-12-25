@@ -13,9 +13,11 @@ public class PlayScene extends Scene {
     Button exitButton, daltonismoButton;
     boolean daltonismoMode = false;
     MastermindBoard mb;
+    boolean fromExploringWorlds = false; //booleano para saber si esta escena de juego se creo desde el modo partida rapida o explorar mundos, solucion rapida porque no tenemos pila de escenas
     public PlayScene(Logic logic,int i){
         super(logic);
         log=logic;
+        fromExploringWorlds = false;
 
         exitButton = new Button(10,10,20,20, "exit.png", log.currEngine.getAudio(), log.currEngine.getSound());
         //creamos tablero de juego con un nivel de  dificultad i
@@ -28,6 +30,7 @@ public class PlayScene extends Scene {
     public PlayScene(Logic logic,Level L){
         super(logic);
         log=logic;
+        fromExploringWorlds= true;
 
         exitButton = new Button(10,10,20,20, "exit.png", log.currEngine.getAudio(), log.currEngine.getSound());
         //creamos tablero de juego con un nivel de  dificultad i
@@ -71,7 +74,10 @@ public class PlayScene extends Scene {
     }
 
     void exitButtonEffect(){
-        log.SetScene(new LevelMenu(log));
+        if(!fromExploringWorlds)
+            log.SetScene(new LevelMenu(log));
+        else
+            log.SetScene(new ExploreWorldsScene(log));
     }
 
     void daltonismoButtonEffect(){
