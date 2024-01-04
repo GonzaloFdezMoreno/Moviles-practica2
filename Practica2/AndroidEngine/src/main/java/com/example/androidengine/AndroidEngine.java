@@ -167,6 +167,14 @@ public class AndroidEngine extends EngineClass implements Runnable{
         return this.sound;
     }
 
+    public AndrGraphics2D GetGraphics() {
+        return andgr;
+    }
+
+    public AndrInput GetInput() {
+        return ainpt;
+    }
+
     public AndrJSONLoader getaJsonlodr(){return aJsonlodr;}
 
     @Override

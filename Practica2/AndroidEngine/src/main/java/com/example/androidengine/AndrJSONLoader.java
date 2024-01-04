@@ -5,7 +5,7 @@ import android.content.res.AssetManager;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+
 
 public class AndrJSONLoader {
     private AssetManager aMngr;
@@ -24,6 +24,16 @@ public class AndrJSONLoader {
         return aMngr.list(dirname);
     }
 
+    //para saber si existe un archivo
+    public boolean containsFile(String filename) {
+        try{
+            aMngr.open(filename);
+        }
+        catch (IOException e){ //truco algo feo para si sabemos que no existe
+            return false;
+        }
+        return true;
+    }
     public Context getCtxt() {
         return ctxt;
     }

@@ -13,7 +13,7 @@ public abstract class Scene {
     Logic log;
 
     //estas son las imagenes de fondo que podemos poner cuando cambiamos la skin de fondo en el menu de skins
-    String[] backgroundImages = {"world1_background.jpg", "world2_bg.jpeg", "world3_bg.jpg", "world4_bg.jpeg"};
+    String[] backgroundImages = {"levels/world1/world_bg.jpg", "levels/world2/world_bg.jpeg", "levels/world3/world_bg.jpg", "levels/world4/world_bg.jpeg"};
     private final ArrayList<GameObject> objects = new ArrayList<>();
 
     protected Scene(Logic logic){

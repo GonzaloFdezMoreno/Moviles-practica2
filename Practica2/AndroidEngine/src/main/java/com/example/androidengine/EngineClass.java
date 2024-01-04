@@ -6,6 +6,8 @@ public abstract class EngineClass {
     protected CLogic log;
     public AndroidAudio audio;
     public AndroidSound sound;
+    AndrGraphics2D graphics;
+    AndrInput input;
     AndrJSONLoader andrJSONLoader;
 
     AndroidNotifications andrNot;
@@ -33,6 +35,10 @@ public abstract class EngineClass {
     public AndroidSound getSound() {
         return this.sound;
     }
+
+    public AndrGraphics2D GetGraphics(){ return graphics;}
+
+    AndrInput GetInput(){ return input;}
 
     public AndrJSONLoader getaJsonlodr(){ return andrJSONLoader;}
 

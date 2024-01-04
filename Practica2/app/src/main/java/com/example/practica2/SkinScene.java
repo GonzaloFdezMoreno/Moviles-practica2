@@ -35,25 +35,25 @@ public class SkinScene extends Scene{
 
         goBack = new Button(20,20,20,20, "goback.png", log.currEngine.getAudio(), log.currEngine.getSound());
 
-        pokerBG = new Button(10,100,60,100, "world1_background.jpg", log.currEngine.getAudio(), log.currEngine.getSound());
+        pokerBG = new Button(10,100,60,100, "levels/world1/world_bg.jpg", log.currEngine.getAudio(), log.currEngine.getSound());
         if(log.unlockedBackgrounds[0])
             pokerText = new SceneText(10, 230, 60, 30, "GOT");
         else
             pokerText = new SceneText(10, 230, 60, 30, "50");
 
-        emojiBG = new Button(90,100,60,100, "world2_bg.jpeg", log.currEngine.getAudio(), log.currEngine.getSound());
+        emojiBG = new Button(90,100,60,100, "levels/world2/world_bg.jpeg", log.currEngine.getAudio(), log.currEngine.getSound());
         if(log.unlockedBackgrounds[1])
             emojiBGText = new SceneText(90, 230, 60, 30, "GOT");
         else
             emojiBGText = new SceneText(90, 230, 60, 30, "50");
 
-        turkeyBG = new Button(170,100,60,100, "world3_bg.jpg", log.currEngine.getAudio(), log.currEngine.getSound());
+        turkeyBG = new Button(170,100,60,100, "levels/world3/world_bg.jpg", log.currEngine.getAudio(), log.currEngine.getSound());
         if(log.unlockedBackgrounds[2])
             turkeyText = new SceneText(170, 230, 60, 30, "GOT");
         else
             turkeyText = new SceneText(170, 230, 60, 30, "50");
 
-        santaBG = new Button(250,100,60,100, "world4_bg.jpeg", log.currEngine.getAudio(), log.currEngine.getSound());
+        santaBG = new Button(250,100,60,100, "levels/world4/world_bg.jpeg", log.currEngine.getAudio(), log.currEngine.getSound());
         if(log.unlockedBackgrounds[3])
             santaText = new SceneText(250, 230, 60, 30, "GOT");
         else
