@@ -115,7 +115,7 @@ public class AndrGraphics2D {
 
 
     public void drawRoundRectangle(int cx, int cy, int width, int height, int arc, int s) {
-        paint.setStyle(Paint.Style.STROKE);
+        paint.setStyle(Paint.Style.FILL);
         this.canvas.drawRoundRect(cx,cy,cx+width,cy+height,arc,s,paint);
         paint.setStyle(Paint.Style.FILL);
     }

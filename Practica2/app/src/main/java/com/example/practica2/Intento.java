@@ -61,6 +61,9 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
     @Override
     public void render(AndrGraphics2D graph){
 
+        graph.setColor(0XFFFFFFFF);
+        graph.drawRoundRectangle(getPosX(), getPosY(), getWidth(), getHeight(), 10, 10);
+        graph.setColor(0XFF000000);
         graph.drawText(String.valueOf(numIntento),getPosX() + 15, getPosY() + 30);
 
         graph.drawLine(getPosX() + 45, getPosY() + 5, getPosX() + 45, getPosY() + 35);
@@ -68,7 +71,6 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
         graph.drawLine(getPosX() + 280, getPosY() + 5, getPosX() + 280, getPosY() + 35);
 
 
-        graph.drawRoundRectangle(getPosX(), getPosY(), getWidth(), getHeight(), 10, 10);
         botonesIntentoCodigo.render(graph);
         pistas.render(graph);
     }
