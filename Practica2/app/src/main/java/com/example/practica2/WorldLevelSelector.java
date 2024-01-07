@@ -18,6 +18,8 @@ public class WorldLevelSelector {
     Button aux;
     Button currWorldText; //no tenemos un objeto texto, esto hara de texto del nombre del mundo pero no se podra pulsar
     ArrayList<World> worlds;
+    int[] levelsCompletedByWorld;
+    Logic log;
     WorldLevelSelector(int posX_, int posY_, String[] worldNames_, Logic log_){
         posX = posX_; posY = posY_;
 
@@ -26,11 +28,17 @@ public class WorldLevelSelector {
         worlds = new ArrayList<>();
 
         for(int i = 0; i < worldNames_.length; ++i){
-            worlds.add(new World(posX_, posY_, widthMargin, heightMargin, worldNames_[i], this, log_));
+            worlds.add(new World(posX_, posY_, widthMargin, heightMargin, worldNames_[i], this, log_, i));
         }
 
         //ponemos el primer nivel a jugable
         worlds.get(currWorld).levelComplete();
+
+        levelsCompletedByWorld = new int[worlds.size()];
+
+        log = log_;
+
+        LoadWorldCompletedLevels();
     }
 
     public void render(AndrGraphics2D graph){
@@ -55,5 +63,18 @@ public class WorldLevelSelector {
             worlds.get(currWorld+1).levelComplete();
     }
 
+    void LoadWorldCompletedLevels(){
+        levelsCompletedByWorld = log.loadLevelsCompleted(worlds.size());
+
+        int i = 0;
+        for(World w : worlds){
+            for(int ii = 0; ii < levelsCompletedByWorld[i]; ++ii)
+                w.levelComplete();
+            ++i;
+        }
+    }
+    void SaveWorldLevelsComplete(){
+        log.saveLevelsCompleted(levelsCompletedByWorld);
+    }
 
 }

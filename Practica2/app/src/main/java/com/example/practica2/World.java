@@ -21,7 +21,8 @@ public class World {
 
     boolean complete = false;
     WorldLevelSelector wls;
-    World(int posX_, int posY_, int widthMargin_, int heightMargin_, String worldName_, WorldLevelSelector wls_, Logic log_){
+    int numWorld = -1;
+    World(int posX_, int posY_, int widthMargin_, int heightMargin_, String worldName_, WorldLevelSelector wls_, Logic log_, int numWorld_){
         worldName = worldName_;
         log = log_;
 
@@ -40,6 +41,7 @@ public class World {
         }
 
         wls = wls_;
+        numWorld = numWorld_;
     }
 
     public void render(AndrGraphics2D graph){
@@ -104,7 +106,7 @@ public class World {
             if(L.codeOpt <= -1 || L.codeSize <= -1 || L.attempts <= -1){
                 throw new IllegalArgumentException("Level file didnt have correct formatting");
             }
-            log.SetScene(new PlayScene(log,L));
+            log.SetScene(new PlayScene(log,L, this));
 
         }
         catch(IllegalArgumentException e){
@@ -147,5 +149,13 @@ public class World {
         }
         reader.endObject();
         return new Level(codeSize, codeOpt, repeat, attempts);
+    }
+
+    //Llamamos a esto despues de pasarnos un nuevo nivel, para guardar cuantos llevamos
+    void saveLevelsBeaten(){
+        //numLevelsBeaten++; //llamamos a la funcion depues de ganar un nivel, por lo que añadimos una victoria antes de guardar
+
+        wls.levelsCompletedByWorld[numWorld] = numLevelsBeaten;
+        wls.SaveWorldLevelsComplete();
     }
 }

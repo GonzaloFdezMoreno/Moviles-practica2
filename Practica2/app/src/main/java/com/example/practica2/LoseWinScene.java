@@ -13,15 +13,17 @@ public class LoseWinScene extends Scene{
     Button adButton;
 
     Logic log;
-    protected LoseWinScene(Logic logic, int[] codigoSecreto, int nivel,String txt,int intent, boolean dalton) {
+    protected LoseWinScene(Logic logic, int[] codigoSecreto, int nivel,boolean win,int intent, boolean dalton) {
         super(logic);
 
-        addGameObject(new SceneText(100, 80, 100, 50, txt));
-        addGameObject(new SceneText(100, 80, 100, 50, txt));
+        String txt;
 
         log=logic;
 
-        if (txt=="ENHORABUENA!!"){
+        if (win){
+            txt="ENHORABUENA!!";
+            addGameObject(new SceneText(100, 80, 100, 50, txt));
+
             addGameObject(new SceneText(50, 125, 100, 50,
                     "Has averiguado el codigo en  "));
             addGameObject(new SceneText(100, 175, 100, 50,
@@ -33,7 +35,10 @@ public class LoseWinScene extends Scene{
                 throw new RuntimeException(e);
             }
         }
-        else if (txt=="GAME OVER"){
+        else{
+            txt = "GAME OVER";
+            addGameObject(new SceneText(100, 80, 100, 50, txt));
+
             addGameObject(new SceneText(50, 125, 100, 50,
                     "Te has quedado sin intentos"));
             addGameObject(new SceneText(50, 175, 100, 50,
@@ -44,7 +49,7 @@ public class LoseWinScene extends Scene{
 
         //addGameObject(new StartButton(75, 350, 300, 70,"Elegir dificultad",logic ));
         playAgainButton = new Button(100,400,200,80,"Volver a jugar", 0xFF1FE3E0, logic.currEngine.getAudio(), log.currEngine.getSound());
-        selectDifficultyButton = new Button(100,500,200,80,"Elegir difificultad", 0xFF1FE3E0, logic.currEngine.getAudio(), log.currEngine.getSound());
+        selectDifficultyButton = new Button(100,500,200,80,"Elegir dificultad", 0xFF1FE3E0, logic.currEngine.getAudio(), log.currEngine.getSound());
         adButton = new Button(100,300,200,80,"Ver para recompensa", 0xFF1FE3E0, logic.currEngine.getAudio(), log.currEngine.getSound());
 
 

@@ -27,14 +27,14 @@ public class PlayScene extends Scene {
         daltonismoButton = new Button(350, 5, 40, 40, "eyehide.png", log.currEngine.getAudio(), log.currEngine.getSound());
     }
 
-    public PlayScene(Logic logic,Level L){
+    public PlayScene(Logic logic,Level L, World world){
         super(logic);
         log=logic;
         fromExploringWorlds= true;
 
         exitButton = new Button(10,10,20,20, "exit.png", log.currEngine.getAudio(), log.currEngine.getSound());
         //creamos tablero de juego con un nivel de  dificultad i
-        mb = new MastermindBoard(log, L,25, 75, 1, 1 );
+        mb = new MastermindBoard(log, L,25, 75, 1, 1, world);
         addGameObject(mb);
 
         daltonismoButton = new Button(350, 5, 40, 40, "eyehide.png", log.currEngine.getAudio(), log.currEngine.getSound());

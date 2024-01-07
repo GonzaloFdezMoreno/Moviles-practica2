@@ -75,6 +75,7 @@ public class MastermindBoard extends GameObject {
     int cantColoresRellenados = 0; //cuando haya tamCodigo de estos, comprobamos con pistas(estara completado un Intento)
     Map<Integer, Integer> cuantoDeCadaColorEnCodigoSecreto; //para rapidamente saber cuanto de cada color hay en el codigoSecreto(Amarillo:2, Rojo:3...)
     boolean daltonismo; //modo daltonismo, muestra numeros encima de los colores para identificarlos facilmente
+    World world = null; //para saber de que mundo procedemos
     MastermindBoard(Logic log_, int nivDificultad_, int posX_, int posY_, int width_, int height_) {
         super(posX_, posY_, width_, height_);
 
@@ -109,7 +110,7 @@ public class MastermindBoard extends GameObject {
         daltonismo = false;
     }
 
-    MastermindBoard(Logic log_, Level l, int posX_, int posY_, int width_, int height_) {
+    MastermindBoard(Logic log_, Level l, int posX_, int posY_, int width_, int height_, World world_) {
         super(posX_, posY_, width_, height_);
 
         log = log_;
@@ -147,6 +148,8 @@ public class MastermindBoard extends GameObject {
 
         daltonismo = false;
 
+        world = world_;
+
     }
     @Override
     public boolean handleInput(ArrayList<TouchEvent> event) {
@@ -178,7 +181,7 @@ public class MastermindBoard extends GameObject {
         }
 
         selector.render(graph);
-        //pintaCodigo(graph); //muestra el codigo secreto
+        pintaCodigo(graph); //muestra el codigo secreto
     }
 
     //seteamos currTableroCaracteristicas
@@ -193,8 +196,8 @@ public class MastermindBoard extends GameObject {
 
         switch (dificultad){
             case 0:
-                currTableroCaracteristicas.maxIntentos = 6;
-                currTableroCaracteristicas.tamCodigo = 4;
+                currTableroCaracteristicas.maxIntentos = 1;
+                currTableroCaracteristicas.tamCodigo = 1;
                 currTableroCaracteristicas.numColoresCodigo = 4;
                 currTableroCaracteristicas.repeticionColores = false;
 
@@ -289,7 +292,10 @@ public class MastermindBoard extends GameObject {
 
         //comprobamos si ha ganado
         if(numAciertos >= currTableroCaracteristicas.tamCodigo){
-            log.SetScene(new LoseWinScene(log, codigoSecreto,nivelDificultad,"ENHORABUENA!!",numIntentoActual+1, daltonismo));
+
+            world.saveLevelsBeaten(); //guardamos cuatos niveles hay resueltos en este mundo
+            log.SetScene(new LoseWinScene(log, codigoSecreto,nivelDificultad,true,numIntentoActual+1, daltonismo));
+
             return;
         }
 
@@ -303,11 +309,8 @@ public class MastermindBoard extends GameObject {
             if(colorComprobado != colorColocado) {
                 if (aux.containsKey(colorColocado) && aux.get(colorColocado) > 0) {
                     numAciertosPosIncorrecta++;
-                    //aciertos[i] = 2;
                     aux.put(colorColocado, aux.get(colorColocado) - 1);
-                } //else {
-                    //aciertos[i] = 0;
-                //}
+                }
             }
         }
 
@@ -320,7 +323,7 @@ public class MastermindBoard extends GameObject {
 
         //comprobamos si ha perdido
         if(numIntentoActual >= currTableroCaracteristicas.maxIntentos){
-            log.SetScene(new LoseWinScene(log, codigoSecreto,nivelDificultad,"GAME OVER",0, daltonismo));
+            log.SetScene(new LoseWinScene(log, codigoSecreto,nivelDificultad,false,0, daltonismo));
         }
     }
 
@@ -331,7 +334,7 @@ public class MastermindBoard extends GameObject {
                 for(int j = 0; j < hexColores.length; j++){
                     if(codigoSecreto[i] == hexColores[j]){
                         graph.drawImage(graph.createImage("sprites/"+skinFolderNames[log.currSkin]+"/"+skinsColores[j]),
-                                getPosX() + 50 * i, getPosY() - 25, 25, 25);
+                                getPosX() + 25 * i, getPosY() - 25, 25, 25);
                     }
                 }
             }
