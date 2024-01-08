@@ -30,10 +30,9 @@ public class InputHandler implements View.OnTouchListener{
         TouchEvent event = new TouchEvent();
         int index = motionEvent.getActionIndex();
         int action = motionEvent.getActionMasked();
-        int finger = motionEvent.getPointerId(index);
 
-        event.x = (int) motionEvent.getX(finger);
-        event.y = (int) motionEvent.getY(finger);
+        event.x = (int) motionEvent.getX(index);
+        event.y = (int) motionEvent.getY(index);
 
         if(action == MotionEvent.ACTION_DOWN){
             event.type = TouchEvent.TouchEventType.TOUCH_DOWN;
