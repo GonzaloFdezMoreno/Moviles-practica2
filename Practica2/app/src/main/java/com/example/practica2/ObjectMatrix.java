@@ -12,7 +12,7 @@ public class ObjectMatrix extends GameObject { //utilizamos esta clase para pode
     int numElems = 0;
     int numRows;
     double width, height;
-    private ArrayList<GameObject> matrixObjects;
+    ArrayList<GameObject> matrixObjects;
 
     public ObjectMatrix(int numRows_, int posX_, int posY_, int width_, int height_) {
         super(posX_, posY_, width_, height_);

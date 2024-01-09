@@ -1,6 +1,8 @@
 package com.example.practica2;
 
 
+import android.util.Log;
+
 import com.example.androidengine.AndrGraphics2D;
 import com.example.androidengine.AndroidAudio;
 import com.example.androidengine.AndroidSound;
@@ -55,7 +57,7 @@ public class Button extends GameObject {
                     && this.getPosY() < events.y && this.getPosY() + this.getHeight() > events.y) {
 
                 if (events.type == TouchEvent.TouchEventType.TOUCH_DOWN) {
-                    System.out.println("ButtonPressed");
+                    System.out.println("ButtonPressed\n");
                     onTouchDown();
                     andAudio.playSound(esound);
                     pressed = true;

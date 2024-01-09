@@ -25,10 +25,12 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
         tamCodigo = tamCodigo_;
 
         //introducimos circulos que marcan nuestros intentos
-        botonesIntentoCodigo = new ObjectMatrix(1, getPosX() + 40, getPosY() + 5, 225, 50);
+        botonesIntentoCodigo = new ObjectMatrix(1, 40, getPosY() + 5, 225, 50);
         for(int i = 0; i < tamCodigo_; ++i){
             //las posiciones que se pasen por aqui dan igual, setObjectsPositionsInMatrix() las ajusta automaticamente
-            botonesIntentoCodigo.addObjectToMatrix(new IntentoButton(mb,-1, -1, diametroIntentoCodigo, diametroIntentoCodigo, mb.log.getEngine().getAudio(), mb.log.currEngine.getSound()));
+            IntentoButton ib = new IntentoButton(mb,-1, -1, diametroIntentoCodigo, diametroIntentoCodigo, mb.log.getEngine().getAudio(), mb.log.currEngine.getSound());
+            botonesIntentoCodigo.addObjectToMatrix(ib);
+            addChild(ib);
         }
         botonesIntentoCodigo.setObjectsPositionsInMatrix();
 
@@ -37,7 +39,9 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
         //introducimos pistas
         pistas = new ObjectMatrix(2, getPosX() + 45 + 225 + 10 , getPosY() + 5, 125, 35);
         for(int i = 0; i < tamCodigo_; ++i){
-            pistas.addObjectToMatrix(new Pista(-1, -1, diametroPista, diametroPista));
+            Pista p = new Pista(-1, -1, diametroPista, diametroPista);
+            pistas.addObjectToMatrix(p);
+            addChild(p);
         }
         pistas.setObjectsPositionsInMatrix();
 
@@ -61,7 +65,7 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
     @Override
     public void render(AndrGraphics2D graph){
 
-        graph.setColor(0XFFFFFFFF);
+        graph.setColor(0XFF000000);
         graph.drawRoundRectangle(getPosX(), getPosY(), getWidth(), getHeight(), 10, 10);
         graph.setColor(0XFF000000);
         graph.drawText(String.valueOf(numIntento),getPosX() + 15, getPosY() + 30);

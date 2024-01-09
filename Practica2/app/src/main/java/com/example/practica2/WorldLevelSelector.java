@@ -15,7 +15,7 @@ public class WorldLevelSelector {
     int posX, posY;
     int widthMargin = 120, heightMargin = 120; //margenes entre botones de niveles
     int currWorld = 0;
-    Button aux;
+    Button aux; //para poner un nivel como resuelto automaticamente
     Button currWorldText; //no tenemos un objeto texto, esto hara de texto del nombre del mundo pero no se podra pulsar
     ArrayList<World> worlds;
     int[] levelsCompletedByWorld;
@@ -48,8 +48,10 @@ public class WorldLevelSelector {
         currWorldText.render(graph);
     }
     public void handleInput(ArrayList<TouchEvent> event){
-        if(aux.handleInput(event))
+        if(aux.handleInput(event)){
             worlds.get(currWorld).levelComplete();
+            worlds.get(currWorld).saveLevelsBeaten();
+        }
 
         worlds.get(currWorld).handleInput(event);
 

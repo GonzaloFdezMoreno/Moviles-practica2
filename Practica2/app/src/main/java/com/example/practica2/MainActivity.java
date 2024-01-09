@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         andrEng.resume();
 
-        System.out.print("WE BACK BBY!!\n");
         if (savedInstanceState == null) {
             //load stuff
             Logic logic_ = (Logic)logic;

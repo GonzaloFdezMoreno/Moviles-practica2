@@ -1,27 +1,14 @@
 package com.example.practica2;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Environment;
-import android.util.TypedValue;
-import android.view.Gravity;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.androidengine.AndrGraphics2D;
-import com.example.androidengine.AndroidEngine;
 import com.example.androidengine.TouchEvent;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 
 class Level{
@@ -66,16 +53,20 @@ public class MastermindBoard extends GameObject {
         boolean repeticionColores; //se repiten colores al crear codigo secreto
     }
     caractTablero currTableroCaracteristicas; //aqui guardamos las caractTablero del tablero en el que jugaremos
-    int anchoIntento = 355, altoIntento = 40, margenAltoIntento = 45; // tamaños para los intentos en pantalla
+
     int numIntentoActual = 0; //controla en que Intento pintamos. Si acabamos el ultimo y no acertamos el codigo, perdemos
-    Intento intentos[]; //un Intento es cada una de las barras donde el jugador coloca colores, y contiene tambien las pistas
+    ConjuntoIntentos conjuntoIntentos; //un Intento es cada una de las barras donde el jugador coloca colores, y contiene tambien las pistas
     int codigoSecreto[];
 
+    int anchoIntento = 355, altoIntento = 40, margenAltoIntento = 45; // tamaños para los intentos en pantalla
     ObjectMatrix selector; //aqui estaran los botones para seleccionar cada codigo. Es un ObjectMatrix de objetos tipo ColorSetterButton
     int cantColoresRellenados = 0; //cuando haya tamCodigo de estos, comprobamos con pistas(estara completado un Intento)
     Map<Integer, Integer> cuantoDeCadaColorEnCodigoSecreto; //para rapidamente saber cuanto de cada color hay en el codigoSecreto(Amarillo:2, Rojo:3...)
     boolean daltonismo; //modo daltonismo, muestra numeros encima de los colores para identificarlos facilmente
     World world = null; //para saber de que mundo procedemos
+
+    //para el scroll, aqui es donde empieza la pulsacion en pantalla
+    int initialTouchY;
     MastermindBoard(Logic log_, int nivDificultad_, int posX_, int posY_, int width_, int height_) {
         super(posX_, posY_, width_, height_);
 
@@ -87,11 +78,7 @@ public class MastermindBoard extends GameObject {
         if(!errNivel)
             System.out.println("ERROR ESTABLECIENDO CARACT. TABLERO, NIVEL NO ESTABA ENTRE [0 Y 3]");
 
-        //creamos la secuencia vacia de todos los intentos
-        intentos = new Intento[currTableroCaracteristicas.maxIntentos];
-        for (int i = 0; i < currTableroCaracteristicas.maxIntentos; ++i) {
-            intentos[i] = new Intento(this, i+1, currTableroCaracteristicas.tamCodigo, getPosX(), getPosY() + margenAltoIntento * i, anchoIntento, altoIntento);
-        }
+        conjuntoIntentos = new ConjuntoIntentos(this, getPosX(), getPosY(), anchoIntento, altoIntento, currTableroCaracteristicas.maxIntentos, currTableroCaracteristicas.tamCodigo);
 
         //creamos el selector
         selector = new ObjectMatrix(1,posX_ - 20, 540, anchoIntento, altoIntento);//new Selector(tamCodigo, posX_ + 150, getPosY() + 600, anchoIntento, altoIntento);
@@ -109,7 +96,6 @@ public class MastermindBoard extends GameObject {
 
         daltonismo = false;
     }
-
     MastermindBoard(Logic log_, Level l, int posX_, int posY_, int width_, int height_, World world_) {
         super(posX_, posY_, width_, height_);
 
@@ -126,11 +112,7 @@ public class MastermindBoard extends GameObject {
         currTableroCaracteristicas.repeticionColores = l.repeat;
         currTableroCaracteristicas.numColoresCodigo = l.codeOpt;
 
-        //creamos la secuencia vacia de todos los intentos
-        intentos = new Intento[currTableroCaracteristicas.maxIntentos];
-        for (int i = 0; i < currTableroCaracteristicas.maxIntentos; ++i) {
-            intentos[i] = new Intento(this, i+1, currTableroCaracteristicas.tamCodigo, getPosX(), getPosY() + margenAltoIntento * i, anchoIntento, altoIntento);
-        }
+        conjuntoIntentos = new ConjuntoIntentos(this, getPosX(), getPosY(), anchoIntento, altoIntento, currTableroCaracteristicas.maxIntentos, currTableroCaracteristicas.tamCodigo);
 
         //creamos el selector
         selector = new ObjectMatrix(1,posX_ - 20, 540, anchoIntento, altoIntento);//new Selector(tamCodigo, posX_ + 150, getPosY() + 600, anchoIntento, altoIntento);
@@ -154,7 +136,17 @@ public class MastermindBoard extends GameObject {
     @Override
     public boolean handleInput(ArrayList<TouchEvent> event) {
 
-        intentos[numIntentoActual].handleInput(event);
+        for(TouchEvent events : event) {
+            if (events.type == TouchEvent.TouchEventType.TOUCH_DRAG) {
+                int deltaY = events.y - initialTouchY;
+                scrollAttempts(deltaY);
+                initialTouchY = events.y;
+            } else if (events.type == TouchEvent.TouchEventType.TOUCH_DOWN) {
+                initialTouchY = events.y;
+            }
+        }
+
+        conjuntoIntentos.handleInput(event);
 
         selector.handleInput(event);
 
@@ -162,12 +154,18 @@ public class MastermindBoard extends GameObject {
     }
     @Override
     public void update(double t){
-        for (Intento intento : intentos) {
-            intento.update(t);
-        }
+        conjuntoIntentos.update(t);
     }
     @Override
     public void render(AndrGraphics2D graph) {
+        conjuntoIntentos.render(graph);
+
+        graph.setColor(0xFFFFFFFF);
+        graph.fillRectangle(0,0,400, 50);
+        graph.fillRectangle(0,525,400, 200);
+
+        graph.setColor(0xFF000000);
+
         graph.setFont(graph.createFont("AARVC___.TTF",25,false,false));
 
         if(currTableroCaracteristicas.maxIntentos-numIntentoActual>1) {
@@ -176,14 +174,9 @@ public class MastermindBoard extends GameObject {
         else {
             graph.drawText("Te queda " + (currTableroCaracteristicas.maxIntentos - numIntentoActual) + " intento", 100, 30);
         }
-        for (Intento intento : intentos) {
-            intento.render(graph);
-        }
-
         selector.render(graph);
         pintaCodigo(graph); //muestra el codigo secreto
     }
-
     //seteamos currTableroCaracteristicas
     boolean estableceCaracteristicasTablero(int dificultad){
 
@@ -229,7 +222,6 @@ public class MastermindBoard extends GameObject {
 
         return true;
     }
-
     //creamos el codigo secreto en funcion de las caracteristicas que pasamos al tablero
     void estableceNuevoCodigoSecreto(){
 
@@ -256,18 +248,17 @@ public class MastermindBoard extends GameObject {
         }
 
     }
-
     //cuando pulsamos un boton de selector, se llama a este metodo para rellenar el siguiente hueco disponible. Si estan
     //todos rellenos, comprobamos que tal le ha ido al jugador y seteamos las psitas
     void rellenaSiguienteHuecoIntentoActual(int color_){
-        intentos[numIntentoActual].pintaPrimerBotonIntentoCodigoLibre(color_); //dentro hay un bucle que recorre hasta encontrarlo
+        conjuntoIntentos.intentos[numIntentoActual].pintaPrimerBotonIntentoCodigoLibre(color_); //dentro hay un bucle que recorre hasta encontrarlo
+
         cantColoresRellenados++;
 
         if(cantColoresRellenados >= currTableroCaracteristicas.tamCodigo){
             compruebaPistas();
         }
     }
-
     //finalizado un intento, rellenamos las pistas para indicar al jugador que tal lo ha hecho
     void compruebaPistas(){
         int numAciertos = 0;
@@ -282,7 +273,7 @@ public class MastermindBoard extends GameObject {
         //esta, pero en pos incorrecta
         for(int i = 0; i < currTableroCaracteristicas.tamCodigo; ++i){
             int colorComprobado = codigoSecreto[i];
-            int colorColocado = intentos[numIntentoActual].getColorBotonAt(i);
+            int colorColocado = conjuntoIntentos.intentos[numIntentoActual].getColorBotonAt(i);
             if(colorComprobado == colorColocado){
                 //aciertos[i] = 1;
                 aux.put(colorComprobado, aux.get(colorComprobado) - 1);
@@ -304,7 +295,7 @@ public class MastermindBoard extends GameObject {
         for(int i = 0; i < currTableroCaracteristicas.tamCodigo; ++i){
 
             int colorComprobado = codigoSecreto[i];
-            int colorColocado = intentos[numIntentoActual].getColorBotonAt(i);
+            int colorColocado = conjuntoIntentos.intentos[numIntentoActual].getColorBotonAt(i);
 
             if(colorComprobado != colorColocado) {
                 if (aux.containsKey(colorColocado) && aux.get(colorColocado) > 0) {
@@ -315,8 +306,7 @@ public class MastermindBoard extends GameObject {
         }
 
         //ponemos colores a las pistas
-        //intentos[numIntentoActual].rellenaPistas2(aciertos);
-        intentos[numIntentoActual].rellenaPistas2(numAciertos, numAciertosPosIncorrecta);
+        conjuntoIntentos.intentos[numIntentoActual].rellenaPistas2(numAciertos, numAciertosPosIncorrecta);
         cantColoresRellenados = 0;
 
         numIntentoActual++;
@@ -326,7 +316,6 @@ public class MastermindBoard extends GameObject {
             log.SetScene(new LoseWinScene(log, codigoSecreto,nivelDificultad,false,0, daltonismo));
         }
     }
-
     //auxiliar, para poder visualizar el codigo secreto
     void pintaCodigo(AndrGraphics2D graph){
         for(int i = 0; i < codigoSecreto.length; ++i){
@@ -346,15 +335,12 @@ public class MastermindBoard extends GameObject {
 
         }
     }
-
     void setDaltonismo(boolean dalton){
         daltonismo = dalton;
     }
-
     public boolean isDaltonismo() {
         return daltonismo;
     }
-
     void loadGameState(SharedPreferences preferences){
         SaveBoardInformation sbitest = new SaveBoardInformation();
         sbitest.maxIntentos = preferences.getInt("maxIntentos", sbitest.maxIntentos);
@@ -400,7 +386,7 @@ public class MastermindBoard extends GameObject {
             StringBuilder sb = new StringBuilder();
 
             for (int j = 0; j < currTableroCaracteristicas.tamCodigo; j++) {
-                sb.append(intentos[i].getColorBotonAt(j)).append(",");
+                sb.append(conjuntoIntentos.intentos[i].getColorBotonAt(j)).append(",");
             }
 
             preferencesEditor.putString("valoresYaPuestos_" + String.valueOf(i), sb.toString());
@@ -408,5 +394,13 @@ public class MastermindBoard extends GameObject {
         }
 
         return sbi;
+    }
+    void scrollAttempts(int amount){
+        int altoConjuntoIntentos = (altoIntento + margenAltoIntento) * currTableroCaracteristicas.maxIntentos;
+        if((conjuntoIntentos.getPosY() + altoConjuntoIntentos + amount >= 1900 && amount < 0) ||
+                (conjuntoIntentos.getPosY() + amount < 85 && amount > 0))
+            conjuntoIntentos.setPosY(conjuntoIntentos.getPosY() + amount);
+        System.out.print(conjuntoIntentos.getPosY()/* + altoConjuntoIntentos + amount*/ + '\n');
+        System.out.flush();
     }
 }
