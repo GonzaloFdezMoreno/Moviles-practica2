@@ -91,7 +91,7 @@ public class World {
         }
         else if(numLevelsBeaten > 0 && !complete){
             buttonsLevels.get(numLevelsBeaten-1).color = 0XDDD3D3D3;
-            wls.startNextWorld();
+            wls.startNextWorld(numWorld+1);
             complete = true;
         }
     }

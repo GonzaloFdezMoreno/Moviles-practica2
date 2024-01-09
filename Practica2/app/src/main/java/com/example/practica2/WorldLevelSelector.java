@@ -60,9 +60,9 @@ public class WorldLevelSelector {
         currWorld = i;
         currWorldText.text = worlds.get(currWorld).worldName;
     }
-    void startNextWorld(){
-        if(currWorld < worlds.size()-1)
-            worlds.get(currWorld+1).levelComplete();
+    void startNextWorld(int worldToStart){
+        if(worldToStart < worlds.size())
+            worlds.get(worldToStart).levelComplete();
     }
 
     void LoadWorldCompletedLevels(){
