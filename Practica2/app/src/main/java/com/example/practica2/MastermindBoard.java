@@ -3,6 +3,7 @@ package com.example.practica2;
 import android.content.SharedPreferences;
 
 import com.example.androidengine.AndrGraphics2D;
+import com.example.androidengine.AndroidFont;
 import com.example.androidengine.TouchEvent;
 
 import java.util.ArrayList;
@@ -64,6 +65,7 @@ public class MastermindBoard extends GameObject {
     Map<Integer, Integer> cuantoDeCadaColorEnCodigoSecreto; //para rapidamente saber cuanto de cada color hay en el codigoSecreto(Amarillo:2, Rojo:3...)
     boolean daltonismo; //modo daltonismo, muestra numeros encima de los colores para identificarlos facilmente
     World world = null; //para saber de que mundo procedemos
+    AndroidFont Font;
 
     //para el scroll, aqui es donde empieza la pulsacion en pantalla
     int initialTouchY;
@@ -85,7 +87,7 @@ public class MastermindBoard extends GameObject {
         for (int i = 0; i < currTableroCaracteristicas.numColoresCodigo; ++i){
 
             //podemos ver que no importa la pos en la que se colocan los objetos, pues con selector.setObjectsPositionsInMatrix(); los colocamos correctamente
-            selector.addObjectToMatrix(new ColorSetterButton(this, hexColores[i], -1, -1, 30, 30, log.currEngine.getAudio(), log.currEngine.getSound()));
+            selector.addObjectToMatrix(new ColorSetterButton(this, hexColores[i], -1, -1, 30, 30, log.currEngine.getAudio(), log.currEngine.getSound(), log_));
         }
         selector.setObjectsPositionsInMatrix(); //necesario para situar los elementos dentro del ObjectMatrix, asi no lo hacemos en cada vuelta del bucle
 
@@ -95,6 +97,8 @@ public class MastermindBoard extends GameObject {
         estableceNuevoCodigoSecreto();
 
         daltonismo = false;
+
+        Font = log_.currEngine.GetGraphics().createFont("AARVC___.TTF", 25,false,false);
     }
     MastermindBoard(Logic log_, Level l, int posX_, int posY_, int width_, int height_, World world_) {
         super(posX_, posY_, width_, height_);
@@ -119,7 +123,7 @@ public class MastermindBoard extends GameObject {
         for (int i = 0; i < currTableroCaracteristicas.numColoresCodigo; ++i){
 
             //podemos ver que no importa la pos en la que se colocan los objetos, pues con selector.setObjectsPositionsInMatrix(); los colocamos correctamente
-            selector.addObjectToMatrix(new ColorSetterButton(this, hexColores[i], -1, -1, 30, 30, log.currEngine.getAudio(), log.currEngine.getSound()));
+            selector.addObjectToMatrix(new ColorSetterButton(this, hexColores[i], -1, -1, 30, 30, log.currEngine.getAudio(), log.currEngine.getSound(), log_));
         }
         selector.setObjectsPositionsInMatrix(); //necesario para situar los elementos dentro del ObjectMatrix, asi no lo hacemos en cada vuelta del bucle
 
@@ -131,7 +135,7 @@ public class MastermindBoard extends GameObject {
         daltonismo = false;
 
         world = world_;
-
+        Font = log_.currEngine.GetGraphics().createFont("AARVC___.TTF", 25,false,false);
     }
     @Override
     public boolean handleInput(ArrayList<TouchEvent> event) {
@@ -166,7 +170,7 @@ public class MastermindBoard extends GameObject {
 
         graph.setColor(0xFF000000);
 
-        graph.setFont(graph.createFont("AARVC___.TTF",25,false,false));
+        graph.setFont(Font);
 
         if(currTableroCaracteristicas.maxIntentos-numIntentoActual>1) {
             graph.drawText("Te quedan " + (currTableroCaracteristicas.maxIntentos - numIntentoActual) + " intentos", 100, 30);

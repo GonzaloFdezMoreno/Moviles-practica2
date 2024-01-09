@@ -26,26 +26,17 @@ public class ConjuntoIntentos extends GameObject{
 
     @Override
     public void render(AndrGraphics2D graph) {
-        super.render(graph);
-
         for(Intento i : intentos)
             i.render(graph);
     }
 
     @Override
     public void update(double delta) {
-        super.update(delta);
-
-        for(Intento i : intentos){
-            i.update(delta);
-        }
+        intentos[mb.numIntentoActual].update(delta);
     }
 
     @Override
     public boolean handleInput(ArrayList<TouchEvent> event) {
-
-        intentos[mb.numIntentoActual].handleInput(event);
-
-        return super.handleInput(event);
+        return intentos[mb.numIntentoActual].handleInput(event);
     }
 }

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.androidengine.AndrGraphics2D;
 import com.example.androidengine.AndroidAudio;
+import com.example.androidengine.AndroidImage;
 import com.example.androidengine.AndroidSound;
 import com.example.androidengine.TouchEvent;
 
@@ -21,29 +22,41 @@ public class Button extends GameObject {
     String imgName = "";
     int color = 0xFFFFFFFF;
     boolean background = false;
-    Button(int posX_, int posY_, int width_, int height_, String imgName_, AndroidAudio audio, AndroidSound sound){
+
+    Logic log;
+    AndroidImage Image;
+    Button(int posX_, int posY_, int width_, int height_, String imgName_, Logic log_){
         super(posX_, posY_, width_, height_);
         imgName = imgName_;
-        andAudio = audio;
-        esound = sound;
+
+        andAudio = log_.currEngine.getAudio();
+        esound = log_.currEngine.getSound();
+        log = log_;
+        Image = log_.getEngine().GetGraphics().createImage(imgName_);
     }
 
     //he creado esta version con el booleano background porque no tengo tiempo de cambiar cada uno de las constructoras de botones para que incluyan un booleano inicializado a false
-    Button(int posX_, int posY_, int width_, int height_, String imgName_, boolean background_, AndroidAudio audio, AndroidSound sound){
+    Button(int posX_, int posY_, int width_, int height_, String imgName_, boolean background_, Logic log_){
         super(posX_, posY_, width_, height_);
         imgName = imgName_;
-        andAudio = audio;
-        esound = sound;
+        andAudio = log_.currEngine.getAudio();
+        esound = log_.currEngine.getSound();
 
         background = background_;
+
+        log = log_;
+        Image = log_.getEngine().GetGraphics().createImage(imgName_);
+
     }
 
-    Button(int posX_, int posY_, int width_, int height_, String text_, int color_, AndroidAudio audio, AndroidSound sound){
+    Button(int posX_, int posY_, int width_, int height_, String text_, int color_, Logic log_){
         super(posX_, posY_, width_, height_);
         text = text_;
         color = color_;
-        andAudio = audio;
-        esound = sound;
+        andAudio = log_.currEngine.getAudio();
+        esound = log_.currEngine.getSound();
+
+        log = log_;
     }
 
     @Override
@@ -82,7 +95,7 @@ public class Button extends GameObject {
         }
 
         if(imgName != ""){
-            graph.drawImage(graph.createImage(imgName),getPosX(),getPosY(),getWidth(),getHeight());
+            graph.drawImage(Image,getPosX(),getPosY(),getWidth(),getHeight());
         }
 
         if(text != ""){
@@ -109,6 +122,7 @@ public class Button extends GameObject {
 
     void setImgName(String name_){
         imgName = name_;
+        log.getEngine().GetGraphics().createImage(imgName);
     }
 
     //nuestro boton pasa de tener una imagen a renderizar texto

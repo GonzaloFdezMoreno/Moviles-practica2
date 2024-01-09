@@ -15,7 +15,7 @@ public abstract class GameObject {
         width = width_;
         height = height_;
 
-        hijos = new ArrayList<GameObject>();
+        hijos = new ArrayList<>();
     }
 
     public int getPosX() {

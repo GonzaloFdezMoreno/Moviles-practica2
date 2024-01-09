@@ -13,7 +13,8 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
     private int numIntento = -1;
     int diametroIntentoCodigo = 30;
     int diametroPista = 8;
-    ObjectMatrix botonesIntentoCodigo; //aqui guardamos lo que el jugador quiere que sea su intento, se puede quitar el color haciendo click
+    ArrayList<IntentoButton> botonesIntentoCodigoo;
+    //ObjectMatrix botonesIntentoCodigo; //aqui guardamos lo que el jugador quiere que sea su intento, se puede quitar el color haciendo click
     ObjectMatrix pistas; //aqui se dibujara cada una de las pistas
     MastermindBoard mb; //referencia para llamar a algunos metodos
     int tamCodigo;
@@ -25,14 +26,16 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
         tamCodigo = tamCodigo_;
 
         //introducimos circulos que marcan nuestros intentos
-        botonesIntentoCodigo = new ObjectMatrix(1, 40, getPosY() + 5, 225, 50);
+        botonesIntentoCodigoo = new ArrayList<IntentoButton>(tamCodigo_);
+        colocaBotonesIntentos(tamCodigo_);
+        /*botonesIntentoCodigo = new ObjectMatrix(1, 40, getPosY() + 5, 225, 50);
         for(int i = 0; i < tamCodigo_; ++i){
             //las posiciones que se pasen por aqui dan igual, setObjectsPositionsInMatrix() las ajusta automaticamente
             IntentoButton ib = new IntentoButton(mb,-1, -1, diametroIntentoCodigo, diametroIntentoCodigo, mb.log.getEngine().getAudio(), mb.log.currEngine.getSound());
             botonesIntentoCodigo.addObjectToMatrix(ib);
             addChild(ib);
         }
-        botonesIntentoCodigo.setObjectsPositionsInMatrix();
+        botonesIntentoCodigo.setObjectsPositionsInMatrix();*/
 
 
 
@@ -52,14 +55,18 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
 
     @Override
     public boolean handleInput(ArrayList<TouchEvent> event) {
-        botonesIntentoCodigo.handleInput(event);
+        for(IntentoButton ib : botonesIntentoCodigoo){
+            ib.handleInput(event);
+        }
         pistas.handleInput(event);
         return true;
     }
 
     @Override
     public void update(double t){
-        botonesIntentoCodigo.update(t);
+        for(IntentoButton ib : botonesIntentoCodigoo){
+            ib.update(t);
+        }
         pistas.update(t);
     }
     @Override
@@ -68,22 +75,24 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
         graph.setColor(0XFF000000);
         graph.drawRoundRectangle(getPosX(), getPosY(), getWidth(), getHeight(), 10, 10);
         graph.setColor(0XFF000000);
-        graph.drawText(String.valueOf(numIntento),getPosX() + 15, getPosY() + 30);
+        graph.drawText(String.valueOf(numIntento),getPosX(), getPosY() + 30);
 
         graph.drawLine(getPosX() + 45, getPosY() + 5, getPosX() + 45, getPosY() + 35);
 
         graph.drawLine(getPosX() + 280, getPosY() + 5, getPosX() + 280, getPosY() + 35);
 
+        for(IntentoButton ib : botonesIntentoCodigoo){
+            ib.render(graph);
+        }
 
-        botonesIntentoCodigo.render(graph);
         pistas.render(graph);
     }
 
     boolean pintaPrimerBotonIntentoCodigoLibre(int newColor_){
         int i = 0;
         boolean encontrado = false;
-        while(i < botonesIntentoCodigo.numElems && !encontrado){
-            IntentoButton ib = (IntentoButton) botonesIntentoCodigo.getElemAtIndex(i);
+        while(i < botonesIntentoCodigoo.size() && !encontrado){
+            IntentoButton ib = botonesIntentoCodigoo.get(i);
             if(ib.colorSet == false){
                 ib.setColor(newColor_);
                 encontrado = true;
@@ -94,15 +103,8 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
     }
 
     int getColorBotonAt(int i_){ //devuelve el color del boton en la pos i_
-        IntentoButton ib = (IntentoButton) botonesIntentoCodigo.getElemAtIndex(i_);
+        IntentoButton ib = botonesIntentoCodigoo.get(i_);
         return ib.getColor();
-    }
-
-    void rellenaPistas(int[] aciertos){ //en funcion de los valores de aciertos[](0, 1, 2), rellena pistas
-        for(int i = 0; i < tamCodigo; ++i){
-            Pista p = (Pista)pistas.getElemAtIndex(i);
-            p.setState(aciertos[i]);
-        }
     }
 
     //version corregida de rellenaPistas para lo que nos pedia el enunciado
@@ -123,6 +125,21 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
                 p.setState(0);
             }
 
+        }
+    }
+
+    void colocaBotonesIntentos(int tamCodigo_){
+
+        for(int i = 0; i < tamCodigo_; ++i){
+            int aux = (int)(240 / tamCodigo_);
+            IntentoButton ib = new IntentoButton(mb,
+                    getPosX() + 15 + i * aux + aux/2,
+                    getPosY(),
+                    diametroIntentoCodigo, diametroIntentoCodigo, mb.log.getEngine().getAudio(), mb.log.currEngine.getSound(), mb.log);
+
+            botonesIntentoCodigoo.add(ib);
+
+            addChild(ib);
         }
     }
 }

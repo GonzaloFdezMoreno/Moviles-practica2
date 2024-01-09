@@ -23,8 +23,8 @@ public class WorldLevelSelector {
     WorldLevelSelector(int posX_, int posY_, String[] worldNames_, Logic log_){
         posX = posX_; posY = posY_;
 
-        aux = new Button(20, posY - 20, 30, 30, "eyeshow.png", true, log_.currEngine.getAudio(), log_.currEngine.getSound());
-        currWorldText = new Button(posX + widthMargin, 10, 110, 40, worldNames_[0], 0xFF1FE3E0, log_.currEngine.getAudio(), log_.currEngine.getSound());
+        aux = new Button(20, posY - 20, 30, 30, "eyeshow.png", true, log_);
+        currWorldText = new Button(posX + widthMargin, 10, 110, 40, worldNames_[0], 0xFF1FE3E0,  log_);
         worlds = new ArrayList<>();
 
         for(int i = 0; i < worldNames_.length; ++i){

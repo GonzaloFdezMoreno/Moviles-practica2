@@ -18,8 +18,8 @@ public class IntentoButton extends Button{ //contenidos en cada intento, con col
                                         // valor mas pequeño su tamaño
     int assignedNum = 0;
     MastermindBoard mb;
-    IntentoButton(MastermindBoard mb_, int posX_, int posY_, int width_, int height_, AndroidAudio audio, AndroidSound sound) {
-        super(posX_, posY_, width_, height_, "", 0XFFFFFFFF, audio, sound);
+    IntentoButton(MastermindBoard mb_, int posX_, int posY_, int width_, int height_, AndroidAudio audio, AndroidSound sound, Logic log_) {
+        super(posX_, posY_, width_, height_, "", 0XFFFFFFFF, log_);
         mb = mb_;
     }
 

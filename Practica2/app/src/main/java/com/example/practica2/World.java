@@ -36,7 +36,7 @@ public class World {
                 ++j;
             }
 
-            buttonsLevels.add(new Button(posX_ + k * widthMargin_, posY_ + j * heightMargin_, 110, 110, "lock.png", true, log.currEngine.getAudio(), log.currEngine.getSound()));
+            buttonsLevels.add(new Button(posX_ + k * widthMargin_, posY_ + j * heightMargin_, 110, 110, "lock.png", true,  log_));
 
         }
 
