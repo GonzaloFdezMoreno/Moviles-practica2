@@ -83,7 +83,7 @@ public class MastermindBoard extends GameObject {
         conjuntoIntentos = new ConjuntoIntentos(this, getPosX(), getPosY(), anchoIntento, altoIntento, currTableroCaracteristicas.maxIntentos, currTableroCaracteristicas.tamCodigo);
 
         //creamos el selector
-        selector = new ObjectMatrix(1,posX_ - 20, 540, anchoIntento, altoIntento);//new Selector(tamCodigo, posX_ + 150, getPosY() + 600, anchoIntento, altoIntento);
+        selector = new ObjectMatrix(1,log.getEngine().GetGraphics().getWidth()/2, 540, anchoIntento, altoIntento);//new Selector(tamCodigo, posX_ + 150, getPosY() + 600, anchoIntento, altoIntento);
         for (int i = 0; i < currTableroCaracteristicas.numColoresCodigo; ++i){
 
             //podemos ver que no importa la pos en la que se colocan los objetos, pues con selector.setObjectsPositionsInMatrix(); los colocamos correctamente
@@ -119,7 +119,7 @@ public class MastermindBoard extends GameObject {
         conjuntoIntentos = new ConjuntoIntentos(this, getPosX(), getPosY(), anchoIntento, altoIntento, currTableroCaracteristicas.maxIntentos, currTableroCaracteristicas.tamCodigo);
 
         //creamos el selector
-        selector = new ObjectMatrix(1,posX_ - 20, 540, anchoIntento, altoIntento);//new Selector(tamCodigo, posX_ + 150, getPosY() + 600, anchoIntento, altoIntento);
+        selector = new ObjectMatrix(1,log.getEngine().GetGraphics().getWidth()/2, 540, anchoIntento, altoIntento);//new Selector(tamCodigo, posX_ + 150, getPosY() + 600, anchoIntento, altoIntento);
         for (int i = 0; i < currTableroCaracteristicas.numColoresCodigo; ++i){
 
             //podemos ver que no importa la pos en la que se colocan los objetos, pues con selector.setObjectsPositionsInMatrix(); los colocamos correctamente
@@ -173,12 +173,13 @@ public class MastermindBoard extends GameObject {
         graph.setFont(Font);
 
         if(currTableroCaracteristicas.maxIntentos-numIntentoActual>1) {
-            graph.drawText("Te quedan " + (currTableroCaracteristicas.maxIntentos - numIntentoActual) + " intentos", 100, 30);
+            graph.drawText("Te quedan " + (currTableroCaracteristicas.maxIntentos - numIntentoActual) + " intentos", graph.getWidth()/2, 30);
         }
         else {
-            graph.drawText("Te queda " + (currTableroCaracteristicas.maxIntentos - numIntentoActual) + " intento", 100, 30);
+            graph.drawText("Te queda " + (currTableroCaracteristicas.maxIntentos - numIntentoActual) + " intento", graph.getWidth()/2, 30);
         }
         selector.render(graph);
+
         pintaCodigo(graph); //muestra el codigo secreto
     }
     //seteamos currTableroCaracteristicas

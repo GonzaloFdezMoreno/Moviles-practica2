@@ -13,19 +13,22 @@ public class LevelMenu extends Scene {
     public LevelMenu(Logic log){
         super(log);
 
-        goBackButton = new Button(20,20,20,20, "goback.png", log);
-        addGameObject(new SceneText(75,100,0,0,"SELECCIONA UN NIVEL"));
+        int windowCenterX=log.getEngine().GetGraphics().getWidth()/2,
+            windowCenterY=log.getEngine().GetGraphics().getHeight()/2;
 
-        easyButton = new Button(100,200,200,50,"FACIL", 0xFF25E31F, log);
-        mediumButton = new Button(100,260,200,50,"MEDIO", 0xFFE3E31F, log);
-        hardButton = new Button(100,320,200,50,"DIFICIL", 0xFFE3991F, log);
-        insaneButton = new Button(100,380,200,50,"IMPOSIBLE", 0xFFE3371F,  log);
+        goBackButton = new Button(windowCenterX - 180,windowCenterY - 290,20,20, "goback.png", log);
+        addGameObject(new SceneText(windowCenterX,(windowCenterY/3),0,0,"SELECCIONA UN NIVEL"));
+
+        easyButton = new Button(windowCenterX,windowCenterY - 100,200,50,"FACIL", 0xFF25E31F, log);
+        mediumButton = new Button(windowCenterX,windowCenterY - 40,200,50,"MEDIO", 0xFFE3E31F, log);
+        hardButton = new Button(windowCenterX,windowCenterY + 20,200,50,"DIFICIL", 0xFFE3991F, log);
+        insaneButton = new Button(windowCenterX,windowCenterY + 80,200,50,"IMPOSIBLE", 0xFFE3371F,  log);
     }
 
     @Override
     public void render(AndrGraphics2D graph) {
         if(log.currBG < 4) {
-            graph.drawImage(graph.createImage(backgroundImages[log.currBG]), 0, 0, 400, 600);
+            graph.drawImage(graph.createImage(backgroundImages[log.currBG]), log.getEngine().GetGraphics().getWidth()/2, log.getEngine().GetGraphics().getHeight()/2, 400, 600);
 
             graph.setColor(0xFFFFFFFF);
             graph.fillRectangle(0,0,400, 50);

@@ -39,8 +39,8 @@ public class IntentoButton extends Button{ //contenidos en cada intento, con col
             double smallWidth = (getWidth()/smallInteriorCircleScale);
             double smallHeight = (getHeight()/smallInteriorCircleScale);
 
-            graph.fillCircle((int)(getPosX() + getWidth()/2 - smallWidth/2),
-                    (int)(getPosY() + getHeight()/2 - smallHeight/2),
+            graph.fillCircle(getPosX(),
+                    getPosY(),
                     (int)(smallWidth));
         }
         else{
@@ -53,7 +53,7 @@ public class IntentoButton extends Button{ //contenidos en cada intento, con col
             }
             if(mb.isDaltonismo()){
                 graph.setColor(0xFF000000);
-                graph.drawText(String.valueOf(assignedNum), (int) getPosX() + getWidth()/2 -3, (int) getPosY() + getHeight()/2 + 3);
+                graph.drawText(String.valueOf(assignedNum), (int) getPosX(), (int) getPosY() + 10);
             }
         }
         graph.setColor(0xFF000000);

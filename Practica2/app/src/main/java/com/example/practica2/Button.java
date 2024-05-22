@@ -1,10 +1,12 @@
 package com.example.practica2;
 
 
+import android.graphics.Paint;
 import android.util.Log;
 
 import com.example.androidengine.AndrGraphics2D;
 import com.example.androidengine.AndroidAudio;
+import com.example.androidengine.AndroidFont;
 import com.example.androidengine.AndroidImage;
 import com.example.androidengine.AndroidSound;
 import com.example.androidengine.TouchEvent;
@@ -25,6 +27,8 @@ public class Button extends GameObject {
 
     Logic log;
     AndroidImage Image;
+
+    //boton con imagen
     Button(int posX_, int posY_, int width_, int height_, String imgName_, Logic log_){
         super(posX_, posY_, width_, height_);
         imgName = imgName_;
@@ -36,6 +40,7 @@ public class Button extends GameObject {
     }
 
     //he creado esta version con el booleano background porque no tengo tiempo de cambiar cada uno de las constructoras de botones para que incluyan un booleano inicializado a false
+    //botones de fondo en los mundos
     Button(int posX_, int posY_, int width_, int height_, String imgName_, boolean background_, Logic log_){
         super(posX_, posY_, width_, height_);
         imgName = imgName_;
@@ -49,6 +54,7 @@ public class Button extends GameObject {
 
     }
 
+    //botones que solo usan colores
     Button(int posX_, int posY_, int width_, int height_, String text_, int color_, Logic log_){
         super(posX_, posY_, width_, height_);
         text = text_;
@@ -66,8 +72,8 @@ public class Button extends GameObject {
         for(TouchEvent events : event) {
             //comprobamos que esta dentro de los limites del boton
 
-            if(this.getPosX() < events.x && this.getPosX() + this.getWidth() > events.x
-                    && this.getPosY() < events.y && this.getPosY() + this.getHeight() > events.y) {
+            if((this.getPosX() - getWidth()/2) < events.x && this.getPosX() + this.getWidth()/2 > events.x
+                    && this.getPosY() - getHeight()/2 < events.y && this.getPosY() + getHeight()/2 > events.y) {
 
                 if (events.type == TouchEvent.TouchEventType.TOUCH_DOWN) {
                     System.out.println("ButtonPressed\n");
@@ -89,7 +95,7 @@ public class Button extends GameObject {
     public void render(AndrGraphics2D graph){
         if(imgName == "" || background){
             graph.setColor(color);
-            graph.fillRoundRectangle(getPosX(), getPosY(), getWidth(), getHeight(), 15, 10);
+            graph.fillRoundRectangle(getPosX() - getWidth()/2, getPosY() - getHeight()/2, getWidth(), getHeight(), 15, 10);
             graph.setColor(0xFFFFFFFF);
 
         }
@@ -101,8 +107,10 @@ public class Button extends GameObject {
         if(text != ""){
             graph.setColor(0xFF000000);
             int size = 25;
-            graph.setFont(graph.createFont("AARVC___.TTF",size,true,false));
-            graph.drawText(text,getPosX() + getWidth()/2 - 30, getPosY() + getHeight()/2);
+            AndroidFont font = graph.createFont("AARVC___.TTF",size,true,false);
+
+            graph.setFont(font);
+            graph.drawText(text,getPosX(), getPosY());
             graph.setColor(0xFFFFFFFF);
         }
 

@@ -23,7 +23,7 @@ public class AndrGraphics2D {
     private Paint paint;
     int posx,posy;
     private AssetManager aMngr;
-    float hei,wid;
+    int hei, wid;
 
     private float scaleFactor;
 
@@ -39,7 +39,7 @@ public class AndrGraphics2D {
         wid=w;
         //save();
         paint.setStyle(Paint.Style.FILL);
-
+        paint.setTextAlign(Paint.Align.CENTER);
 
 
 
@@ -47,7 +47,8 @@ public class AndrGraphics2D {
 
     }
 
-
+    public int getHeight(){return hei;}
+    public int getWidth(){return wid;}
     public void translate(int x, int y){
 
         canvas.translate(x,y);
@@ -75,17 +76,17 @@ public class AndrGraphics2D {
 
 
     public void drawImage(AndroidImage image, int x, int y,int width,int height) {
-        AndroidImage andImg= image;
+        AndroidImage andImg = image;
         Rect src=new Rect();
         src.left=0;
         src.top=0;
         src.bottom=andImg.getHeight();
         src.right=andImg.getWidth();
         Rect dst=new Rect();
-        dst.left=x;
-        dst.top=y;
-        dst.bottom=y+height;
-        dst.right=x+width;
+        dst.left=x - width/2;
+        dst.top=y - height/2;
+        dst.bottom=y+height/2;
+        dst.right=x+width/2;
 
         this.canvas.drawBitmap(andImg.getImage(), src, dst, this.paint);
 
@@ -129,14 +130,14 @@ public class AndrGraphics2D {
 
     public void drawCircle(int cx, int cy, int width, int height) {
         paint.setStyle(Paint.Style.STROKE);
-        this.canvas.drawCircle(cx+width/2,cy+width/2,width/2,paint);
+        this.canvas.drawCircle(cx,cy,width/2,paint);
         paint.setStyle(Paint.Style.FILL);
 
     }
 
 
     public void fillCircle(int cx, int cy, int width) {
-        this.canvas.drawCircle(cx+width/2,cy+width/2,width/2,paint);
+        this.canvas.drawCircle(cx,cy,width/2,paint);
     }
 
 

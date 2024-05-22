@@ -27,12 +27,16 @@ public class ExploreWorldsScene extends Scene{
         catch (IOException e){
             System.err.println(e.getMessage());
         }
-        levelSelector = new WorldLevelSelector(30,-40, worldFolderNames, logic);
+
+        int windowCenterX=logic.getEngine().GetGraphics().getWidth()/2,
+                windowCenterY=logic.getEngine().GetGraphics().getHeight()/2;
+
+        levelSelector = new WorldLevelSelector(windowCenterX - 120,0, worldFolderNames, logic);
 
 
-        prevWorld = new Button(110,10,30,40, "PrevArrows.png", log);
-        nextWorld = new Button(275,10,30,40, "NextArrows.png", log);
-        goBack = new Button(20,20,20,20, "goback.png", log);
+        prevWorld = new Button(windowCenterX - 90,windowCenterY - 290,30,40, "PrevArrows.png", log);
+        nextWorld = new Button(windowCenterX + 90,windowCenterY - 290,30,40, "NextArrows.png", log);
+        goBack = new Button(windowCenterX - 180,windowCenterY - 280,20,20, "goback.png", log);
     }
 
     @Override
@@ -41,7 +45,7 @@ public class ExploreWorldsScene extends Scene{
         super.render(graph);
 
         if(!(worldBackgroundImages[currentWorld] == null))
-            graph.drawImage(worldBackgroundImages[currentWorld], 0,0,400,600);
+            graph.drawImage(worldBackgroundImages[currentWorld], graph.getWidth()/2,graph.getHeight()/2,400,600);
 
         graph.setColor(0xFFFFFFFF);
         graph.fillRectangle(0,0,400, 50);

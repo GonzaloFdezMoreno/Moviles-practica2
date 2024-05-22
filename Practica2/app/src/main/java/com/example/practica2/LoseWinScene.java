@@ -20,13 +20,16 @@ public class LoseWinScene extends Scene{
 
         log=logic;
 
+        int windowCenterX=logic.getEngine().GetGraphics().getWidth()/2,
+                windowCenterY=logic.getEngine().GetGraphics().getHeight()/2;
+
         if (win){
             txt="ENHORABUENA!!";
-            addGameObject(new SceneText(100, 80, 100, 50, txt));
+            addGameObject(new SceneText(windowCenterX, windowCenterY - 220, 100, 50, txt));
 
-            addGameObject(new SceneText(50, 125, 100, 50,
+            addGameObject(new SceneText(windowCenterX, windowCenterY - 175, 100, 50,
                     "Has averiguado el codigo en  "));
-            addGameObject(new SceneText(100, 175, 100, 50,
+            addGameObject(new SceneText(windowCenterX, windowCenterY - 125, 100, 50,
                     intent+" intento(s)"));
             logic.money += 50;
             try {
@@ -37,20 +40,20 @@ public class LoseWinScene extends Scene{
         }
         else{
             txt = "GAME OVER";
-            addGameObject(new SceneText(100, 80, 100, 50, txt));
+            addGameObject(new SceneText(windowCenterX, windowCenterY - 220, 100, 50, txt));
 
-            addGameObject(new SceneText(50, 125, 100, 50,
+            addGameObject(new SceneText(windowCenterX, windowCenterY - 175, 100, 50,
                     "Te has quedado sin intentos"));
-            addGameObject(new SceneText(50, 175, 100, 50,
+            addGameObject(new SceneText(windowCenterX, windowCenterY - 125, 100, 50,
                     "Codigo:"));
         }
 
-        addGameObject(new SecretCode(codigoSecreto, 150, 200, 1, 1, dalton, logic));
+        addGameObject(new SecretCode(codigoSecreto, windowCenterX - (35/2) * codigoSecreto.length, windowCenterY - 100, 1, 1, dalton, logic));
 
         //addGameObject(new StartButton(75, 350, 300, 70,"Elegir dificultad",logic ));
-        playAgainButton = new Button(100,400,200,80,"Volver a jugar", 0xFF1FE3E0, log);
-        selectDifficultyButton = new Button(100,500,200,80,"Elegir dificultad", 0xFF1FE3E0, log);
-        adButton = new Button(100,300,200,80,"Ver para recompensa", 0xFF1FE3E0, log);
+        playAgainButton = new Button(windowCenterX,windowCenterY + 100,200,80,"Volver a jugar", 0xFF1FE3E0, log);
+        selectDifficultyButton = new Button(windowCenterX,windowCenterY + 200,200,80,"Elegir dificultad", 0xFF1FE3E0, log);
+        adButton = new Button(windowCenterX,windowCenterY + 300,200,80,"Ver para recompensa", 0xFF1FE3E0, log);
 
 
     }
@@ -66,7 +69,7 @@ public class LoseWinScene extends Scene{
     @Override
     public void render(AndrGraphics2D graph) {
         if(log.currBG < 4) {
-            graph.drawImage(graph.createImage(backgroundImages[log.currBG]), 0, 0, 400, 600);
+            graph.drawImage(graph.createImage(backgroundImages[log.currBG]), log.getEngine().GetGraphics().getWidth()/2, log.getEngine().GetGraphics().getHeight()/2, 400, 600);
 
             graph.setColor(0xFFFFFFFF);
             graph.fillRectangle(0,0,400, 50);

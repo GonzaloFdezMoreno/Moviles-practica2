@@ -28,72 +28,79 @@ public class SkinScene extends Scene{
     SceneText emojiSkinText;
     SceneText foodText;
     SceneText xmasText;
+    int bgWidth, bgHeight;
     protected SkinScene(Logic logic){
         super(logic);
 
-        moneyText = new SceneText(100, 30, 100, 50, "Current Money: " + log.money);
+        int windowCenterX=log.getEngine().GetGraphics().getWidth()/2,
+                windowCenterY=log.getEngine().GetGraphics().getHeight()/2;
 
-        goBack = new Button(20,20,20,20, "goback.png", log);
+        moneyText = new SceneText(windowCenterX, 30, 100, 50, "Current Money: " + log.money);
 
-        pokerBG = new Button(10,100,60,100, "levels/world1/world_bg.jpg", log);
+        goBack = new Button(windowCenterX - 180,20,20,20, "goback.png", log);
+
+        int uiWidth = 60;
+        bgWidth = 60; bgHeight = 100;
+
+        pokerBG = new Button(windowCenterX - 190,100,uiWidth,bgHeight, "levels/world1/world_bg.jpg", log);
         if(log.unlockedBackgrounds[0])
-            pokerText = new SceneText(10, 230, 60, 30, "GOT");
+            pokerText = new SceneText(windowCenterX - 190, 230, uiWidth, 30, "GOT");
         else
-            pokerText = new SceneText(10, 230, 60, 30, "50");
+            pokerText = new SceneText(windowCenterX - 190, 230, uiWidth, 30, "50");
 
-        emojiBG = new Button(90,100,60,100, "levels/world2/world_bg.jpeg", log);
+        emojiBG = new Button(windowCenterX - 110,100,uiWidth,bgHeight, "levels/world2/world_bg.jpeg", log);
         if(log.unlockedBackgrounds[1])
-            emojiBGText = new SceneText(90, 230, 60, 30, "GOT");
+            emojiBGText = new SceneText(windowCenterX - 110, 230, uiWidth, 30, "GOT");
         else
-            emojiBGText = new SceneText(90, 230, 60, 30, "50");
+            emojiBGText = new SceneText(windowCenterX - 110, 230, uiWidth, 30, "50");
 
-        turkeyBG = new Button(170,100,60,100, "levels/world3/world_bg.jpg", log);
+        turkeyBG = new Button(windowCenterX - 30,100,uiWidth,bgHeight, "levels/world3/world_bg.jpg", log);
         if(log.unlockedBackgrounds[2])
-            turkeyText = new SceneText(170, 230, 60, 30, "GOT");
+            turkeyText = new SceneText(windowCenterX - 30, 230, uiWidth, 30, "GOT");
         else
-            turkeyText = new SceneText(170, 230, 60, 30, "50");
+            turkeyText = new SceneText(windowCenterX - 30, 230, uiWidth, 30, "50");
 
-        santaBG = new Button(250,100,60,100, "levels/world4/world_bg.jpeg", log);
+        santaBG = new Button(windowCenterX + 50,100,uiWidth,bgHeight, "levels/world4/world_bg.jpeg", log);
         if(log.unlockedBackgrounds[3])
-            santaText = new SceneText(250, 230, 60, 30, "GOT");
+            santaText = new SceneText(windowCenterX + 50, 230, uiWidth, 30, "GOT");
         else
-            santaText = new SceneText(250, 230, 60, 30, "50");
+            santaText = new SceneText(windowCenterX + 50, 230, uiWidth, 30, "50");
 
-        defaultBG = new Button(330,100,60,100, "default_bg.jpg", log);
-        addGameObject(new SceneText(330, 230, 60, 30, "GOT"));
+        defaultBG = new Button(windowCenterX + 130,100,uiWidth,bgHeight, "default_bg.jpg", log);
+        addGameObject(new SceneText(windowCenterX + 130, 230, uiWidth, 30, "GOT"));
 
-        coinSkin = new Button(20,300,60,60, "sprites/coins/amarillo.png", log);
+        coinSkin = new Button(windowCenterX - 180,300,uiWidth,60, "sprites/coins/amarillo.png", log);
         if(log.unlockedSkins[0])
-            coinText = new SceneText(20, 390, 60, 30, "GOT");
+            coinText = new SceneText(windowCenterX - 180, 390, uiWidth, 30, "GOT");
         else
-            coinText = new SceneText(20, 390, 60, 30, "50");
+            coinText = new SceneText(windowCenterX - 180, 390, uiWidth, 30, "50");
 
-        emojiSkin = new Button(160,300,60,60, "sprites/emojis/amarillo.png", log);
+        emojiSkin = new Button(windowCenterX - 40,300,uiWidth,60, "sprites/emojis/amarillo.png", log);
         if(log.unlockedSkins[1])
-            emojiSkinText = new SceneText(160, 390, 60, 30, "GOT");
+            emojiSkinText = new SceneText(windowCenterX - 40, 390, uiWidth, 30, "GOT");
         else
-            emojiSkinText = new SceneText(160, 390, 60, 30, "50");
+            emojiSkinText = new SceneText(windowCenterX - 40, 390, uiWidth, 30, "50");
 
-        foodSkin = new Button(280,300,60,60, "sprites/food/amarillo.png",log);
+        foodSkin = new Button(windowCenterX + 80,300,uiWidth,60, "sprites/food/amarillo.png",log);
         if(log.unlockedSkins[2])
-            foodText = new SceneText(280, 390, 60, 30, "GOT");
+            foodText = new SceneText(windowCenterX + 80, 390, uiWidth, 30, "GOT");
         else
-            foodText = new SceneText(280, 390, 60, 30, "50");
+            foodText = new SceneText(windowCenterX + 80, 390, uiWidth, 30, "50");
 
-        xmasSkin = new Button(80,420,60,60, "sprites/xmas/rojo.png", log);
+        xmasSkin = new Button(windowCenterX - 120,420,uiWidth,60, "sprites/xmas/rojo.png", log);
         if(log.unlockedSkins[3])
-            xmasText = new SceneText(80, 510, 60, 30, "GOT");
+            xmasText = new SceneText(windowCenterX - 120, 510, uiWidth, 30, "GOT");
         else
-            xmasText = new SceneText(80, 510, 60, 30, "50");
+            xmasText = new SceneText(windowCenterX - 120, 510, uiWidth, 30, "50");
 
-        defaultSkin = new Button(240,420,60,60, "defaultSkin.png", log);
-        addGameObject(new SceneText(240, 510, 60, 30, "GOT"));
+        defaultSkin = new Button(windowCenterX + 40,420,uiWidth,60, "defaultSkin.png", log);
+        addGameObject(new SceneText(windowCenterX + 40, 510, uiWidth, 30, "GOT"));
     }
 
     public void render(AndrGraphics2D graph){
 
         if(log.currBG < 4) {
-            graph.drawImage(graph.createImage(backgroundImages[log.currBG]), 0, 0, 400, 600);
+            graph.drawImage(graph.createImage(backgroundImages[log.currBG]), log.getEngine().GetGraphics().getWidth()/2, log.getEngine().GetGraphics().getHeight()/2, 400, 600);
 
             graph.setColor(0xFFFFFFFF);
             graph.fillRectangle(0,0,400, 50);
@@ -104,6 +111,7 @@ public class SkinScene extends Scene{
 
         moneyText.render(graph);
         goBack.render(graph);
+
         pokerBG.render(graph);
         pokerText.render(graph);
         emojiBG.render(graph);
@@ -113,6 +121,7 @@ public class SkinScene extends Scene{
         santaBG.render(graph);
         santaText.render(graph);
         defaultBG.render(graph);
+
         coinSkin.render(graph);
         coinText.render(graph);
         emojiSkin.render(graph);
@@ -126,23 +135,23 @@ public class SkinScene extends Scene{
         switch(log.currBG){
             case 0:
                 graph.setColor(0x55000000);
-                graph.fillRectangle(pokerBG.getPosX(), pokerBG.getPosY(), pokerBG.getWidth(), pokerBG.getHeight());
+                graph.fillRectangle(pokerBG.getPosX() - bgWidth/2, pokerBG.getPosY() - bgHeight/2, pokerBG.getWidth(), pokerBG.getHeight());
                 break;
             case 1:
                 graph.setColor(0x55000000);
-                graph.fillRectangle(emojiBG.getPosX(), emojiBG.getPosY(), emojiBG.getWidth(), emojiBG.getHeight());
+                graph.fillRectangle(emojiBG.getPosX()- bgWidth/2, emojiBG.getPosY() - bgHeight/2, emojiBG.getWidth(), emojiBG.getHeight());
                 break;
             case 2:
                 graph.setColor(0x55000000);
-                graph.fillRectangle(turkeyBG.getPosX(), turkeyBG.getPosY(), turkeyBG.getWidth(), turkeyBG.getHeight());
+                graph.fillRectangle(turkeyBG.getPosX()- bgWidth/2, turkeyBG.getPosY() - bgHeight/2, turkeyBG.getWidth(), turkeyBG.getHeight());
                 break;
             case 3:
                 graph.setColor(0x55000000);
-                graph.fillRectangle(santaBG.getPosX(), santaBG.getPosY(), santaBG.getWidth(), santaBG.getHeight());
+                graph.fillRectangle(santaBG.getPosX()- bgWidth/2, santaBG.getPosY() - bgHeight/2, santaBG.getWidth(), santaBG.getHeight());
                 break;
             case 4:
                 graph.setColor(0x55000000);
-                graph.fillRectangle(defaultBG.getPosX(), defaultBG.getPosY(), defaultBG.getWidth(), defaultBG.getHeight());
+                graph.fillRectangle(defaultBG.getPosX()- bgWidth/2, defaultBG.getPosY() - bgHeight/2, defaultBG.getWidth(), defaultBG.getHeight());
                 break;
         }
         graph.setColor(0xFF000000);

@@ -81,23 +81,16 @@ public class Logic implements CLogic {
         return currEngine;
     }
 
-    //public AndroidEngine getEngine() {
-        //return currEngine;
-    //}
-
     //Unicamente debemos renderizar, actualizar y manejar los inputs
     // de la escena que esté mostrandose.
     @Override
     public void update(double t) {
         currScene.update(t);
-
     }
 
     @Override
     public void render(AndrGraphics2D graph) {
         currScene.render(graph);
-
-
     }
 
     @Override

@@ -33,7 +33,7 @@ public class ColorSetterButton extends Button{
         }
         graph.setColor(0xFF000000);
         if(boardRef.isDaltonismo()){
-            graph.drawText(String.valueOf(assignedNum),  getPosX() + getWidth()/2 -3,  getPosY() + getHeight()/2 + 3);
+            graph.drawText(String.valueOf(assignedNum), getPosX() , getPosY() + 10);
         }
     }
 

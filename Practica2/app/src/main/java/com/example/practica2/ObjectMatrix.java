@@ -24,10 +24,10 @@ public class ObjectMatrix extends GameObject { //utilizamos esta clase para pode
     }
 
     @Override
-    public boolean handleInput(ArrayList<TouchEvent> event/*, CAudio audio*/) {
+    public boolean handleInput(ArrayList<TouchEvent> event) {
 
         for(int i = 0; i < matrixObjects.size(); ++i){
-            matrixObjects.get(i).handleInput(event/*,audio*/);
+            matrixObjects.get(i).handleInput(event);
         }
         return true;
     }
@@ -40,6 +40,8 @@ public class ObjectMatrix extends GameObject { //utilizamos esta clase para pode
     }
     @Override
     public void render(AndrGraphics2D graph) {
+
+        graph.drawCircle(getPosX(),getPosY(),30,30); //!!
         for(int i = 0; i < matrixObjects.size(); ++i){
             matrixObjects.get(i).render(graph);
         }
@@ -73,9 +75,9 @@ public class ObjectMatrix extends GameObject { //utilizamos esta clase para pode
             for (int i = 0; i < objectsInThisRow; ++i) {
 
                 if(extraObjects > 0)
-                    matrixObjects.get(index).setPosX(getPosX() + i * (int)(width / matrixObjects.size()));
+                    matrixObjects.get(index).setPosX(getPosX() /*- (int)((objectsInThisRow-1)*(width/matrixObjects.size()))*/ + i * (int)(width / matrixObjects.size()));
                 else
-                    matrixObjects.get(index).setPosX(getPosX() + i * (int)(width /matrixObjects.size()) + (int)(width /matrixObjects.size())/2);
+                    matrixObjects.get(index).setPosX(getPosX()/* - (int)((objectsInThisRow-1)*(width/matrixObjects.size()))*/ + i * (int)(width /matrixObjects.size()) + (int)(width /matrixObjects.size())/2 );
 
                 matrixObjects.get(index).setPosY((int)(height /numRows) * row + this.getPosY());
                 index++;
