@@ -35,7 +35,7 @@ class SaveBoardInformation{ //la info que queremos que se guarde de una partida 
 public class MastermindBoard extends GameObject {
     Logic log; //para poder cambiar entre escenas cuando ganas, pierdes...
 
-    int nivelDificultad;
+    int nivelDificultad = -1;
     Random random = new Random(); //para poder generara valores aleatorios
 
     // introducimos aqui los colores que queremos que esten en el juego. DEBE HABER 9. Si no seleccion de dificultad fallara
@@ -288,7 +288,8 @@ public class MastermindBoard extends GameObject {
         //comprobamos si ha ganado
         if(numAciertos >= currTableroCaracteristicas.tamCodigo){
 
-            world.saveLevelsBeaten(); //guardamos cuatos niveles hay resueltos en este mundo
+            if(nivelDificultad==-1)
+                world.saveLevelsBeaten(); //guardamos cuatos niveles hay resueltos en este mundo
             log.SetScene(new LoseWinScene(log, codigoSecreto,nivelDificultad,true,numIntentoActual+1, daltonismo));
 
             return;
