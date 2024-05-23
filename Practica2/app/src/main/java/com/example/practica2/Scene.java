@@ -18,7 +18,6 @@ public abstract class Scene {
 
     protected Scene(Logic logic){
         this.log = logic;
-
     }
 
     public void init() {

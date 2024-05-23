@@ -45,7 +45,7 @@ public class ExploreWorldsScene extends Scene{
         super.render(graph);
 
         if(!(worldBackgroundImages[currentWorld] == null))
-            graph.drawImage(worldBackgroundImages[currentWorld], graph.getWidth()/2,graph.getHeight()/2,400,600);
+            graph.drawImage(worldBackgroundImages[currentWorld], graph.getWidth()/2,graph.getHeight()/2,800,1200);
 
         graph.setColor(0xFFFFFFFF);
         graph.fillRectangle(0,0,400, 50);

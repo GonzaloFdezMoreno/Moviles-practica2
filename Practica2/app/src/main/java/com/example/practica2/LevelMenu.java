@@ -28,7 +28,7 @@ public class LevelMenu extends Scene {
     @Override
     public void render(AndrGraphics2D graph) {
         if(log.currBG < 4) {
-            graph.drawImage(graph.createImage(backgroundImages[log.currBG]), log.getEngine().GetGraphics().getWidth()/2, log.getEngine().GetGraphics().getHeight()/2, 400, 600);
+            graph.drawImage(graph.createImage(backgroundImages[log.currBG]), log.getEngine().GetGraphics().getWidth()/2, log.getEngine().GetGraphics().getHeight()/2, 800, 1200);
 
             graph.setColor(0xFFFFFFFF);
             graph.fillRectangle(0,0,400, 50);

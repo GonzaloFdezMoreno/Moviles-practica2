@@ -1,6 +1,7 @@
 package com.example.androidengine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.view.SurfaceView;
 
@@ -187,6 +188,7 @@ public class AndroidEngine extends EngineClass implements Runnable{
 
     @Override
     public void resetLoaded(){ adsMngr.setNotLoaded();}
+
 }
 
 

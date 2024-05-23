@@ -32,7 +32,7 @@ public class MainMenu extends Scene {
     public void render(AndrGraphics2D graph) {
         if(log.currBG < 4) {
             bgImage = graph.createImage(backgroundImages[log.currBG]);
-            graph.drawImage(bgImage, log.getEngine().GetGraphics().getWidth()/2, log.getEngine().GetGraphics().getHeight()/2, 400, 600);
+            graph.drawImage(bgImage, log.getEngine().GetGraphics().getWidth()/2, log.getEngine().GetGraphics().getHeight()/2, 800, 1200);
 
             graph.setColor(0xFFFFFFFF);
             graph.fillRectangle(0,0,400, 50);
