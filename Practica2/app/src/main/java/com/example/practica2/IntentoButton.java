@@ -24,8 +24,8 @@ public class IntentoButton extends Button{ //contenidos en cada intento, con col
     }
 
     @Override
-    public boolean handleInput(ArrayList<TouchEvent> event /*, CAudio audio*/) {
-        return super.handleInput(event/*,audio*/);
+    public boolean handleInput(ArrayList<TouchEvent> event) {
+        return super.handleInput(event);
     }
 
     @Override

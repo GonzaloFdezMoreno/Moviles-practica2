@@ -83,7 +83,7 @@ public class MastermindBoard extends GameObject {
         conjuntoIntentos = new ConjuntoIntentos(this, getPosX(), getPosY(), anchoIntento, altoIntento, currTableroCaracteristicas.maxIntentos, currTableroCaracteristicas.tamCodigo);
 
         //creamos el selector
-        selector = new ObjectMatrix(1,log.getEngine().GetGraphics().getWidth()/2, 540, anchoIntento, altoIntento);//new Selector(tamCodigo, posX_ + 150, getPosY() + 600, anchoIntento, altoIntento);
+        selector = new ObjectMatrix(1,log.getEngine().GetGraphics().getWidth()/2 - 200, 540, anchoIntento, altoIntento);//new Selector(tamCodigo, posX_ + 150, getPosY() + 600, anchoIntento, altoIntento);
         for (int i = 0; i < currTableroCaracteristicas.numColoresCodigo; ++i){
 
             //podemos ver que no importa la pos en la que se colocan los objetos, pues con selector.setObjectsPositionsInMatrix(); los colocamos correctamente
@@ -100,6 +100,8 @@ public class MastermindBoard extends GameObject {
 
         Font = log_.currEngine.GetGraphics().createFont("AARVC___.TTF", 25,false,false);
     }
+
+    //para cargar un nivel a partir de un fichero
     MastermindBoard(Logic log_, Level l, int posX_, int posY_, int width_, int height_, World world_) {
         super(posX_, posY_, width_, height_);
 
@@ -119,7 +121,7 @@ public class MastermindBoard extends GameObject {
         conjuntoIntentos = new ConjuntoIntentos(this, getPosX(), getPosY(), anchoIntento, altoIntento, currTableroCaracteristicas.maxIntentos, currTableroCaracteristicas.tamCodigo);
 
         //creamos el selector
-        selector = new ObjectMatrix(1,log.getEngine().GetGraphics().getWidth()/2, 540, anchoIntento, altoIntento);//new Selector(tamCodigo, posX_ + 150, getPosY() + 600, anchoIntento, altoIntento);
+        selector = new ObjectMatrix(1,log.getEngine().GetGraphics().getWidth()/2 - 200, 540, anchoIntento, altoIntento);//new Selector(tamCodigo, posX_ + 150, getPosY() + 600, anchoIntento, altoIntento);
         for (int i = 0; i < currTableroCaracteristicas.numColoresCodigo; ++i){
 
             //podemos ver que no importa la pos en la que se colocan los objetos, pues con selector.setObjectsPositionsInMatrix(); los colocamos correctamente
@@ -289,9 +291,7 @@ public class MastermindBoard extends GameObject {
         //comprobamos si ha ganado
         if(numAciertos >= currTableroCaracteristicas.tamCodigo){
 
-            if(nivelDificultad==-1)
-                world.saveLevelsBeaten(); //guardamos cuatos niveles hay resueltos en este mundo
-            log.SetScene(new LoseWinScene(log, codigoSecreto,nivelDificultad,true,numIntentoActual+1, daltonismo));
+            win();
 
             return;
         }
@@ -321,6 +321,11 @@ public class MastermindBoard extends GameObject {
         if(numIntentoActual >= currTableroCaracteristicas.maxIntentos){
             log.SetScene(new LoseWinScene(log, codigoSecreto,nivelDificultad,false,0, daltonismo));
         }
+    }
+    void win(){
+        if(nivelDificultad==-1) //si nivel dificultad es -1, significa que es un nivel de mundo
+            world.saveLevelsBeaten(); //guardamos cuatos niveles hay resueltos en este mundo
+        log.SetScene(new LoseWinScene(log, codigoSecreto,true,numIntentoActual+1, daltonismo));
     }
     //auxiliar, para poder visualizar el codigo secreto
     void pintaCodigo(AndrGraphics2D graph){

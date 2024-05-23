@@ -75,9 +75,9 @@ public class ObjectMatrix extends GameObject { //utilizamos esta clase para pode
             for (int i = 0; i < objectsInThisRow; ++i) {
 
                 if(extraObjects > 0)
-                    matrixObjects.get(index).setPosX(getPosX() /*- (int)((objectsInThisRow-1)*(width/matrixObjects.size()))*/ + i * (int)(width / matrixObjects.size()));
+                    matrixObjects.get(index).setPosX(getPosX()/* - (int)((objectsInThisRow-1)*(width/4))*/ + i * (int)(width / matrixObjects.size()));
                 else
-                    matrixObjects.get(index).setPosX(getPosX()/* - (int)((objectsInThisRow-1)*(width/matrixObjects.size()))*/ + i * (int)(width /matrixObjects.size()) + (int)(width /matrixObjects.size())/2 );
+                    matrixObjects.get(index).setPosX(getPosX() /*- (int)((objectsInThisRow-1)*(width))*/ + i * (int)(width /matrixObjects.size()) + (int)(width /matrixObjects.size())/2 );
 
                 matrixObjects.get(index).setPosY((int)(height /numRows) * row + this.getPosY());
                 index++;
