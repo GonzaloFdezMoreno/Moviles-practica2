@@ -28,7 +28,7 @@ public class ConjuntoIntentos extends GameObject{
     public void render(AndrGraphics2D graph) {
         for(Intento i : intentos){
             if(i.getPosY() > 0 && i .getPosY() < 500)
-            i.render(graph);
+                i.render(graph);
         }
 
     }

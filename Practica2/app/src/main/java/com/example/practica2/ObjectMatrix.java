@@ -41,7 +41,6 @@ public class ObjectMatrix extends GameObject { //utilizamos esta clase para pode
     @Override
     public void render(AndrGraphics2D graph) {
 
-        graph.drawCircle(getPosX(),getPosY(),30,30); //!!
         for(int i = 0; i < matrixObjects.size(); ++i){
             matrixObjects.get(i).render(graph);
         }
@@ -75,9 +74,9 @@ public class ObjectMatrix extends GameObject { //utilizamos esta clase para pode
             for (int i = 0; i < objectsInThisRow; ++i) {
 
                 if(extraObjects > 0)
-                    matrixObjects.get(index).setPosX(getPosX()/* - (int)((objectsInThisRow-1)*(width/4))*/ + i * (int)(width / matrixObjects.size()));
+                    matrixObjects.get(index).setPosX(getPosX() + (i - objectsInThisRow/2) * (int)(width / matrixObjects.size()));
                 else
-                    matrixObjects.get(index).setPosX(getPosX() /*- (int)((objectsInThisRow-1)*(width))*/ + i * (int)(width /matrixObjects.size()) + (int)(width /matrixObjects.size())/2 );
+                    matrixObjects.get(index).setPosX(getPosX() + (i - objectsInThisRow/2) * (int)(width /matrixObjects.size()) + (int)(width /matrixObjects.size())/2);
 
                 matrixObjects.get(index).setPosY((int)(height /numRows) * row + this.getPosY());
                 index++;
