@@ -327,15 +327,15 @@ public class MastermindBoard extends GameObject {
             world.saveLevelsBeaten(); //guardamos cuatos niveles hay resueltos en este mundo
 
         if(nivelDificultad==-1)//desde un nivel de mundo
-            log.SetScene(new LoseWinScene(log, codigoSecreto,true,numIntentoActual+1, daltonismo, true));
+            log.SetScene(new LoseWinScene(log, codigoSecreto,true,numIntentoActual+1, daltonismo, true, -1));
         else
-            log.SetScene(new LoseWinScene(log, codigoSecreto,true,numIntentoActual+1, daltonismo, false));
+            log.SetScene(new LoseWinScene(log, codigoSecreto,true,numIntentoActual+1, daltonismo, false, nivelDificultad));
     }
     void lose(){
         if(nivelDificultad==-1) //desde un nivel de mundo
-            log.SetScene(new LoseWinScene(log, codigoSecreto,false,0, daltonismo, true));
+            log.SetScene(new LoseWinScene(log, codigoSecreto,false,0, daltonismo, true, -1));
         else
-            log.SetScene(new LoseWinScene(log, codigoSecreto,false,0, daltonismo, false));
+            log.SetScene(new LoseWinScene(log, codigoSecreto,false,0, daltonismo, false, nivelDificultad));
     }
     //auxiliar, para poder visualizar el codigo secreto
     void pintaCodigo(AndrGraphics2D graph){

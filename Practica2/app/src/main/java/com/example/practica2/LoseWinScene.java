@@ -19,7 +19,8 @@ public class LoseWinScene extends Scene{
     Logic log;
 
     boolean worldWin;
-    protected LoseWinScene(Logic logic, int[] codigoSecreto, boolean win, int intent, boolean dalton, boolean worldWin_) {
+    int difficulty = -1;
+    protected LoseWinScene(Logic logic, int[] codigoSecreto, boolean win, int intent, boolean dalton, boolean worldWin_, int difficulty_) {
         super(logic);
 
         String txt;
@@ -27,6 +28,8 @@ public class LoseWinScene extends Scene{
         log=logic;
 
         worldWin = worldWin_;
+
+        difficulty = difficulty_;
 
         int windowCenterX=logic.getEngine().GetGraphics().getWidth()/2,
                 windowCenterY=logic.getEngine().GetGraphics().getHeight()/2;
@@ -97,9 +100,6 @@ public class LoseWinScene extends Scene{
         if(log.currBG < 4) {
             graph.drawImage(graph.createImage(backgroundImages[log.currBG]), log.getEngine().GetGraphics().getWidth()/2, log.getEngine().GetGraphics().getHeight()/2, 800, 1200);
 
-            graph.setColor(0xFFFFFFFF);
-            graph.fillRectangle(0,0,400, 50);
-            graph.setColor(0xFF000000);
         }
 
         super.render(graph);
@@ -132,10 +132,10 @@ public class LoseWinScene extends Scene{
     }
 
     void playAgainButtonEffect(){
-        log.SetScene(new LevelMenu(log));
+        log.SetScene(new PlayScene(log, difficulty));
     }
     void selectDifficultyButtonEffect(){
-       log.SetScene(new MainMenu(log));
+       log.SetScene(new LevelMenu(log));
     }
 
     void loadAdButtonEffect(){ log.currEngine.resetLoaded();  log.currEngine.showRewardAd();  }

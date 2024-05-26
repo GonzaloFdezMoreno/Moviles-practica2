@@ -47,10 +47,6 @@ public class ExploreWorldsScene extends Scene{
         if(!(worldBackgroundImages[currentWorld] == null))
             graph.drawImage(worldBackgroundImages[currentWorld], graph.getWidth()/2,graph.getHeight()/2,800,1200);
 
-        graph.setColor(0xFFFFFFFF);
-        graph.fillRectangle(0,0,400, 50);
-        graph.setColor(0xFF000000);
-
         prevWorld.render(graph);
         nextWorld.render(graph);
         goBack.render(graph);

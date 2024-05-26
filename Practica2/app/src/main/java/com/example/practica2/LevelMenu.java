@@ -30,9 +30,6 @@ public class LevelMenu extends Scene {
         if(log.currBG < 4) {
             graph.drawImage(graph.createImage(backgroundImages[log.currBG]), log.getEngine().GetGraphics().getWidth()/2, log.getEngine().GetGraphics().getHeight()/2, 800, 1200);
 
-            graph.setColor(0xFFFFFFFF);
-            graph.fillRectangle(0,0,400, 50);
-            graph.setColor(0xFF000000);
         }
 
         super.render(graph);
