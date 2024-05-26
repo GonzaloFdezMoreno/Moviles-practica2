@@ -41,7 +41,7 @@ public class LoseWinScene extends Scene{
                     intent+" intento(s)"));
             logic.money += 50;
             addGameObject(new SceneText(windowCenterX, windowCenterY - 70, 100, 50, "has ganado 50 monedas"));
-            addGameObject(new SceneText(windowCenterX, windowCenterY - 30, 100, 50, "total de monedas: "+logic.money));
+            addGameObject(new SceneText(windowCenterX, windowCenterY - 50, 100, 50, "total de monedas: "+logic.money));
             try {
                 logic.saveGameSkins();
             } catch (IOException e) {
