@@ -27,7 +27,7 @@ public class Intento extends GameObject { //contiene el "rectangulo" de info. In
         colocaBotonesIntentos(tamCodigo_);
 
         //introducimos pistas
-        pistas = new ObjectMatrix(2, getPosX() + 320 , getPosY() + 10, 125, 35);
+        pistas = new ObjectMatrix(2, getPosX() + 300 , getPosY() + 10, 125, 35);
         for(int i = 0; i < tamCodigo_; ++i){
             Pista p = new Pista(-1, -1, diametroPista, diametroPista);
             pistas.addObjectToMatrix(p);

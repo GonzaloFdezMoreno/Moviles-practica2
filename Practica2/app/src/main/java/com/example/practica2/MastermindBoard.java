@@ -83,7 +83,7 @@ public class MastermindBoard extends GameObject {
         conjuntoIntentos = new ConjuntoIntentos(this, getPosX(), getPosY(), anchoIntento, altoIntento, currTableroCaracteristicas.maxIntentos, currTableroCaracteristicas.tamCodigo);
 
         //creamos el selector
-        selector = new ObjectMatrix(1,log.getEngine().GetGraphics().getWidth()/2, 540, anchoIntento, altoIntento);//new Selector(tamCodigo, posX_ + 150, getPosY() + 600, anchoIntento, altoIntento);
+        selector = new ObjectMatrix(1,log.getEngine().GetGraphics().getWidth()/2 - 150, 540, anchoIntento, altoIntento);//new Selector(tamCodigo, posX_ + 150, getPosY() + 600, anchoIntento, altoIntento);
         for (int i = 0; i < currTableroCaracteristicas.numColoresCodigo; ++i){
 
             //podemos ver que no importa la pos en la que se colocan los objetos, pues con selector.setObjectsPositionsInMatrix(); los colocamos correctamente
@@ -121,7 +121,7 @@ public class MastermindBoard extends GameObject {
         conjuntoIntentos = new ConjuntoIntentos(this, getPosX(), getPosY(), anchoIntento, altoIntento, currTableroCaracteristicas.maxIntentos, currTableroCaracteristicas.tamCodigo);
 
         //creamos el selector
-        selector = new ObjectMatrix(1,log.getEngine().GetGraphics().getWidth()/2, 540, anchoIntento, altoIntento);//new Selector(tamCodigo, posX_ + 150, getPosY() + 600, anchoIntento, altoIntento);
+        selector = new ObjectMatrix(1,log.getEngine().GetGraphics().getWidth()/2 - 150, 540, anchoIntento, altoIntento);//new Selector(tamCodigo, posX_ + 150, getPosY() + 600, anchoIntento, altoIntento);
         for (int i = 0; i < currTableroCaracteristicas.numColoresCodigo; ++i){
 
             //podemos ver que no importa la pos en la que se colocan los objetos, pues con selector.setObjectsPositionsInMatrix(); los colocamos correctamente
@@ -416,6 +416,8 @@ public class MastermindBoard extends GameObject {
 
         return sbi;
     }
+
+    //si intentos se salen de la pantalla, permitimos scroll
     void scrollAttempts(int amount){
         int altoConjuntoIntentos = (altoIntento + margenAltoIntento) * currTableroCaracteristicas.maxIntentos;
         if((conjuntoIntentos.getPosY() + altoConjuntoIntentos + amount >= 1900 && amount < 0) ||
