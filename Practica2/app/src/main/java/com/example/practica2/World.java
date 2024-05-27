@@ -4,6 +4,7 @@ import android.util.JsonReader;
 
 import com.example.androidengine.AndrGraphics2D;
 import com.example.androidengine.TouchEvent;
+import com.google.android.gms.common.util.ArrayUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,9 +66,22 @@ public class World {
 
     void getLevels(String worldName){ //cogemos los archivos en la carpeta correspondiente al mundo y asignamos cuantos hay
         try{
-            worldLevelFileNames = log.getEngine().getaJsonlodr().getAssetsDirectory("levels/" + worldName);
+            String[] auxList = log.getEngine().getaJsonlodr().getAssetsDirectory("levels/" + worldName);
 
-            numLevels = worldLevelFileNames.length;
+
+            for(String s : auxList) //solo contamos archivos que contengan .json como niveles
+                if(s.contains(".json"))
+                    numLevels++;
+
+
+            worldLevelFileNames = new String[numLevels];
+            int i = 0;
+            for(String s : auxList) //solo contamos json como niveles
+                if(s.contains(".json")){
+                    worldLevelFileNames[i] = s;
+                    ++i;
+
+                }
 
             levelsAvailable = new boolean[numLevels];
         }
