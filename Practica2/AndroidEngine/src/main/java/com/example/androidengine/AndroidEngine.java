@@ -49,7 +49,8 @@ public class AndroidEngine extends EngineClass implements Runnable{
         ctxt = cntxt;
 
         adsMngr=new AndroidAdsManager(this.adview,cntxt,activity);
-
+        adsMngr.setNotLoaded();
+        
         aJsonlodr = new AndrJSONLoader(cntxt);
 
         andrNot=new AndroidNotifications(cntxt);

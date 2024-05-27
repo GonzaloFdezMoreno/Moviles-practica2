@@ -65,22 +65,22 @@ public class LoseWinScene extends Scene{
 
         usedButtons = new ArrayList<>();
 
-        if(!worldWin){
+        if(!worldWin){ //si es una partida que no proviene de los niveles de mundos
             playAgainButton = new Button(windowCenterX,windowCenterY + 100,200,80,"Volver a jugar", 0xFF1FE3E0, log);
             selectDifficultyButton = new Button(windowCenterX,windowCenterY + 200,200,80,"Elegir dificultad", 0xFF1FE3E0, log);
-            adButton = new Button(windowCenterX,windowCenterY + 300,200,80,"Ver para recompensa", 0xFF1FE3E0, log);
+            menuButton = new Button(windowCenterX, windowCenterY + 200, 220, 80, "Menú", 0xFF1FE3E0, logic);;
 
             usedButtons.add(playAgainButton);
             usedButtons.add(selectDifficultyButton);
-            usedButtons.add(adButton);
+            usedButtons.add(menuButton);
         }
         else{
-            compartirButton = new Button(windowCenterX, windowCenterY, 220, 80, "Compartir", 0xFF1FE3E0, logic);;
-            siguienteNivelButton = new Button(windowCenterX, windowCenterY + 100, 220, 80, "Siguiente Nivel", 0xFF1FE3E0, logic);
-            menuButton = new Button(windowCenterX, windowCenterY + 200, 220, 80, "Menú", 0xFF1FE3E0, logic);;
+            compartirButton = new Button(windowCenterX, windowCenterY + 100, 220, 80, "Compartir", 0xFF1FE3E0, logic);
+            menuButton = new Button(windowCenterX, windowCenterY + 200, 220, 80, "Menú", 0xFF1FE3E0, logic);
+            adButton = new Button(windowCenterX,windowCenterY + 300,200,80,"Ver para recompensa", 0xFF1FE3E0, log);
 
             usedButtons.add(compartirButton);
-            usedButtons.add(siguienteNivelButton);
+            usedButtons.add(adButton);
             usedButtons.add(menuButton);
         }
 
@@ -111,21 +111,21 @@ public class LoseWinScene extends Scene{
     public void handleInput(ArrayList<TouchEvent> event) {
         super.handleInput(event);
 
-        if(!worldWin){
+        if(!worldWin){ //si es una partida que no proviene de los niveles de mundos
             if(playAgainButton.handleInput(event))
                 playAgainButtonEffect();
             if(selectDifficultyButton.handleInput(event))
                 selectDifficultyButtonEffect();
-            if(adButton.handleInput(event))
-                loadAdButtonEffect();
+            if(menuButton.handleInput(event))
+                menuButtonEffect();
         }
         else{
             if(compartirButton.handleInput(event))
                 compartirButtonEffect();
-            if(siguienteNivelButton.handleInput(event))
-                siguienteNivelButtonEffect();
             if(menuButton.handleInput(event))
                 menuButtonEffect();
+            if(adButton.handleInput(event))
+                loadAdButtonEffect();
         }
 
 

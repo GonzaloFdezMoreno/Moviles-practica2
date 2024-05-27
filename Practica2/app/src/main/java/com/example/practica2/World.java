@@ -21,7 +21,7 @@ public class World {
     ArrayList<Button> buttonsLevels; //aqui cargamos todos los botones cuando creamos la clase
 
     boolean complete = false;
-    WorldLevelSelector wls;
+    WorldLevelSelector wls; //el WorldLevelSelector en el que esta guardado este mundo
     int numWorld = -1;
     World(int posX_, int posY_, int widthMargin_, int heightMargin_, String worldName_, WorldLevelSelector wls_, Logic log_, int numWorld_){
         worldName = worldName_;
