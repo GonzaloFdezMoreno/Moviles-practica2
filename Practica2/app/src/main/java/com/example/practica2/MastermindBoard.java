@@ -182,7 +182,7 @@ public class MastermindBoard extends GameObject {
         }
         selector.render(graph);
 
-        pintaCodigo(graph); //muestra el codigo secreto
+        //pintaCodigo(graph); //muestra el codigo secreto
     }
     //seteamos currTableroCaracteristicas
     boolean estableceCaracteristicasTablero(int dificultad){
